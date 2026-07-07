@@ -1,104 +1,105 @@
 /* ==========================================================================
-   ENHANCED ATMOSPHERIC EFFECTS & SILHOUETTES (v2.2)
+   FIXED ATMOSPHERIC LAYER v2.3 (TIDAK MERUSAK LAYOUT)
    ========================================================================== */
 
-/* 1. Siluet Bergerak Lambat (Ambient Silhouettes) */
+/* Pastikan container efek berada di paling belakang dan tidak memblokir klik */
+#bg-effects-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+/* 1. Efek Siluet Samar di Latar Belakang Terdalam */
 .ambient-silhouette {
     position: absolute;
-    opacity: 0.04; /* Tipis samar di background belakang */
+    opacity: 0.03; /* Sangat samar agar tidak mengganggu teks */
     pointer-events: none;
     z-index: 1;
     user-select: none;
 }
-
-/* Siluet Neon: UFO / Satelit */
 .theme-neon .ambient-silhouette {
-    font-size: 80px;
+    font-size: 90px;
     top: 20%;
-    left: -100px;
-    animation: moveSaturn 45s linear infinite;
+    animation: moveSaturn 50s linear infinite;
 }
-
-/* Siluet Sakura: Burung Bangau Jepang */
 .theme-anime .ambient-silhouette {
-    font-size: 60px;
-    bottom: 30%;
-    right: -100px;
-    animation: moveCrane 35s linear infinite;
+    font-size: 70px;
+    bottom: 25%;
+    animation: moveCrane 40s linear infinite;
 }
-
-/* Siluet Samudra: Gurita Raksasa / Kraken */
 .theme-ocean .ambient-silhouette {
-    font-size: 150px;
-    bottom: -50px;
+    font-size: 140px;
+    bottom: 5%;
     left: 10%;
-    animation: driftKraken 25s ease-in-out infinite alternate;
+    animation: driftKraken 20s ease-in-out infinite alternate;
 }
 
 @keyframes moveSaturn {
-    0% { transform: translate(0, 0) rotate(0deg); left: -100px; }
-    100% { transform: translate(110vw, 30vh) rotate(360deg); left: 100%; }
+    0% { transform: translate(-120px, 0) rotate(0deg); }
+    100% { transform: translate(110vw, 20vh) rotate(360deg); }
 }
 @keyframes moveCrane {
-    0% { transform: scaleX(-1) translate(0, 0); right: -100px; }
-    100% { transform: scaleX(-1) translate(-110vw, -20vh); right: 100%; }
+    0% { transform: scaleX(-1) translate(110vw, 0); }
+    100% { transform: scaleX(-1) translate(-120px, -15vh); }
 }
 @keyframes driftKraken {
-    0% { transform: translateY(0) scale(1); opacity: 0.03; }
-    100% { transform: translateY(-40px) scale(1.1); opacity: 0.06; }
+    0% { transform: translateY(0) scale(1); }
+    100% { transform: translateY(-30px) scale(1.05); }
 }
 
 /* 2. Meteor Besar (Tema Neon) */
 .big-meteor {
     position: absolute;
-    width: 6px;
-    height: 90px;
-    background: linear-gradient(to bottom, rgba(255,0,128,1), rgba(0,255,255,0));
+    width: 4px;
+    height: 100px;
+    background: linear-gradient(to bottom, #ff0080, transparent);
     transform: rotate(45deg);
     pointer-events: none;
     z-index: 2;
-    opacity: 0.8;
-    filter: drop-shadow(0 0 8px #ff0080);
-    animation: bigMeteorAnim 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    opacity: 0;
+    animation: bigMeteorAnim 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 @keyframes bigMeteorAnim {
     0% { transform: translate(0, 0) rotate(45deg) scaleY(0.5); opacity: 0; }
-    20% { opacity: 1; }
-    100% { transform: translate(-500px, 500px) rotate(45deg) scaleY(1.5); opacity: 0; }
+    20% { opacity: 0.8; }
+    100% { transform: translate(-600px, 600px) rotate(45deg) scaleY(1.5); opacity: 0; }
 }
 
 /* 3. Kawanan Ikan Bergerak (Tema Samudra) */
 .school-fish {
     position: absolute;
-    font-size: 20px;
+    font-size: 22px;
     pointer-events: none;
     z-index: 2;
-    opacity: 0.4;
-    animation: swimFish 8s linear forwards;
+    opacity: 0.35;
+    animation: swimFish 9s linear forwards;
 }
 @keyframes swimFish {
-    0% { left: -50px; transform: translateY(0) scaleX(1); }
-    50% { transform: translateY(-20px) scaleX(1); }
-    100% { left: 105vw; transform: translateY(10px) scaleX(1); }
+    0% { left: -60px; transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+    100% { left: 105vw; transform: translateY(10px); }
 }
 
-/* 4. Penajaman Garis Kotak (Retro Grid) Tema Sakura */
-.theme-anime .retro-grid {
+/* 4. PERBAIKAN: Garis Kotak Sakura Dipertajam Tanpa Merusak Layout */
+.theme-anime .sakura-clean-grid {
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
     background-image: 
-        linear-gradient(rgba(219, 39, 119, 0.25) 2px, transparent 2px),
-        linear-gradient(90deg, rgba(219, 39, 119, 0.25) 2px, transparent 2px);
-    background-size: 50px 50px;
+        linear-gradient(rgba(219, 39, 119, 0.18) 1.5px, transparent 1.5px),
+        linear-gradient(90deg, rgba(219, 39, 119, 0.18) 1.5px, transparent 1.5px);
+    background-size: 60px 60px;
     background-position: center;
-    mask-image: linear-gradient(to bottom, rgba(0,0,0,0.8), rgba(0,0,0,0.1));
-    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.8), rgba(0,0,0,0.1));
+    opacity: 0.7;
     z-index: 1;
-    border: none;
-    filter: drop-shadow(0 0 1px rgba(219, 39, 119, 0.5)); /* Membuat garis tegas & tajam */
+    pointer-events: none;
 }
 
-/* 5. Sistem Angin Dinamis untuk Kelopak Sakura */
+/* 5. Sistem Kelopak Sakura & Animasi Angin */
 .sakura-node {
     position: absolute;
     background: #ffb7c5;
@@ -106,22 +107,19 @@
     pointer-events: none;
     z-index: 2;
     transform-origin: center;
-    box-shadow: inset -2px -2px rgba(0,0,0,0.05);
     animation: sakuraFall linear infinite;
-    transition: transform 0.5s ease-out; /* Untuk transisi halus saat dihempas angin */
+    /* transition dihapus agar perubahan gerak angin instan dan tidak kaku */
 }
-
-/* Keadaan Normal: Jatuh Santai ke Bawah */
 @keyframes sakuraFall {
-    0% { transform: translateY(0) rotate(0deg); }
+    0% { transform: translateY(-20px) rotate(0deg); }
     100% { transform: translateY(105vh) rotate(360deg); }
 }
 
-/* Efek Angin Kencang: Didorong Paksa Kebawah Kanan */
+/* Modifikasi Angin: Didorong miring ke kanan bawah dengan cepat saat aktif */
 .sakura-wind-active {
-    animation: sakuraWindBlow 2s ease-in-out infinite !important;
+    animation: sakuraWindBlow 2.2s ease-in-out infinite !important;
 }
 @keyframes sakuraWindBlow {
-    0% { transform: translate(0, 0) rotate(0deg); }
-    100% { transform: translate(400px, 105vh) rotate(720deg); }
+    0% { transform: translate(0, -20px) rotate(0deg); }
+    100% { transform: translate(350px, 105vh) rotate(540deg); }
 }
