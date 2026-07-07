@@ -1,48 +1,48 @@
 /* ==========================================================================
-   1. VARIABLES & THEMES (Tampilan Bersih, Lembut, dan Elegan)
+   1. VARIABLES & THEMES (Sistem Kaca Glassmorphism & Neon Glow)
    ========================================================================== */
 :root {
     --font-heading: 'Fredoka', sans-serif;
     --font-body: 'Plus Jakarta Sans', sans-serif;
-    --transition-smooth: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    --transition-smooth: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
     
-    /* Tema 1: Galaksi Nebula (Hitam & Sentuhan Ungu) */
-    --bg-gradient: linear-gradient(135deg, #05020a 0%, #110924 50%, #030107 100%);
-    --neon-color: #8a2be2; /* Diubah jadi Ungu Nebula Lembut */
-    --neon-glow: 0 4px 15px rgba(138, 43, 226, 0.2); /* Glow tipis, bukan neon keras */
-    --glass-bg: rgba(17, 9, 36, 0.45);
-    --glass-border: rgba(138, 43, 226, 0.25);
+    /* Tema 1: Galaksi Neon (Default) */
+    --bg-gradient: linear-gradient(135deg, #05030a 0%, #110924 50%, #020105 100%);
+    --neon-color: #00f3ff;
+    --neon-glow: 0 0 15px #00f3ff, 0 0 35px rgba(0, 243, 255, 0.5);
+    --glass-bg: rgba(17, 9, 36, 0.4);
+    --glass-border: rgba(0, 243, 255, 0.35);
     --text-color: #ffffff;
-    --accent-color: #ba55d3;
-    --accent-glow: 0 4px 15px rgba(186, 85, 211, 0.2);
+    --accent-color: #ff007f;
+    --accent-glow: 0 0 15px #ff007f, 0 0 30px rgba(255, 0, 127, 0.4);
 }
 
-[data-theme="sakura"] {
-    /* Tema 2: Langit Sakura (Pink Keputihan Lembut) */
-    --bg-gradient: linear-gradient(135deg, #fff5f7 0%, #fde2e4 50%, #fff0f3 100%);
-    --neon-color: #ff758f; /* Pink Lembut */
-    --neon-glow: 0 4px 15px rgba(255, 117, 143, 0.15);
-    --glass-bg: rgba(255, 255, 255, 0.65);
-    --glass-border: rgba(255, 117, 143, 0.25);
-    --text-color: #2b2d42; /* Teks gelap agar terbaca di latar putih */
-    --accent-color: #e0aaff;
-    --accent-glow: 0 4px 15px rgba(224, 170, 255, 0.15);
+[data-theme="langit"] {
+    /* Tema 2: Langit Senja Jepang Bersih */
+    --bg-gradient: linear-gradient(135deg, #ffb4a2 0%, #fcd5ce 50%, #ffccd5 100%);
+    --neon-color: #ff4d6d;
+    --neon-glow: 0 0 15px #ff4d6d, 0 0 30px rgba(255, 77, 109, 0.4);
+    --glass-bg: rgba(255, 255, 255, 0.55);
+    --glass-border: rgba(255, 77, 109, 0.3);
+    --text-color: #3d2633;
+    --accent-color: #ff758f;
+    --accent-glow: 0 0 15px #ff758f, 0 0 25px rgba(255, 117, 143, 0.3);
 }
 
 [data-theme="samudra"] {
-    /* Tema 3: Samudra Deep Blue (Biru Klasik Tenang) */
-    --bg-gradient: linear-gradient(135deg, #03045e 0%, #0077b6 50%, #0096c7 100%);
-    --neon-color: #00b4d8; /* Biru Cerah Lembut */
-    --neon-glow: 0 4px 15px rgba(0, 180, 216, 0.2);
-    --glass-bg: rgba(3, 4, 94, 0.4);
-    --glass-border: rgba(0, 180, 216, 0.3);
-    --text-color: #caf0f8;
-    --accent-color: #90e0ef;
-    --accent-glow: 0 4px 15px rgba(144, 224, 239, 0.2);
+    /* Tema 3: Samudra Deep Blue */
+    --bg-gradient: linear-gradient(135deg, #010c1e 0%, #001b29 50%, #002b3a 100%);
+    --neon-color: #00f5d4;
+    --neon-glow: 0 0 15px #00f5d4, 0 0 35px rgba(0, 245, 212, 0.5);
+    --glass-bg: rgba(0, 27, 41, 0.45);
+    --glass-border: rgba(0, 245, 212, 0.35);
+    --text-color: #e0fbfc;
+    --accent-color: #00b4d8;
+    --accent-glow: 0 0 15px #00b4d8, 0 0 25px rgba(0, 180, 216, 0.4);
 }
 
 /* ==========================================================================
-   2. RESET & BASE STYLES
+   2. RESET & BASE LAYOUT
    ========================================================================== */
 * {
     margin: 0;
@@ -56,580 +56,484 @@ body {
     background: var(--bg-gradient);
     min-height: 100vh;
     overflow-x: hidden;
-    transition: background 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+    transition: background 1.2s cubic-bezier(0.25, 1, 0.5, 1), color 0.5s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 h1, h2, h3, h4 {
     font-family: var(--font-heading);
 }
 
+.hidden {
+    display: none !important;
+}
+
 .bg-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    overflow: hidden;
-    pointer-events: none;
-}
-
-/* ==========================================================================
-   3. LAYOUT COMPONENTS & MODERN GLASSMORPHISM (CLEAN VERSION)
-   ========================================================================== */
-.glass-card {
-    background: var(--glass-bg);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid var(--glass-border); /* Diperpis menjadi 1px agar lebih bersih */
-    border-radius: 24px;
-    padding: 2rem;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1), var(--neon-glow); /* Pendaran sangat halus */
-    transition: var(--transition-smooth);
-}
-
-.main-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.top-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-}
-
-.logo-text {
-    font-family: var(--font-heading);
-    font-size: 1.5rem;
-    letter-spacing: 1px;
-    color: var(--neon-color);
-}
-
-.control-panel {
-    display: flex;
-    gap: 1rem;
-}
-
-/* BUTTONS MODERN */
-.btn-primary {
-    font-family: var(--font-heading);
-    background: linear-gradient(45deg, var(--neon-color), var(--accent-color));
-    color: #fff;
-    border: none;
-    padding: 1rem 2.5rem;
-    font-size: 1.25rem;
-    border-radius: 50px;
-    cursor: pointer;
-    box-shadow: var(--neon-glow);
-    transition: var(--transition-smooth);
-}
-
-.btn-primary:hover {
-    transform: translateY(-3px);
-    opacity: 0.95;
-}
-
-.btn-secondary {
-    background: rgba(255, 255, 255, 0.05);
-    color: var(--text-color);
-    border: 1px solid var(--glass-border);
-    padding: 0.75rem 2rem;
-    border-radius: 50px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: var(--transition-smooth);
-}
-
-.btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.12);
-    border-color: var(--neon-color);
-    transform: translateY(-2px);
-}
-
-.btn-icon {
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    font-size: 1.2rem;
-    padding: 0.5rem;
-    border-radius: 50%;
-    cursor: pointer;
-    color: var(--text-color);
-    transition: var(--transition-smooth);
-}
-
-.btn-icon:hover {
-    transform: rotate(45deg) scale(1.05);
-}
-
-/* ==========================================================================
-   4. PAGES ROUTING & STATES
-   ========================================================================== */
-.page {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 100;
-    background: var(--bg-gradient);
-    transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1), visibility 1s;
-}
-
-.page-view {
-    display: none;
-    opacity: 0;
-    transform: translateY(15px);
-    transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1), transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.active-view {
-    display: block !important;
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.hidden { display: none !important; }
-
-/* ==========================================================================
-   5. HALAMAN 0: LOADING SCREEN
-   ========================================================================== */
-.loading-wrapper {
-    text-align: center;
-}
-
-.galaxy-loader {
-    width: 100px;
-    height: 100px;
-    margin: 0 auto 2rem;
-    position: relative;
-}
-
-.orbit-line {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    border: 3px solid rgba(255, 255, 255, 0.05);
-    border-top-color: var(--neon-color);
-    border-bottom-color: var(--accent-color);
-    border-radius: 50%;
-    animation: spinSempurna 1.2s linear infinite;
-}
-
-.core-glow {
-    position: absolute;
-    top: 50%; left: 50%;
-    width: 36px; height: 36px;
-    margin-top: -18px; margin-left: -18px;
-    background: var(--neon-color);
-    border-radius: 50%;
-    opacity: 0.6;
-    animation: pulseSempurna 2s ease-in-out infinite;
-}
-
-.progress-container {
-    width: 300px;
-    height: 6px;
-    background: rgba(255,255,255,0.05);
-    border-radius: 10px;
-    margin: 1.5rem auto;
+    z-index: -1;
     overflow: hidden;
-    border: 1px solid var(--glass-border);
+    pointer-events: none;
 }
 
-.progress-bar {
-    width: 0%;
-    height: 100%;
-    background: linear-gradient(90deg, var(--neon-color), var(--accent-color));
-    transition: width 0.3s ease-out;
-}
-
-.loading-text {
-    font-size: 1.25rem;
-    font-weight: 600;
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.hw-logo-glow {
-    font-family: var(--font-heading);
-    font-size: 3.2rem;
-    font-weight: 800;
-    color: var(--text-color);
-    opacity: 0;
-    transform: scale(0.95);
-    transition: opacity 1.2s ease, transform 1.2s ease;
-}
-
-.hw-logo-glow.show {
-    opacity: 1;
-    transform: scale(1);
-}
-
-@keyframes spinSempurna {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-@keyframes pulseSempurna {
-    0%, 100% { transform: scale(1); opacity: 0.5; }
-    50% { transform: scale(1.1); opacity: 0.8; }
-}
-
-/* ==========================================================================
-   6. HALAMAN 1: MENU UTAMA STYLES
-   ========================================================================== */
-.hero-section {
-    text-align: center;
-    margin-bottom: 2rem;
-}
-
-.main-title {
-    font-size: 3.5rem;
-    font-weight: 800;
-    letter-spacing: 2px;
-}
-
-.text-glow {
-    color: var(--text-color);
-}
-
-.menu-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    margin-bottom: 2rem;
-}
-
-.avatar-container {
-    width: 120px;
-    height: 120px;
-    margin: 0 auto 1.5rem;
-    background: rgba(255,255,255,0.03);
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px dashed var(--neon-color);
-    animation: floating 3.5s ease-in-out infinite;
-}
-
-.avatar-graphic {
-    font-size: 4rem;
-}
-
-.input-group {
+main {
+    width: 100%;
+    max-width: 1000px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-}
-
-.input-group input {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid var(--glass-border);
-    padding: 1rem;
-    border-radius: 14px;
-    color: var(--text-color);
-    font-size: 1rem;
-    outline: none;
-    transition: var(--transition-smooth);
-}
-
-.input-group input:focus {
-    border-color: var(--neon-color);
-}
-
-.theme-options {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-top: 1rem;
-}
-
-.theme-btn {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1rem;
-    background: rgba(255,255,255,0.02);
-    border: 1px solid transparent;
-    border-radius: 14px;
-    cursor: pointer;
-    color: var(--text-color);
-    transition: var(--transition-smooth);
-}
-
-.theme-btn:hover {
-    background: rgba(255, 255, 255, 0.05);
-    transform: translateX(5px);
-}
-
-.theme-btn.active {
-    background: var(--glass-bg);
-    border-color: var(--neon-color);
-}
-
-.theme-icon { font-size: 1.5rem; }
-.action-area { text-align: center; margin-top: 1rem; }
-
-/* ==========================================================================
-   7. HALAMAN 2: NARASI
-   ========================================================================== */
-.narration-box {
-    max-width: 800px;
-    margin: 4rem auto;
-}
-
-.narration-header {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.mentor-avatar {
-    font-size: 2.5rem;
-    animation: floating 3.5s ease-in-out infinite;
-}
-
-.divider {
-    border: none;
-    height: 1px;
-    background: var(--glass-border);
-    margin: 1.5rem 0;
-}
-
-.narration-body {
-    min-height: 120px;
-    font-size: 1.25rem;
-    line-height: 1.8;
-}
-
-.narration-footer {
-    display: flex;
+    min-height: 90vh;
     justify-content: space-between;
     align-items: center;
-    margin-top: 2rem;
+}
+
+/* Glassmorphism Card Frame */
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 2px solid var(--glass-border);
+    border-radius: 28px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+    transition: var(--transition-smooth);
+    width: 100%;
 }
 
 /* ==========================================================================
-   8. HALAMAN 3 & 4: SELECTION SYSTEMS
+   3. ANIMASI LIVE BACKGROUND (REVISI ENGINE)
    ========================================================================== */
-.section-title {
-    text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 3rem;
-}
-
-.cards-container {
-    display: flex;
-    justify-content: center;
-    gap: 3rem;
-    flex-wrap: wrap;
-    margin-bottom: 3rem;
-}
-
-.selection-card {
-    width: 280px;
-    text-align: center;
-    cursor: pointer;
-}
-
-.interactive-card:hover {
-    transform: translateY(-5px);
-    border-color: var(--neon-color);
-}
-
-.card-icon {
-    font-size: 4rem;
-    margin-bottom: 1rem;
-}
-
-.locked-card {
-    opacity: 0.45;
-    position: relative;
-    cursor: not-allowed;
-}
-
-.badge-lock {
-    display: inline-block;
-    margin-top: 1rem;
-    padding: 0.25rem 1rem;
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 50px;
-    font-size: 0.85rem;
-}
-
-.navigation-area { text-align: center; }
-
-/* ==========================================================================
-   9. POPUP / MODAL SETTINGS
-   ========================================================================== */
-.modal-overlay {
-    position: fixed;
-    top: 0; left: 0; width: 100vw; height: 100vh;
-    background: rgba(0,0,0,0.4);
-    backdrop-filter: blur(10px);
-    z-index: 1000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.modal-content {
-    max-width: 450px;
-    width: 90%;
-    text-align: center;
-}
-
-.modal-content h3 { margin-bottom: 1.5rem; font-size: 1.75rem; }
-#modalBody { margin-bottom: 2rem; font-size: 1.1rem; line-height: 1.5; }
-
-/* ==========================================================================
-   10. BACKGROUND ATMOSPHERE (STAY COMPATIBLE WITH OLD SCRIPT)
-   ========================================================================== */
-
-/* --- TEMA 1: REVOLUSI GALAKSI 3D MIRING --- */
+/* --- GALAKSI ENGINE --- */
 .star-twinkle {
     position: absolute;
     background: #fff;
     border-radius: 50%;
-    pointer-events: none;
-    animation: kelapKelip var(--d) ease-in-out infinite alternate;
+    animation: twinkle-pulse var(--d) infinite ease-in-out alternate;
 }
-@keyframes kelapKelip { 
-    0% { opacity: 0.1; transform: scale(0.8); } 
-    100% { opacity: 0.8; transform: scale(1.1); } 
+@keyframes twinkle-pulse {
+    0% { opacity: 0.2; transform: scale(0.8) translateY(0); }
+    100% { opacity: 1; transform: scale(1.2) translateY(-4px); }
 }
 
 .system-solar-3d {
     position: absolute;
-    top: 50%; left: 50%;
-    width: 650px; height: 650px;
-    pointer-events: none;
-    transform: translate(-50%, -50%) rotateX(65deg) rotateY(-10deg);
+    top: 20%;
+    left: 15%;
+    width: 1px; height: 1px;
+    transform: rotateX(60deg) rotateY(-15deg);
     transform-style: preserve-3d;
 }
-
 .sun-center-3d {
     position: absolute;
-    top: 50%; left: 50%;
-    width: 65px; height: 65px;
-    background: radial-gradient(circle, #fffbe0 10%, #ba55d3 60%, #110924 100%);
+    width: 60px; height: 60px;
+    background: radial-gradient(circle, #fffdf0 0%, #ffb703 60%, transparent 100%);
     border-radius: 50%;
-    transform: translate(-50%, -50%) rotateY(10deg) rotateX(-65deg);
-    box-shadow: 0 0 30px rgba(138, 43, 226, 0.4); /* Dijinakkan dari merah pijar keras ke ungu lembut */
+    box-shadow: 0 0 40px #ffb703, 0 0 80px rgba(255,183,3,0.5);
+    transform: translate(-50%, -50%) rotateX(-60deg);
+    animation: sun-pulse 3s infinite ease-in-out alternate;
 }
-
+@keyframes sun-pulse {
+    0% { transform: translate(-50%, -50%) rotateX(-60deg) scale(0.95); opacity: 0.9; }
+    100% { transform: translate(-50%, -50%) rotateX(-60deg) scale(1.05); opacity: 1; }
+}
 .orbit-ellipse-path {
     position: absolute;
-    top: 50%; left: 50%;
-    border: 1px dashed rgba(138, 43, 226, 0.2); /* Sangat tipis transparan */
+    border: 1px dashed rgba(0,243,255,0.15);
     border-radius: 50%;
+    top: 50%; left: 50%;
     transform: translate(-50%, -50%);
     transform-style: preserve-3d;
-    animation: spin3D var(--speed) linear infinite;
+    animation: orbit-rotate var(--speed) linear infinite;
 }
-
+@keyframes orbit-rotate { 100% { transform: translate(-50%, -50%) rotate(360deg); } }
 .planet-3d {
     position: absolute;
     top: 0; left: 50%;
     border-radius: 50%;
-    transform: translate(-50%, -50%) rotateY(10deg) rotateX(-65deg);
+    transform: translate(-50%, -50%) rotateX(-60deg);
+    box-shadow: 0 0 12px var(--glow);
 }
 
 .meteor-streak {
     position: absolute;
-    width: 1.5px; height: 60px;
-    background: linear-gradient(to top, var(--neon-color), transparent);
-    opacity: 0;
-    pointer-events: none;
-    animation: flyMeteorMove var(--dur) cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    width: 120px;
+    height: 4px;
+    background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,0,127,0.4) 50%, transparent 100%);
+    clip-path: polygon(0 50%, 100% 0, 100% 100%);
+    opacity: 0.9;
+    filter: drop-shadow(0 0 8px #ff007f);
+    animation: meteor-fly var(--dur) linear forwards;
 }
-@keyframes flyMeteorMove {
-    0% { transform: translate(var(--startX), var(--startY)) rotate(40deg); opacity: 0; }
-    15% { opacity: 0.7; }
-    100% { transform: translate(var(--endX), var(--endY)) rotate(40deg); opacity: 0; }
+@keyframes meteor-fly {
+    0% { transform: translate(var(--startX), var(--startY)) rotate(-35deg); }
+    100% { transform: translate(var(--endX), var(--endY)) rotate(-35deg); }
 }
-@keyframes spin3D { 100% { transform: translate(-50%, -50%) rotate(360deg); } }
 
-/* --- TEMA 2: KEMBALI KE SAKURA NEON BERGUGURAN --- */
+/* --- LANGIT ENGINE --- */
 .sakura-petal {
     position: absolute;
-    background: rgba(255, 117, 143, 0.5);
-    border-radius: 150% 0 150% 150%;
-    pointer-events: none;
-    animation: sakuraFall var(--speed) linear forwards;
+    background: radial-gradient(circle at 30% 30%, #fff 0%, #ff758f 80%);
+    border-radius: 50% 0 50% 50%;
+    opacity: 0.85;
+    transform-origin: center;
+    box-shadow: 0 2px 5px rgba(255,77,109,0.2);
+    animation: sakura-fall var(--speed) linear forwards;
 }
-@keyframes sakuraFall {
-    0% { top: -40px; transform: translateX(0) rotate(0deg); opacity: 0; }
-    10% { opacity: 0.8; }
-    90% { opacity: 0.8; }
-    100% { top: 105vh; transform: translateX(var(--sway)) rotate(360deg); opacity: 0; }
-}
-
-/* --- TEMA 3: SAMUDRA DEEP BLUE --- */
-.bubble-dense {
-    position: absolute;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    pointer-events: none;
-    animation: floatUpDense var(--d) ease-in infinite;
-}
-@keyframes floatUpDense {
-    0% { transform: translateY(105vh) scale(0.6); opacity: 0; }
-    20% { opacity: 0.7; }
-    90% { opacity: 0.5; }
-    100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+@keyframes sakura-fall {
+    0% { transform: translateY(-5vh) translateX(0) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.9; }
+    90% { opacity: 0.9; }
+    100% { transform: translateY(105vh) translateX(var(--sway)) rotate(720deg); opacity: 0; }
 }
 
+/* --- SAMUDRA ENGINE --- */
 .fish-silhouette {
     position: absolute;
-    font-size: var(--size);
-    color: #011424; /* Siluet gelap palung laut */
-    opacity: 0.5;
+    font-size: var(--sz);
+    color: var(--col);
+    opacity: var(--op);
+    filter: drop-shadow(0 0 5px var(--col));
     pointer-events: none;
-    user-select: none;
-    animation: swimRightToLeft var(--speed) linear forwards, waveUpDown 3s ease-in-out infinite alternate;
+    transform: scaleX(-1); /* Berenang dari kanan ke kiri */
+    animation: fish-swim var(--speed) linear forwards;
 }
-@keyframes swimRightToLeft {
-    0% { right: -80px; transform: scaleX(1); }
-    100% { right: 105vw; transform: scaleX(1); }
-}
-@keyframes waveUpDown {
-    0% { margin-top: -25px; }
-    100% { margin-top: 25px; }
+@keyframes fish-swim {
+    0% { right: -10vw; transform: scaleX(-1) translateY(0); }
+    100% { right: 110vw; transform: scaleX(-1) translateY(var(--waveY)); }
 }
 
-/* DEKORASI UTILITY */
-.pulse-glow { transition: var(--transition-smooth); } /* Dijinakkan dari denyut warna kasar */
-@keyframes floating { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
-.animate-zoom { animation: zoomIn 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-@keyframes zoomIn { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.bubble-dense {
+    position: absolute;
+    bottom: -20px;
+    background: rgba(0, 245, 212, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    box-shadow: inset 0 0 4px #fff, 0 0 8px rgba(0,245,212,0.4);
+    animation: bubble-rise var(--d) linear infinite;
+}
+@keyframes bubble-rise {
+    0% { transform: translateY(0) translateX(0); opacity: 0; }
+    10% { opacity: 0.7; }
+    90% { opacity: 0.7; }
+    100% { transform: translateY(-105vh) translateX(var(--sway, 20px)); opacity: 0; }
+}
 
 /* ==========================================================================
-   11. FOOTER & RESPONSIVE DESIGN
+   4. HALAMAN 0 COMPONENT (LOADING SCREEN LUXURY)
    ========================================================================== */
-.main-footer {
+#page-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 999;
+    background: var(--bg-gradient);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.loader-wrapper {
     text-align: center;
-    font-size: 0.85rem;
-    opacity: 0.6;
-    margin-top: 3rem;
-    line-height: 1.6;
-    border-top: 1px solid var(--glass-border);
-    padding-top: 1.5rem;
+}
+.galaxy-loader {
+    position: relative;
+    width: 120px; height: 120px;
+    margin: 0 auto 30px;
+}
+.ring {
+    position: absolute;
+    width: 100%; height: 100%;
+    border: 2px solid transparent;
+    border-radius: 50%;
+}
+.ring-1 { border-top-color: var(--neon-color); animation: orbit-rotate 1.5s linear infinite; }
+.ring-2 { border-right-color: var(--accent-color); animation: orbit-rotate 2s linear infinite reverse; scale: 0.85; }
+.ring-3 { border-bottom-color: #fff; animation: orbit-rotate 1s linear infinite; scale: 0.7; }
+.core-glow {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 30px; height: 30px;
+    background: #fff;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: var(--neon-glow), var(--accent-glow);
+}
+.loading-brand {
+    position: absolute;
+    top: 42px; left: 0; right: 0;
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: var(--neon-glow);
+}
+#loadingText {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    min-height: 30px;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.neon-text-pulse { text-shadow: var(--neon-glow); }
+.progress-container {
+    width: 260px; height: 8px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    margin: 0 auto;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+.progress-bar {
+    width: 0%; height: 100%;
+    background: linear-gradient(90deg, var(--neon-color), var(--accent-color));
+    box-shadow: var(--neon-glow);
+    transition: width 0.1s linear;
 }
 
+/* ==========================================================================
+   5. HALAMAN 1 COMPONENT (MENU UTAMA)
+   ========================================================================== */
+.page-view {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    animation: view-fade-in 0.6s ease forwards;
+}
+@keyframes view-fade-in { 0% { opacity: 0; transform: scale(0.97); } 100% { opacity: 1; transform: scale(1); } }
+.menu-header { text-align: center; }
+.main-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #fff;
+    text-shadow: var(--neon-glow);
+}
+[data-theme="langit"] .main-title { color: var(--neon-color); text-shadow: none; }
+.subtitle {
+    font-size: 1.3rem;
+    font-weight: 500;
+    opacity: 0.9;
+    letter-spacing: 1px;
+}
+.avatar-frame {
+    width: 100px; height: 100px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid var(--glass-border);
+    box-shadow: var(--neon-glow);
+}
+.avatar-emoji { font-size: 3.5rem; }
+.animate-float { animation: floating-slow 4s infinite ease-in-out alternate; }
+@keyframes floating-slow { 0% { transform: translateY(0px) rotate(0deg); } 100% { transform: translateY(-12px) rotate(5deg); } }
+
+input[type="text"] {
+    width: 280px;
+    padding: 12px 20px;
+    border-radius: 16px;
+    border: 2px solid var(--glass-border);
+    background: rgba(0,0,0,0.2);
+    color: #fff;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    text-align: center;
+    outline: none;
+    transition: var(--transition-smooth);
+}
+[data-theme="langit"] input[type="text"] { background: rgba(255,255,255,0.5); color: #3d2633; }
+input[type="text"]:focus {
+    border-color: var(--neon-color);
+    box-shadow: var(--neon-glow);
+}
+
+.theme-selection { width: 100%; text-align: center; }
+.section-label { font-size: 1rem; font-weight: 600; margin-bottom: 10px; }
+.theme-cards { display: flex; gap: 15px; justify-content: center; }
+.theme-card {
+    background: rgba(255,255,255,0.06);
+    border: 2px solid transparent;
+    border-radius: 16px;
+    padding: 10px 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: inherit;
+    font-family: var(--font-body);
+    font-weight: 600;
+    transition: var(--transition-smooth);
+}
+[data-theme="langit"] .theme-card { background: rgba(0,0,0,0.04); }
+.theme-card.active, .theme-card:hover {
+    background: var(--glass-bg);
+    border-color: var(--neon-color);
+    box-shadow: var(--neon-glow);
+    transform: translateY(-3px);
+}
+.theme-icon { font-size: 1.3rem; }
+
+.action-area { display: flex; gap: 15px; align-items: center; margin-top: 10px; }
+.btn-primary-neon {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    font-weight: 600;
+    padding: 12px 35px;
+    border-radius: 20px;
+    border: none;
+    background: var(--neon-color);
+    color: #000;
+    cursor: pointer;
+    box-shadow: var(--neon-glow);
+    transition: var(--transition-smooth);
+}
+.btn-primary-neon:hover {
+    transform: scale(1.06);
+    box-shadow: 0 0 25px var(--neon-color), var(--accent-glow);
+}
+.btn-secondary-neon {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 10px 24px;
+    border-radius: 16px;
+    border: 2px solid var(--glass-border);
+    background: transparent;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+.btn-secondary-neon:hover {
+    border-color: var(--neon-color);
+    box-shadow: var(--neon-glow);
+    transform: translateY(-2px);
+}
+.btn-icon-setting {
+    background: rgba(255,255,255,0.1);
+    border: 2px solid var(--glass-border);
+    width: 50px; height: 50px;
+    border-radius: 16px;
+    font-size: 1.4rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: var(--transition-smooth);
+}
+.btn-icon-setting:hover { transform: rotate(45deg); border-color: var(--neon-color); box-shadow: var(--neon-glow); }
+
+/* ==========================================================================
+   6. HALAMAN 2: NARASI (TYPEWRITER COMPONENT)
+   ========================================================================== */
+.narration-layout { width: 100%; display: flex; flex-direction: column; gap: 1.5rem; align-items: center; }
+.mentor-profile { text-align: center; }
+.mentor-avatar-glow {
+    width: 80px; height: 80px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid var(--neon-color);
+    box-shadow: var(--neon-glow);
+    margin: 0 auto 10px;
+    font-size: 2.8rem;
+}
+.dialogue-box {
+    width: 100%;
+    min-height: 120px;
+    background: rgba(0,0,0,0.2);
+    border-radius: 18px;
+    padding: 20px;
+    border-left: 5px solid var(--neon-color);
+}
+[data-theme="langit"] .dialogue-box { background: rgba(255,255,255,0.4); }
+.dialogue-box p { font-size: 1.15rem; line-height: 1.6; font-weight: 500; }
+.dialogue-controls { display: flex; gap: 15px; }
+
+/* ==========================================================================
+   7. HALAMAN 3 & 4: CARDS INTERAKTIF
+   ========================================================================== */
+.page-title { font-size: 2.2rem; text-align: center; text-shadow: var(--neon-glow); }
+[data-theme="langit"] .page-title { text-shadow: none; }
+.card-grid { display: flex; gap: 20px; width: 100%; max-width: 700px; justify-content: center; margin: 15px 0; }
+.interactive-card {
+    flex: 1;
+    background: rgba(255,255,255,0.05);
+    border: 2px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 25px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+}
+[data-theme="langit"] .interactive-card { background: rgba(255,255,255,0.4); }
+.card-icon { font-size: 3rem; }
+.interactive-card h3 { font-size: 1.4rem; color: #fff; }
+[data-theme="langit"] .interactive-card h3 { color: inherit; }
+.interactive-card p { font-size: 0.9rem; opacity: 0.8; }
+.glow-hover:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: var(--neon-color);
+    box-shadow: var(--neon-glow);
+}
+.locked-card { opacity: 0.6; cursor: not-allowed; }
+.locked-card:hover { transform: translateY(-3px); border-color: rgba(255,255,255,0.2); }
+.badge-soon {
+    position: absolute; top: 12px; right: 12px;
+    font-size: 0.75rem; font-weight: 700;
+    padding: 4px 10px; border-radius: 20px;
+    background: var(--accent-color); color: #fff;
+    box-shadow: var(--accent-glow);
+}
+
+/* ==========================================================================
+   8. GLOBAL MODAL & FOOTER STYLE
+   ========================================================================== */
+.modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.6); backdrop-filter: blur(8px);
+    z-index: 1000; display: flex; justify-content: center; align-items: center;
+}
+.modal-card { max-width: 420px; text-align: center; display: flex; flex-direction: column; gap: 1.2rem; }
+.modal-content-body { font-size: 1rem; line-height: 1.5; font-weight: 500; }
+.control-row { display: flex; align-items: center; justify-content: space-between; gap: 15px; margin: 5px 0; }
+.slider-neon {
+    accent-color: var(--neon-color); width: 130px; cursor: pointer;
+}
+.animate-zoom { animation: zoom-in-bounce 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+@keyframes zoom-in-bounce { 0% { transform: scale(0.6); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+
+.global-footer {
+    text-align: center; opacity: 0.7; font-size: 0.85rem;
+    line-height: 1.5; border-top: 1px solid var(--glass-border);
+    padding-top: 15px; width: 100%; margin-top: 25px;
+}
+
+/* ==========================================================================
+   9. RESPONSIVE MEDIA QUERIES (DESKTOP, LAPTOP, TABLET, HP)
+   ========================================================================== */
 @media (max-width: 768px) {
-    .menu-grid { grid-template-columns: 1fr; gap: 1.5rem; }
-    .main-title { font-size: 2.3rem; }
-    .cards-container { gap: 1.5rem; }
-    .main-content { padding: 1rem; }
+    .card-grid { flex-direction: column; }
+    .main-title { font-size: 2.6rem; }
+    .glass-card { padding: 1.5rem; }
+    .theme-cards { flex-wrap: wrap; }
+}
+@media (max-width: 480px) {
+    .main-title { font-size: 2.2rem; }
+    .subtitle { font-size: 1.1rem; }
+    input[type="text"] { width: 100%; }
+    .dialogue-controls { flex-direction: column; width: 100%; }
+    .dialogue-controls button { width: 100%; }
 }
