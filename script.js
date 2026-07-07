@@ -1,6 +1,6 @@
 /**
- * HW Les Private - Petualangan TKA Engine Pro v2
- * Audio Streaming OpenSource & Dynamic Special Atmospheric Events
+ * HW Les Private - Petualangan TKA Engine Pro v2.1
+ * GADGET & AUDIO AUTOPLAY AUTOTRIGGER FIX
  */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -21,11 +21,11 @@ document.addEventListener("DOMContentLoaded", () => {
         currentScreen: "screen-welcome"
     };
 
-    // OpenSource Royalty Free Audio Streams (Archive.org & Wikimedia Commons Assets)
+    // Aset Musik OpenSource (Archive.org & Wikimedia Commons)
     const audioStreams = {
-        neon: "https://ia802804.us.archive.org/5/items/synthwave-ambient-track/synthwave_loop.mp3", // Neon Synthwave Ambient
-        anime: "https://ia903103.us.archive.org/31/items/japanese-flute-koto-instrumental/sakura_koto.mp3", // Traditional Japanese Koto Flute
-        ocean: "https://ia800108.us.archive.org/15/items/OceanWavesAmbient/ocean_waves.mp3" // Underwater/Sea Ambient
+        neon: "https://ia802804.us.archive.org/5/items/synthwave-ambient-track/synthwave_loop.mp3", 
+        anime: "https://ia903103.us.archive.org/31/items/japanese-flute-koto-instrumental/sakura_koto.mp3", 
+        ocean: "https://ia800108.us.archive.org/15/items/OceanWavesAmbient/ocean_waves.mp3" 
     };
 
     const dialogueData = {
@@ -62,16 +62,17 @@ document.addEventListener("DOMContentLoaded", () => {
     let typingTimeout;
     let audioElements = {};
     let atmosphericInterval = null;
+    let isAudioContextInitialized = false;
 
     // ==========================================================================
     // AUDIO PLAYER & ATMOSPHERIC EVENT SYSTEM
     // ==========================================================================
     function initAudioStreams() {
-        // Build individual streams elements smoothly
         Object.keys(audioStreams).forEach(key => {
             if (!audioElements[key]) {
                 let audio = new Audio(audioStreams[key]);
                 audio.loop = true;
+                audio.crossOrigin = "anonymous"; // bypass CORS stream policy
                 audio.volume = state.settings.volume;
                 audioElements[key] = audio;
             }
@@ -98,7 +99,9 @@ document.addEventListener("DOMContentLoaded", () => {
         initAudioStreams();
         if (audioElements[state.currentTheme]) {
             audioElements[state.currentTheme].volume = state.settings.volume;
-            audioElements[state.currentTheme].play().catch(e => console.log("Interaksi user diperlukan untuk memicu audio"));
+            audioElements[state.currentTheme].play().catch(() => {
+                console.log("Autoplay ditahan browser. Menunggu interaksi user...");
+            });
         }
     }
 
@@ -109,16 +112,13 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    /**
-     * REVISI PENTING 3: Efek Khusus/Atmosfer Menandakan Tema di Halaman Pertama secara Berkala
-     */
     function triggerAtmosphericSpecialEvent() {
         if (state.currentScreen !== "screen-welcome" || !state.settings.particles) return;
 
         const container = document.getElementById("bg-effects-container");
+        if (!container) return;
 
         if (state.currentTheme === "neon") {
-            // Event: Kilatan Komet/Meteor ganda melintas acak + Efek Suara Kosmis Frekuensi Tinggi
             for(let i=0; i<3; i++){
                 setTimeout(() => {
                     let m = document.createElement("div");
@@ -129,23 +129,23 @@ document.addEventListener("DOMContentLoaded", () => {
                     setTimeout(() => m.remove(), 2500);
                 }, i * 400);
             }
-            // Sintesis suara kosmis ("Zing!")
             try {
                 let ctx = new (window.AudioContext || window.webkitAudioContext)();
                 let osc = ctx.createOscillator(); let gain = ctx.createGain();
                 osc.connect(gain); gain.connect(ctx.destination);
                 osc.type = 'sawtooth'; osc.frequency.setValueAtTime(800, ctx.currentTime);
                 osc.frequency.linearRampToValueAtTime(1500, ctx.currentTime + 0.4);
-                gain.gain.setValueAtTime(state.settings.volume * 0.05, ctx.currentTime);
+                gain.gain.setValueAtTime(state.settings.volume * 0.04, ctx.currentTime);
                 gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
                 osc.start(); osc.stop(ctx.currentTime + 0.4);
             } catch(e){}
 
         } else if (state.currentTheme === "anime") {
-            // Event: Angin puyuh menyapu kelopak sakura massal + Efek visual blur blur layaknya embusan angin sore
             const wind = document.getElementById("wind-overlay");
-            wind.classList.add("wind-active");
-            setTimeout(() => wind.classList.remove("wind-active"), 1500);
+            if(wind) {
+                wind.classList.add("wind-active");
+                setTimeout(() => wind.classList.remove("wind-active"), 1500);
+            }
 
             for (let i = 0; i < 35; i++) {
                 let s = document.createElement("div");
@@ -153,11 +153,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 s.style.width = s.style.height = Math.random() * 12 + 8 + "px";
                 s.style.left = Math.random() * 100 + "vw";
                 s.style.top = "-20px";
-                s.style.animationDuration = "2s"; // Fast fall due to wind
+                s.style.animationDuration = "2s"; 
                 container.appendChild(s);
                 setTimeout(() => s.remove(), 2000);
             }
-            // Sintesis noise desiran angin ("Whoosh")
             try {
                 let ctx = new (window.AudioContext || window.webkitAudioContext)();
                 let bufferSize = ctx.sampleRate * 1.5, buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate), data = buffer.getChannelData(0);
@@ -165,28 +164,26 @@ document.addEventListener("DOMContentLoaded", () => {
                 let noise = ctx.createBufferSource(); noise.buffer = buffer;
                 let filter = ctx.createBiquadFilter(); filter.type = 'lowpass'; filter.frequency.setValueAtTime(400, ctx.currentTime);
                 filter.frequency.exponentialRampToValueAtTime(800, ctx.currentTime + 0.7);
-                let gain = ctx.createGain(); gain.gain.setValueAtTime(state.settings.volume * 0.15, ctx.currentTime);
+                let gain = ctx.createGain(); gain.gain.setValueAtTime(state.settings.volume * 0.12, ctx.currentTime);
                 gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 1.5);
                 noise.connect(filter); filter.connect(gain); gain.connect(ctx.destination);
                 noise.start();
             } catch(e){}
 
         } else if (state.currentTheme === "ocean") {
-            // Event: Paus biru purba melintas di latar belakang + Dentuman Frekuensi Rendah Sonar Paus
             let whale = document.createElement("div");
             whale.className = "ocean-whale";
             whale.innerText = "🐋";
             container.appendChild(whale);
             setTimeout(() => whale.remove(), 12000);
 
-            // Sintesis dentuman sonar paus bawah laut dalam (Sub-bass low boom frequency)
             try {
                 let ctx = new (window.AudioContext || window.webkitAudioContext)();
                 let osc = ctx.createOscillator(); let gain = ctx.createGain();
                 osc.connect(gain); gain.connect(ctx.destination);
                 osc.type = 'sine'; osc.frequency.setValueAtTime(90, ctx.currentTime);
                 osc.frequency.linearRampToValueAtTime(70, ctx.currentTime + 0.8);
-                gain.gain.setValueAtTime(state.settings.volume * 0.3, ctx.currentTime);
+                gain.gain.setValueAtTime(state.settings.volume * 0.25, ctx.currentTime);
                 gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.2);
                 osc.start(); osc.stop(ctx.currentTime + 1.2);
             } catch(e){}
@@ -195,21 +192,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function startAtmosphericLoop() {
         if(atmosphericInterval) clearInterval(atmosphericInterval);
-        // Terpicu berkala setiap 7 detik untuk menjaga keaktifan halaman utama
         atmosphericInterval = setInterval(triggerAtmosphericSpecialEvent, 7000);
     }
 
     // ==========================================================================
-    // DENSITY PARTICLE GENERATOR (REVISI 1: Jauh Lebih Banyak & Hidup)
+    // DENSITY PARTICLE GENERATOR
     // ==========================================================================
     const bgContainer = document.getElementById("bg-effects-container");
 
     function renderBackgroundFX() {
+        if (!bgContainer) return;
         bgContainer.innerHTML = "";
         if (!state.settings.particles) return;
 
         if (state.currentTheme === 'neon') {
-            // Banyak Bintang Berkelap-kelip Padat (85 Nodes)
             for (let i = 0; i < 85; i++) {
                 let star = document.createElement("div");
                 star.className = "star-node";
@@ -225,7 +221,6 @@ document.addEventListener("DOMContentLoaded", () => {
             bgContainer.appendChild(grid);
 
         } else if (state.currentTheme === 'anime') {
-            // Banyak Bunga Sakura / Dedaunan Berguguran Rimbun (45 Nodes)
             for (let i = 0; i < 45; i++) {
                 let sakura = document.createElement("div");
                 sakura.className = "sakura-node";
@@ -238,7 +233,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
         } else if (state.currentTheme === 'ocean') {
-            // Gelembung Naik Sangat Banyak & Intens (55 Nodes)
             for (let i = 0; i < 55; i++) {
                 let bubble = document.createElement("div");
                 bubble.className = "bubble-node";
@@ -337,9 +331,28 @@ document.addEventListener("DOMContentLoaded", () => {
         startAtmosphericLoop();
     }
 
+    // MEMBUKA BLOKIR AUDIO BROWSER SAAT USER MENGEKLIK AREA APAPUN DI WEB
+    function unlockBrowserAudio() {
+        if (!isAudioContextInitialized) {
+            initAudioStreams();
+            startThemeMusic();
+            // Picu langsung efek pertamanya agar pengguna melihat perubahannya instan
+            triggerAtmosphericSpecialEvent();
+            isAudioContextInitialized = true;
+            
+            // Hapus listener agar tidak dieksekusi berkali-kali
+            window.removeEventListener("click", unlockBrowserAudio);
+            window.removeEventListener("touchstart", unlockBrowserAudio);
+        }
+    }
+    
+    window.addEventListener("click", unlockBrowserAudio);
+    window.addEventListener("touchstart", unlockBrowserAudio);
+
     // Initialize UI on splash timeout
     setTimeout(() => {
-        document.getElementById("loading-screen").classList.remove("active");
+        const loader = document.getElementById("loading-screen");
+        if(loader) loader.classList.remove("active");
         applyPreferences();
     }, 2000);
 
@@ -349,8 +362,9 @@ document.addEventListener("DOMContentLoaded", () => {
             state.currentTheme = card.getAttribute("data-theme");
             localStorage.setItem("hw_theme", state.currentTheme);
             applyPreferences();
-            // Langsung picu pemicu atmosfer sesaat setelah diganti biar interaktif
-            triggerAtmosphericSpecialEvent();
+            setTimeout(() => {
+                triggerAtmosphericSpecialEvent();
+            }, 100);
         });
     });
 
@@ -375,13 +389,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("btn-narrative-next").addEventListener("click", advanceDialogue);
 
-    /**
-     * REVISI PENTING 4: Tombol SKIP / Lewati Cerita pada Halaman Narasi Percakapan
-     */
     document.getElementById("btn-skip-narrative").addEventListener("click", () => {
         playClickSound();
         clearTimeout(typingTimeout);
-        navigateTo("screen-menu"); // Potong jalur langsung menuju pemilihan mata pelajaran
+        navigateTo("screen-menu");
     });
 
     // Menu selections branches
