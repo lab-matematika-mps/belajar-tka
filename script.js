@@ -1,66 +1,49 @@
 /**
- * WEBSITE UTAMA LATIHAN TKA - HAYAM WURUK LES PRIVATE (HW LES PRIVATE)
- * Edisi Pembaruan: Dua Kotak Terpisah, Scroll Tema, & Perbaikan Spasi Narasi
+ * REVISI FINAL WEBSITE LATIHAN TKA - HW LES PRIVATE
  */
 document.addEventListener("DOMContentLoaded", () => {
 
-    // ==========================================
-    // 1. STATE & KONFIGURASI GLOBAL
-    // ==========================================
     const state = {
         username: "",
         currentTheme: "galaksi",
         isMuted: false,
-        activeView: "page-menu",
+        soundFXEnabled: true,
+        volume: 0.4,
         narrationIndex: 0
     };
 
-    // Data Narasi Lore Asal-mula tiap dunia pada Tampilan Awal
-    const themeLoreData = {
-        galaksi: "Mengorbit di ruang angkasa luas penuh misteri rumus-rumus bintang bersinar. Bersiaplah meluncur menembus batas logika sains matematika!",
-        langit: "Terbang tinggi di atas awan putih lembut berembus sepoi kelopak sakura. Belajar dengan hati tenang, memetik rumus indah sehangat mentari pagi.",
-        samudra: "Menyelam jauh ke kedalaman palung misterius tempat tersimpannya mutiara ilmu pengetahuan kuno. Kuatkan fokus pikiranmu menembus derasnya arus soal."
+    const worldLoreData = {
+        galaksi: "Asal-Usul: Kamu berada di pusat rasi bintang kecerdasan Hayam Wuruk. Konon, anak-anak bumi terpilih dilatih di galaksi ini agar memiliki pikiran secepat komet!",
+        langit: "Asal-Usul: Di atas awan senja Jepang, terdapat pulau melayang tempat tinggal Kucing Sakura. Tempat damai ini dirancang khusus untuk mengasah ketenangan berpikir.",
+        samudra: "Asal-Usul: Di kedalaman samudra biru yang tenang, berdiri benteng mutiara kuno. Penyu bijaksana menjaga gerbang ilmu matematika rahasia purba."
     };
 
-    // Data Dialogue Mentor Halaman 2 (Spasi Diperbaiki)
     const narrationData = {
-        galaksi: {
-            mentor: "Tentor Terbaik Galaksi 🚀",
-            avatar: "🚀",
-            dialogues: [
-                "Halo, Petualang Hebat! Selamat datang di markas ruang angkasa kita.",
-                "Aku sudah menunggumu di pusat kendali radar konstelasi ini.",
-                "Hari ini kita akan menjelajahi Galaksi TKA yang sangat menantang.",
-                "Setiap latihan soal yang kamu kerjakan akan membuat mesin roketmu semakin kuat.",
-                "Jangan pernah takut salah dalam melangkah ya!",
-                "Kesalahan adalah bahan bakar roket terbaikmu menuju keberhasilan. Ayo kita luncurkan sekarang!"
-            ]
-        },
-        langit: {
-            mentor: "Tentor Terbaik Langit ☁️",
-            avatar: "☁️",
-            dialogues: [
-                "Selamat datang di taman belajar awan sakura yang indah...",
-                "Aku sudah menyiapkan tempat duduk yang hangat dan penuh ketenangan untukmu.",
-                "Belajar materi hitungan TKA ditemani kelopak bunga berguguran tentu sangat menyenangkan, bukan?",
-                "Tarik napas dalam-dalam, tenangkan barisan pikiranmu.",
-                "Aku yakin dengan latihan yang konsisten, kamu pasti bisa menaklukkannya dengan mudah!",
-                "Mari kita mulai lembaran belajar bersama menyongsong hari esok yang cerah."
-            ]
-        },
-        samudra: {
-            mentor: "Tentor Terbaik Samudra 🐬",
-            avatar: "🐬",
-            dialogues: [
-                "Halo anak muda, selamat datang di kedalaman Akademi Kerajaan Samudra.",
-                "Di bawah perlindungan laut ini tersimpan rahasia taktik ilmu pengetahuan TKA.",
-                "Kita akan menyelam bersama menembus pusaran arus soal-soal matematika yang menantang.",
-                "Semakin dalam kita menyelam dan berlatih, semakin kokoh mental serta ketangkasan logikamu.",
-                "Jangan terburu-buru, nikmati alur gelombangnya, andalkan insting rumasmu.",
-                "Mari kita kayuh dayung petualangan belajarmu sekarang juga!"
-            ]
-        }
+        galaksi: [
+            "Halo, (Nama)! Selamat datang di jembatan komando kapal ruang angkasa kita.",
+            "Hari ini misi kita adalah menembus koordinat sabuk meteor ujian TKA.",
+            "Jangan takut salah ya! Setiap coretan salahmu adalah batu loncatan berharga menuju bintang prestasi tertinggi. Ayo siap meluncur!"
+        ],
+        langit: [
+            "Halo, sahabat kecilku (Nama)... Senang sekali kamu bisa sampai ke atas awan indah ini.",
+            "Sambil menikmati keindahan kelopak sakura yang menari, mari kita asah ketajaman otak kita.",
+            "Tenang, rileks, fokus. Bersama-sama, tidak ada soal matematika yang terlalu sulit bagi kita!"
+        ],
+        samudra: [
+            "Selamat datang penyelam tangguh, (Nama)! Kamu telah sampai di dasar laut terdalam.",
+            "Di bawah sini tidak ada tekanan, yang ada hanyalah aliran arus ilmu yang melimpah.",
+            "Semakin banyak latihan yang kamu selami, semakin kuat napas pengetahuanmu menghadapi ujian asli nanti."
+        ]
     };
+
+    const loadingPhases = [
+        "Menghubungkan ke Galaksi Belajar...",
+        "Menyiapkan Tentor Terbaik...",
+        "Menghubungkan ke HW Les Private...",
+        "Menyiapkan Materi TKA...",
+        "Hampir Selesai...",
+        "Selamat Datang di HW Les Private!"
+    ];
 
     const elements = {
         progressBar: document.getElementById("progressBar"),
@@ -68,229 +51,304 @@ document.addEventListener("DOMContentLoaded", () => {
         pageLoading: document.getElementById("page-loading"),
         mainContent: document.getElementById("mainContent"),
         bgMusic: document.getElementById("bgMusic"),
+        btnSetting: document.getElementById("btnSetting"),
         themeButtons: document.querySelectorAll("[data-choose-theme]"),
-        themeLoreText: document.getElementById("themeLoreText"),
         avatarGraphic: document.getElementById("avatarGraphic"),
         usernameInput: document.getElementById("usernameInput"),
         btnStart: document.getElementById("btnStart"),
         pageViews: document.querySelectorAll(".page-view"),
         bgContainer: document.getElementById("bgContainer"),
+        loreBox: document.getElementById("loreBox"),
         mentorAvatar: document.getElementById("mentorAvatar"),
         mentorName: document.getElementById("mentorName"),
         typewriterText: document.getElementById("typewriterText"),
         btnSkip: document.getElementById("btnSkip"),
         btnNextNarration: document.getElementById("btnNextNarration"),
-        backButtons: document.querySelectorAll(".btn-back"),
-        subjectMath: document.getElementById("subjectMath"),
-        subjectIndo: document.getElementById("subjectIndo"),
-        modeMaterial: document.getElementById("modeMaterial"),
-        modeSimulation: document.getElementById("modeSimulation"),
         globalModal: document.getElementById("globalModal"),
         modalTitle: document.getElementById("modalTitle"),
         modalBody: document.getElementById("modalBody"),
-        btnModalClose: document.getElementById("btnModalClose")
+        btnModalClose: document.getElementById("btnModalClose"),
+        subjectMath: document.getElementById("subjectMath"),
+        subjectIndo: document.getElementById("subjectIndo"),
+        modeMaterial: document.getElementById("modeMaterial"),
+        modeSimulation: document.getElementById("modeSimulation")
     };
 
+    let backgroundTimers = [];
+    function stopBackgroundTimers() {
+        backgroundTimers.forEach(clearInterval);
+        backgroundTimers = [];
+    }
+
     // ==========================================
-    // 2. SISTEM LOADING SCREEN UTAMA
+    // ENGINE AUDIO (AUTOPLAY FALLBACK)
+    // ==========================================
+    function setupAudioEngine() {
+        elements.bgMusic.volume = state.volume;
+        const startPlay = elements.bgMusic.play();
+        if (startPlay !== undefined) {
+            startPlay.catch(() => {
+                document.addEventListener('click', () => { elements.bgMusic.play().catch(()=>{}); }, { once: true });
+            });
+        }
+    }
+
+    // ==========================================
+    // DRAW LIVE ENGINE BACKGROUNDS
+    // ==========================================
+    function createLiveBackground(theme) {
+        stopBackgroundTimers();
+        elements.bgContainer.innerHTML = "";
+
+        if (theme === "galaksi") {
+            const colors = ["#ffffff", "#fffae0", "#e0f2fe", "#f5d0fe"];
+            for (let i = 0; i < 60; i++) {
+                const star = document.createElement("div");
+                star.className = "star-twinkle";
+                const size = Math.random() * 2 + 1;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.background = colors[Math.floor(Math.random() * colors.length)];
+                star.style.left = `${Math.random() * 100}vw`;
+                star.style.top = `${Math.random() * 100}vh`;
+                star.style.setProperty('--d', `${Math.random() * 2 + 1}s`);
+                elements.bgContainer.appendChild(star);
+            }
+
+            // Orbit Melingkar Proporsional Sempurna
+            const centerPoint = document.createElement("div");
+            centerPoint.className = "galaxy-orbit-line";
+            centerPoint.style.width = "0px"; centerPoint.style.height = "0px";
+            centerPoint.style.top = "30%"; centerPoint.style.left = "30%";
+            
+            const orbits = [
+                { r: "100px", size: "12px", col: "#ffbc42", speed: "12s" },
+                { r: "180px", size: "16px", col: "#00f3ff", speed: "20s" },
+                { r: "260px", size: "20px", col: "#ff5c8a", speed: "28s" }
+            ];
+
+            orbits.forEach(o => {
+                const line = document.createElement("div");
+                line.className = "galaxy-orbit-line";
+                line.style.width = line.style.height = o.r;
+                line.style.setProperty('--speed', o.speed);
+
+                const body = document.createElement("div");
+                body.className = "orbit-planet-body";
+                body.style.width = body.style.height = o.size;
+                body.style.background = o.col;
+                body.style.setProperty('--glow', `0 0 10px ${o.col}`);
+
+                line.appendChild(body);
+                elements.bgContainer.appendChild(line);
+            });
+
+        } else if (theme === "langit") {
+            const spawnSakura = () => {
+                const petal = document.createElement("div");
+                petal.className = "sakura-petal";
+                const size = Math.random() * 8 + 8;
+                petal.style.width = `${size}px`; petal.style.height = `${size * 1.2}px`;
+                petal.style.left = `${Math.random() * 100}vw`;
+                const d = Math.random() * 4 + 5;
+                petal.style.setProperty('--speed', `${d}s`);
+                petal.style.setProperty('--sway', `${Math.random() * 100 - 50}px`);
+                elements.bgContainer.appendChild(petal);
+                setTimeout(() => petal.remove(), d * 1000);
+            };
+            const timer = setInterval(spawnSakura, 400);
+            backgroundTimers.push(timer);
+
+        } else if (theme === "samudra") {
+            const spawnBubble = () => {
+                const bubble = document.createElement("div");
+                bubble.className = "bubble-dense";
+                const size = Math.random() * 7 + 3;
+                bubble.style.width = bubble.style.height = `${size}px`;
+                bubble.style.left = `${Math.random() * 100}vw`;
+                const d = Math.random() * 3 + 4;
+                bubble.style.setProperty('--d', `${d}s`);
+                bubble.style.setProperty('--sway', `${Math.random() * 60 - 30}px`);
+                elements.bgContainer.appendChild(bubble);
+                setTimeout(() => bubble.remove(), d * 1000);
+            };
+            const timer = setInterval(spawnBubble, 200);
+            backgroundTimers.push(timer);
+        }
+    }
+
+    // ==========================================
+    // LOADING MECHANICS
     // ==========================================
     function startLoadingSequence() {
-        // Rentetan kata-kata sesuai instruksi, diakhiri nama instansi
-        const loadingPhrases = [
-            { time: 0, text: "Menghubungkan ke Galaksi Belajar..." },
-            { time: 15, text: "Menyiapkan Petualangan Dunia..." },
-            { time: 35, text: "Memanggil Mentor Ahli..." },
-            { time: 55, text: "Menyusun Bank Materi TKA..." },
-            { time: 75, text: "Sinkronisasi Peta Belajar..." },
-            { time: 90, text: "Selamat Datang di HW Les Private" }
-        ];
+        let currentProgress = 0;
+        let phaseIndex = 0;
 
-        let progress = 0;
-        const interval = setInterval(() => {
-            progress += 1;
-            if (elements.progressBar) elements.progressBar.style.width = `${progress}%`;
+        const loadingTimer = setInterval(() => {
+            currentProgress += 1;
+            elements.progressBar.style.width = `${currentProgress}%`;
 
-            // Cek perubahan teks frase secara real-time berdasarkan persentase loading
-            const match = loadingPhrases.find(p => p.time === progress);
-            if (match && elements.loadingText) {
-                elements.loadingText.innerText = match.text;
+            if (currentProgress % 17 === 0 && phaseIndex < loadingPhases.length - 1) {
+                phaseIndex++;
+                elements.loadingText.style.opacity = "0";
+                setTimeout(() => {
+                    elements.loadingText.innerText = loadingPhases[phaseIndex];
+                    elements.loadingText.style.opacity = "1";
+                }, 300);
             }
 
-            if (progress >= 100) {
-                clearInterval(interval);
+            if (currentProgress >= 100) {
+                clearInterval(loadingTimer);
                 setTimeout(() => {
-                    if (elements.pageLoading) {
-                        elements.pageLoading.style.opacity = "0";
-                        elements.pageLoading.style.transform = "scale(0.97)";
-                        setTimeout(() => {
-                            elements.pageLoading.classList.add("hidden");
-                            if (elements.mainContent) elements.mainContent.classList.remove("hidden");
-                            // Triggers autoplay audio
-                            if (!state.isMuted && elements.bgMusic) {
-                                elements.bgMusic.volume = 0.35;
-                                elements.bgMusic.play().catch(() => {});
-                            }
-                        }, 600);
-                    }
+                    elements.pageLoading.style.opacity = "0";
+                    setTimeout(() => {
+                        elements.pageLoading.classList.add("hidden");
+                        elements.mainContent.classList.remove("hidden");
+                        createLiveBackground(state.currentTheme);
+                    }, 600);
                 }, 400);
             }
-        }, 55); // Durasi loading bertambah anggun sesuai permintaan (~5.5 detik)
+        }, 50);
     }
 
     // ==========================================
-    // 3. CORE MANAGEMENT TEMA & PARSE LORE
+    // NAVIGATION SYSTEM & TYPEWRITER DIALOGUE
     // ==========================================
-    function applyTheme(themeName) {
-        document.body.setAttribute("data-theme", themeName);
-        state.currentTheme = themeName;
-        
-        // Update Lore Asal Mula Dunia Real-time
-        if (elements.themeLoreText) {
-            elements.themeLoreText.innerText = themeLoreData[themeName];
-        }
+    function viewTransition(targetId) {
+        elements.pageViews.forEach(v => v.classList.add("hidden"));
+        document.getElementById(targetId).classList.remove("hidden");
+        state.activeView = targetId;
 
-        // Ubah Grafis Avatar Tampilan Utama
-        if (elements.avatarGraphic) {
-            if (themeName === "galaksi") elements.avatarGraphic.innerText = "🚀";
-            else if (themeName === "langit") elements.avatarGraphic.innerText = "☁️";
-            else if (themeName === "samudra") elements.avatarGraphic.innerText = "🐬";
+        if (targetId === "page-narration") {
+            initNarrationScreen();
         }
     }
 
-    // ==========================================
-    // 4. ANIMASI TYPEWRITER TEXT (EFEK SPASI AMAN)
-    // ==========================================
-    let typewriterTimer = null;
-    function typeWriterEffect(text, index = 0) {
-        if (index === 0) {
-            elements.typewriterText.innerHTML = "";
-            elements.btnNextNarration.classList.add("hidden");
-        }
+    function initNarrationScreen() {
+        state.narrationIndex = 0;
+        elements.loreBox.innerText = worldLoreData[state.currentTheme];
+        elements.btnNextNarration.classList.add("hidden");
+        elements.btnSkip.classList.remove("hidden");
+
+        const mentors = { galaksi: "Tentor Astronot Galaksi 🚀", langit: "Tentor Kucing Sakura 🐱", samudra: "Tentor Penyu Bijak 🐬" };
+        const emojis = { galaksi: "🚀", langit: "🐱", samudra: "🐬" };
         
-        if (index < text.length) {
-            // Pengamanan karakter spasi agar dicetak utuh tanpa menyatu kaku
-            if (text[index] === " ") {
-                elements.typewriterText.innerHTML += "&nbsp;";
-            } else {
-                elements.typewriterText.innerText += text[index];
+        elements.mentorName.innerText = mentors[state.currentTheme];
+        elements.mentorAvatar.innerText = emojis[state.currentTheme];
+
+        typewriterWrite(narrationData[state.currentTheme][0]);
+    }
+
+    let writeTimer = null;
+    function typewriterWrite(text) {
+        clearInterval(writeTimer);
+        elements.typewriterText.innerText = "";
+        let index = 0;
+        // Penempatan Spasi & Penggantian Token Nama Terkalibrasi Rapi
+        const parsedText = text.replace("(Nama)", state.username);
+
+        writeTimer = setInterval(() => {
+            elements.typewriterText.innerText += parsedText.charAt(index);
+            index++;
+            if (index >= parsedText.length) {
+                clearInterval(writeTimer);
+                showNarrationControl();
             }
-            
-            typewriterTimer = setTimeout(() => {
-                typeWriterEffect(text, index + 1);
-            }, 25);
+        }, 30);
+    }
+
+    function showNarrationControl() {
+        const total = narrationData[state.currentTheme].length;
+        if (state.narrationIndex < total - 1) {
+            elements.btnNextNarration.innerText = "Lanjutkan ➡️";
         } else {
-            elements.btnNextNarration.classList.remove("hidden");
+            elements.btnNextNarration.innerText = "Mulai Latihan TKA! 🎯";
         }
-    }
-
-    function showNextDialogue() {
-        clearTimeout(typewriterTimer);
-        const currentData = narrationData[state.currentTheme];
-        
-        if (state.narrationIndex < currentData.dialogues.length) {
-            if (elements.mentorName) elements.mentorName.innerText = currentData.mentor;
-            if (elements.mentorAvatar) elements.mentorAvatar.innerText = currentData.avatar;
-            
-            typeWriterEffect(currentData.dialogues[state.narrationIndex]);
-            state.narrationIndex++;
-        } else {
-            switchView("page-subjects");
-        }
+        elements.btnNextNarration.classList.remove("hidden");
     }
 
     // ==========================================
-    // 5. SISTEM NAVIGASI HALAMAN (SPA MURNI)
+    // CLICK ACTION LISTENERS
     // ==========================================
-    function switchView(targetViewId) {
-        elements.pageViews.forEach(view => {
-            view.classList.add("hidden");
-            view.classList.remove("active");
-        });
-        const targetView = document.getElementById(targetViewId);
-        if (targetView) {
-            targetView.classList.remove("hidden");
-            targetView.classList.add("active");
-            state.activeView = targetViewId;
-        }
-
-        // Jika masuk halaman narasi cerita, reset index dialog dari awal
-        if (targetViewId === "page-narration") {
-            state.narrationIndex = 0;
-            showNextDialogue();
-        }
-    }
-
-    // Modal Alert Global
-    function showAlertModal(title, body) {
-        if (elements.modalTitle) elements.modalTitle.innerText = title;
-        if (elements.modalBody) elements.modalBody.innerHTML = `<p>${body}</p>`;
-        if (elements.globalModal) elements.globalModal.classList.remove("hidden");
-    }
-
-    // ==========================================
-    // 6. EVENT LISTENERS & INITIALIZATION
-    // ==========================================
-    // Klik Tombol Ganti Tema Petualangan
     elements.themeButtons.forEach(btn => {
         btn.addEventListener("click", (e) => {
             elements.themeButtons.forEach(b => b.classList.remove("active"));
-            const selectedBtn = e.currentTarget;
-            selectedBtn.classList.add("active");
-            applyTheme(selectedBtn.getAttribute("data-choose-theme"));
+            e.currentTarget.classList.add("active");
+            
+            const theme = e.currentTarget.getAttribute("data-choose-theme");
+            state.currentTheme = theme;
+            document.body.setAttribute("data-theme", theme);
+
+            const avatars = { galaksi: "🚀", langit: "🐱", samudra: "🐬" };
+            elements.avatarGraphic.innerText = avatars[theme];
+
+            createLiveBackground(theme);
         });
     });
 
-    // Tombol Mulai Belajar (Validasi Input Nama)
-    if (elements.btnStart) {
-        elements.btnStart.addEventListener("click", () => {
-            const name = elements.usernameInput.value.trim();
-            if (name === "") {
-                showAlertModal("Akses Ditolak", "Silakan masukkan namamu terlebih dahulu untuk memulai petualangan!");
-                return;
-            }
-            state.username = name;
-            switchView("page-narration");
-        });
-    }
-
-    // Kontrol Navigasi Dialog Cerita
-    if (elements.btnNextNarration) elements.btnNextNarration.addEventListener("click", showNextDialogue);
-    if (elements.btnSkip) elements.btnSkip.addEventListener("click", () => switchView("page-subjects"));
-
-    // Tombol Kembali Global
-    elements.backButtons.forEach(btn => {
-        btn.addEventListener("click", (e) => {
-            switchView(e.currentTarget.getAttribute("data-target"));
-        });
-    });
-
-    // Event Pengunci Pilihan Materi Matematika & Kunci Bahasa Indonesia
-    if (elements.subjectMath) elements.subjectMath.addEventListener("click", () => switchView("page-modes"));
-    if (elements.subjectIndo) {
-        elements.subjectIndo.addEventListener("click", () => {
-            showAlertModal("Zona Terkunci", "Materi Bahasa Indonesia sedang dipersiapkan oleh tim guru hebat HW Les Private.");
-        });
-    }
-    if (elements.modeMaterial) {
-        elements.modeMaterial.addEventListener("click", () => {
-            showAlertModal("Dalam Pengembangan", "Sistem bank soal per materi sedang dirakit. Mohon nantikan update berikutnya!");
-        });
-    }
-    if (elements.modeSimulation) {
-        elements.modeSimulation.addEventListener("click", () => {
-            showAlertModal("Pusat Simulasi", "Uji coba simulasi TKA berwaktu akan segera hadir secara serentak.");
-        });
-    }
-
-    // Pengaturan Modal Tutup & Autoplay Sound Interaction Fallback
-    if (elements.btnModalClose) elements.btnModalClose.addEventListener("click", () => elements.globalModal.classList.add("hidden"));
-    window.addEventListener("click", () => {
-        if (!state.isMuted && elements.bgMusic && elements.bgMusic.paused && !elements.mainContent.classList.contains("hidden")) {
-            elements.bgMusic.play().catch(() => {});
+    elements.btnStart.addEventListener("click", () => {
+        const name = elements.usernameInput.value.trim();
+        if (!name) {
+            elements.modalTitle.innerText = "Perhatian ⚠️";
+            elements.modalBody.innerHTML = "<p>Silakan tuliskan namamu terlebih dahulu.</p>";
+            elements.globalModal.classList.remove("hidden");
+            return;
         }
-    }, { once: true });
+        state.username = name;
+        viewTransition("page-narration");
+    });
 
-    // Jalankan Website
-    applyTheme("galaksi");
+    elements.btnNextNarration.addEventListener("click", () => {
+        state.narrationIndex++;
+        const currentList = narrationData[state.currentTheme];
+        if (state.narrationIndex < currentList.length) {
+            elements.btnNextNarration.classList.add("hidden");
+            typewriterWrite(currentList[state.narrationIndex]);
+        } else {
+            viewTransition("page-subjects");
+        }
+    });
+
+    elements.btnSkip.addEventListener("click", () => {
+        clearInterval(writeTimer);
+        viewTransition("page-subjects");
+    });
+
+    // Event Handler Halaman Menu Materi & Pop-up
+    elements.subjectMath.addEventListener("click", () => viewTransition("page-modes"));
+    elements.subjectIndo.addEventListener("click", () => {
+        elements.modalTitle.innerText = "Bahasa Indonesia 📖";
+        elements.modalBody.innerHTML = "<p>Fitur Bahasa Indonesia sedang kami siapkan.<br>Mohon tunggu update berikutnya.</p>";
+        elements.globalModal.classList.remove("hidden");
+    });
+    elements.modeMaterial.addEventListener("click", () => {
+        elements.modalTitle.innerText = "Latihan per Materi 📚";
+        elements.modalBody.innerHTML = "<p>Fitur ini sedang dalam tahap pengembangan.<br>Kami akan segera menghadirkannya.</p>";
+        elements.globalModal.classList.remove("hidden");
+    });
+    elements.modeSimulation.addEventListener("click", () => {
+        elements.modalTitle.innerText = "Simulasi TKA 🏆";
+        elements.modalBody.innerHTML = "<p>Fitur simulasi sedang dipersiapkan.<br>Nantikan update dari HW Les Private.</p>";
+        elements.globalModal.classList.remove("hidden");
+    });
+
+    document.querySelectorAll(".btn-back").forEach(btn => {
+        btn.addEventListener("click", (e) => viewTransition(e.currentTarget.getAttribute("data-target")));
+    });
+
+    elements.btnModalClose.addEventListener("click", () => elements.globalModal.classList.add("hidden"));
+
+    // Settings Panel
+    elements.btnSetting.addEventListener("click", () => {
+        elements.modalTitle.innerText = "Pengaturan Web ⚙️";
+        elements.modalBody.innerHTML = `
+            <p style='margin-bottom:10px;'>Atur kenyamanan bermain sambil belajarmu disini:</p>
+            <button class='btn-secondary-neon' style='width:100%; margin-bottom:8px;' onclick='window.location.reload()'>🔄 Reset Website</button>
+            <button class='btn-secondary-neon' style='width:100%;' onclick='if(!document.fullscreenElement){document.documentElement.requestFullscreen()}else{document.exitFullscreen()}'>🖥️ Layar Penuh</button>
+        `;
+        elements.globalModal.classList.remove("hidden");
+    });
+
+    setupAudioEngine();
     startLoadingSequence();
 });
