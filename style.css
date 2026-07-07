@@ -1,41 +1,44 @@
 /* ==========================================================================
-   1. VARIABLES & THEMES (Glassmorphism & Neon System)
+   1. VARIABLES & THEMES (Sistem Neon Bersinar Kuat)
    ========================================================================== */
 :root {
     --font-heading: 'Fredoka', sans-serif;
     --font-body: 'Plus Jakarta Sans', sans-serif;
     --transition-smooth: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
     
-    /* Tema 1: Galaksi */
+    /* Tema 1: Galaksi Neon */
     --bg-gradient: linear-gradient(135deg, #05030a 0%, #0c081d 50%, #020104 100%);
     --neon-color: #00f3ff;
-    --neon-glow: 0 0 15px rgba(0, 243, 255, 0.6), 0 0 30px rgba(0, 243, 255, 0.3);
-    --glass-bg: rgba(12, 8, 29, 0.4);
-    --glass-border: rgba(0, 243, 255, 0.2);
+    --neon-glow: 0 0 15px #00f3ff, 0 0 30px rgba(0, 243, 255, 0.6), 0 0 50px rgba(0, 243, 255, 0.3);
+    --glass-bg: rgba(12, 8, 29, 0.35);
+    --glass-border: rgba(0, 243, 255, 0.4); /* Border neon lebih tegas */
     --text-color: #ffffff;
     --accent-color: #ff007f;
+    --accent-glow: 0 0 15px #ff007f, 0 0 30px rgba(255, 0, 127, 0.5);
 }
 
 [data-theme="sakura"] {
-    /* Tema 2: Langit (Ref: Gradasi Fajar Estetik Lembut) */
-    --bg-gradient: linear-gradient(180deg, #6b82a8 0%, #a3b8cc 40%, #e2b9a7 75%, #f5cfb3 100%);
-    --neon-color: #f07167;
-    --neon-glow: 0 0 15px rgba(240, 113, 103, 0.4);
-    --glass-bg: rgba(255, 255, 255, 0.18);
-    --glass-border: rgba(255, 255, 255, 0.3);
-    --text-color: #2b2d42;
-    --accent-color: #4a5759;
+    /* Tema 2: Sakura Neon (Pink & Ungu Menyala) */
+    --bg-gradient: linear-gradient(135deg, #1a0f1a 0%, #2d142c 50%, #110512 100%);
+    --neon-color: #ff758f;
+    --neon-glow: 0 0 15px #ff758f, 0 0 30px rgba(255, 117, 143, 0.6), 0 0 50px rgba(255, 117, 143, 0.3);
+    --glass-bg: rgba(45, 20, 44, 0.35);
+    --glass-border: rgba(255, 117, 143, 0.4);
+    --text-color: #fff0f5;
+    --accent-color: #be95c4;
+    --accent-glow: 0 0 15px #be95c4, 0 0 30px rgba(190, 149, 196, 0.5);
 }
 
 [data-theme="samudra"] {
-    /* Tema 3: Samudra Deep Blue */
-    --bg-gradient: linear-gradient(135deg, #01021e 0%, #00283d 60%, #004c54 100%);
+    /* Tema 3: Samudra Deep Blue Neon */
+    --bg-gradient: linear-gradient(135deg, #010214 0%, #001b29 50%, #002b30 100%);
     --neon-color: #00f5d4;
-    --neon-glow: 0 0 15px rgba(0, 245, 212, 0.5);
-    --glass-bg: rgba(1, 20, 31, 0.45);
-    --glass-border: rgba(0, 245, 212, 0.15);
-    --text-color: #ffffff;
-    --accent-color: #028090;
+    --neon-glow: 0 0 15px #00f5d4, 0 0 30px rgba(0, 245, 212, 0.6), 0 0 50px rgba(0, 245, 212, 0.3);
+    --glass-bg: rgba(0, 27, 41, 0.4);
+    --glass-border: rgba(0, 245, 212, 0.4);
+    --text-color: #e0fbfc;
+    --accent-color: #00b4d8;
+    --accent-glow: 0 0 15px #00b4d8, 0 0 30px rgba(0, 180, 216, 0.5);
 }
 
 /* ==========================================================================
@@ -72,16 +75,16 @@ h1, h2, h3, h4 {
 }
 
 /* ==========================================================================
-   3. LAYOUT COMPONENTS & ULTRA GLASSMORPHISM (Lebih Transparan)
+   3. LAYOUT COMPONENTS & ULTRA NEON GLASSMORPHISM
    ========================================================================== */
 .glass-card {
     background: var(--glass-bg);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border: 1px solid var(--glass-border);
+    border: 2px solid var(--glass-border); /* Dipertebal untuk efek garis neon */
     border-radius: 24px;
     padding: 2rem;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3), var(--neon-glow); /* Efek pendaran neon di luar kartu */
     transition: var(--transition-smooth);
 }
 
@@ -115,7 +118,7 @@ h1, h2, h3, h4 {
     gap: 1rem;
 }
 
-/* BUTTONS */
+/* BUTTONS NEON */
 .btn-primary {
     font-family: var(--font-heading);
     background: linear-gradient(45deg, var(--neon-color), var(--accent-color));
@@ -125,43 +128,49 @@ h1, h2, h3, h4 {
     font-size: 1.25rem;
     border-radius: 50px;
     cursor: pointer;
-    box-shadow: var(--neon-glow);
+    box-shadow: var(--neon-glow), var(--accent-glow);
     transition: var(--transition-smooth);
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
 }
 
 .btn-primary:hover {
     transform: translateY(-4px) scale(1.03);
-    box-shadow: 0 0 25px var(--neon-color);
+    box-shadow: 0 0 25px var(--neon-color), 0 0 35px var(--accent-color);
 }
 
 .btn-secondary {
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.05);
     color: var(--text-color);
-    border: 1px solid var(--glass-border);
+    border: 2px solid var(--glass-border);
     padding: 0.75rem 2rem;
     border-radius: 50px;
     cursor: pointer;
     font-weight: 600;
+    box-shadow: inset 0 0 10px rgba(255,255,255,0.02);
     transition: var(--transition-smooth);
 }
 
 .btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.12);
+    border-color: var(--neon-color);
+    box-shadow: var(--neon-glow);
     transform: translateY(-2px);
 }
 
 .btn-icon {
     background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
+    border: 2px solid var(--glass-border);
     font-size: 1.2rem;
     padding: 0.5rem;
     border-radius: 50%;
     cursor: pointer;
+    box-shadow: var(--neon-glow);
     transition: var(--transition-smooth);
 }
 
 .btn-icon:hover {
     transform: rotate(45deg) scale(1.1);
+    box-shadow: 0 0 20px var(--neon-color);
 }
 
 /* ==========================================================================
@@ -197,13 +206,12 @@ h1, h2, h3, h4 {
 .hidden { display: none !important; }
 
 /* ==========================================================================
-   5. HALAMAN 0: FIX LOADING SCREEN & SMOOTH TEXT
+   5. HALAMAN 0: FIX LOADING SCREEN & ULTRA SMOOTH FADE TEXT
    ========================================================================== */
 .loading-wrapper {
     text-align: center;
 }
 
-/* Centering Orbit Sempurna agar tidak goyang saat berputar */
 .galaxy-loader {
     width: 100px;
     height: 100px;
@@ -216,19 +224,20 @@ h1, h2, h3, h4 {
     position: absolute;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    border: 4px solid rgba(255, 255, 255, 0.05);
+    border: 4px solid rgba(255, 255, 255, 0.03);
     border-top-color: var(--neon-color);
     border-bottom-color: var(--accent-color);
     border-radius: 50%;
     box-sizing: border-box;
     animation: spinSempurna 1.2s linear infinite;
+    filter: drop-shadow(0 0 8px var(--neon-color));
 }
 
 .core-glow {
     position: absolute;
     top: 50%; left: 50%;
-    width: 40px; height: 40px;
-    margin-top: -20px; margin-left: -20px;
+    width: 36px; height: 36px;
+    margin-top: -18px; margin-left: -18px;
     background: var(--neon-color);
     border-radius: 50%;
     box-shadow: var(--neon-glow);
@@ -238,7 +247,7 @@ h1, h2, h3, h4 {
 .progress-container {
     width: 300px;
     height: 6px;
-    background: rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.05);
     border-radius: 10px;
     margin: 1.5rem auto;
     overflow: hidden;
@@ -253,21 +262,22 @@ h1, h2, h3, h4 {
     transition: width 0.3s ease-out;
 }
 
-/* Transisi kemunculan teks loading super smooth */
+/* Transisi kemunculan teks kata-kata yang super smooth */
 .loading-text {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     font-weight: 600;
-    transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    text-shadow: var(--neon-glow);
+    transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1), transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .hw-logo-glow {
     font-family: var(--font-heading);
-    font-size: 3rem;
+    font-size: 3.2rem;
     font-weight: 800;
     color: #fff;
-    text-shadow: var(--neon-glow);
+    text-shadow: var(--neon-glow), 0 0 30px var(--accent-color);
     opacity: 0;
-    transform: scale(0.92);
+    transform: scale(0.95);
     transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
@@ -281,8 +291,8 @@ h1, h2, h3, h4 {
     100% { transform: rotate(360deg); }
 }
 @keyframes pulseSempurna {
-    0%, 100% { transform: scale(1); opacity: 0.6; }
-    50% { transform: scale(1.12); opacity: 1; }
+    0%, 100% { transform: scale(1); opacity: 0.7; }
+    50% { transform: scale(1.15); opacity: 1; }
 }
 
 /* ==========================================================================
@@ -315,7 +325,7 @@ h1, h2, h3, h4 {
     width: 120px;
     height: 120px;
     margin: 0 auto 1.5rem;
-    background: rgba(255,255,255,0.05);
+    background: rgba(255,255,255,0.03);
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -336,19 +346,20 @@ h1, h2, h3, h4 {
 }
 
 .input-group input {
-    background: rgba(255,255,255,0.05);
+    background: rgba(255,255,255,0.03);
     border: 2px solid var(--glass-border);
     padding: 1rem;
     border-radius: 14px;
     color: var(--text-color);
     font-size: 1rem;
     outline: none;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
     transition: var(--transition-smooth);
 }
 
 .input-group input:focus {
     border-color: var(--neon-color);
-    box-shadow: var(--neon-glow);
+    box-shadow: var(--neon-glow), inset 0 0 5px rgba(255,255,255,0.1);
 }
 
 .theme-options {
@@ -363,15 +374,16 @@ h1, h2, h3, h4 {
     align-items: center;
     gap: 1rem;
     padding: 1rem;
-    background: rgba(255,255,255,0.03);
-    border: 1px solid transparent;
+    background: rgba(255,255,255,0.02);
+    border: 2px solid transparent;
     border-radius: 14px;
     cursor: pointer;
     transition: var(--transition-smooth);
 }
 
 .theme-btn:hover {
-    background: rgba(255,255,255,0.08);
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255,255,255,0.1);
     transform: translateX(5px);
 }
 
@@ -400,6 +412,7 @@ h1, h2, h3, h4 {
 
 .mentor-avatar {
     font-size: 2.5rem;
+    text-shadow: var(--neon-glow);
     animation: floating 3.5s ease-in-out infinite;
 }
 
@@ -456,22 +469,24 @@ h1, h2, h3, h4 {
 .card-icon {
     font-size: 4rem;
     margin-bottom: 1rem;
+    filter: drop-shadow(0 0 10px var(--neon-color));
 }
 
 .locked-card {
-    opacity: 0.5;
+    opacity: 0.45;
     position: relative;
     cursor: not-allowed;
+    box-shadow: none !important;
 }
 
 .badge-lock {
     display: inline-block;
     margin-top: 1rem;
     padding: 0.25rem 1rem;
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.4);
     border-radius: 50px;
     font-size: 0.85rem;
-    border: 1px solid rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.1);
 }
 
 .navigation-area { text-align: center; }
@@ -482,7 +497,7 @@ h1, h2, h3, h4 {
 .modal-overlay {
     position: fixed;
     top: 0; left: 0; width: 100vw; height: 100vh;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.6);
     backdrop-filter: blur(10px);
     z-index: 1000;
     display: flex;
@@ -496,11 +511,11 @@ h1, h2, h3, h4 {
     text-align: center;
 }
 
-.modal-content h3 { margin-bottom: 1.5rem; font-size: 1.75rem; }
+.modal-content h3 { margin-bottom: 1.5rem; font-size: 1.75rem; text-shadow: var(--neon-glow); }
 #modalBody { margin-bottom: 2rem; font-size: 1.1rem; line-height: 1.5; }
 
 /* ==========================================================================
-   10. ADVANCED DYNAMIC THEME SYSTEM ANIMATIONS
+   10. ADVANCED DYNAMIC THEME SYSTEM ANIMATIONS (60FPS HIGH-NEON)
    ========================================================================== */
 
 /* --- A. TEMA 1: REVOLUSI GALAKSI 3D MIRING --- */
@@ -513,10 +528,9 @@ h1, h2, h3, h4 {
 }
 @keyframes kelapKelip { 
     0% { opacity: 0.1; transform: scale(0.8); } 
-    100% { opacity: 1; transform: scale(1.2); box-shadow: 0 0 8px #fff; } 
+    100% { opacity: 1; transform: scale(1.2); box-shadow: 0 0 10px #fff, 0 0 4px var(--neon-color); } 
 }
 
-/* Perspektif Miring 3D untuk seluruh tata surya */
 .system-solar-3d {
     position: absolute;
     top: 50%; left: 50%;
@@ -532,15 +546,14 @@ h1, h2, h3, h4 {
     width: 65px; height: 65px;
     background: radial-gradient(circle, #fffbe0 10%, #ff8c00 60%, #ff3c00 100%);
     border-radius: 50%;
-    /* Mengembalikan kemiringan matahari agar tetap bulat sempurna di tengah */
     transform: translate(-50%, -50%) rotateY(10deg) rotateX(-65deg);
-    box-shadow: 0 0 50px #ff3c00, 0 0 100px rgba(255,60,0,0.5);
+    box-shadow: 0 0 40px #ff3c00, 0 0 80px rgba(255,60,0,0.6);
 }
 
 .orbit-ellipse-path {
     position: absolute;
     top: 50%; left: 50%;
-    border: 1.5px solid rgba(255, 255, 255, 0.08);
+    border: 2px dashed rgba(0, 243, 255, 0.25); /* Garis orbit bersinar neon */
     border-radius: 50%;
     transform: translate(-50%, -50%);
     transform-style: preserve-3d;
@@ -551,91 +564,91 @@ h1, h2, h3, h4 {
     position: absolute;
     top: 0; left: 50%;
     border-radius: 50%;
-    transform: translate(-50%, -50%) rotateY(10deg) rotateX(-65deg); /* Counter rotasi biar planet bulat */
-    box-shadow: inset -4px -4px 10px rgba(0,0,0,0.7), 0 0 15px var(--glow);
+    transform: translate(-50%, -50%) rotateY(10deg) rotateX(-65deg);
+    box-shadow: inset -4px -4px 10px rgba(0,0,0,0.7), 0 0 20px var(--glow);
 }
 
-/* Meteor Jatuh acak */
 .meteor-streak {
     position: absolute;
     width: 2px; height: 75px;
-    background: linear-gradient(to top, rgba(255,255,255,0.9), transparent);
+    background: linear-gradient(to top, #00f3ff, transparent);
     opacity: 0;
     pointer-events: none;
     animation: flyMeteorMove var(--dur) cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 @keyframes flyMeteorMove {
     0% { transform: translate(var(--startX), var(--startY)) rotate(40deg); opacity: 0; }
-    15% { opacity: 1; }
+    15% { opacity: 1; filter: drop-shadow(0 0 8px #00f3ff); }
     100% { transform: translate(var(--endX), var(--endY)) rotate(40deg); opacity: 0; }
 }
-
 @keyframes spin3D { 100% { transform: translate(-50%, -50%) rotate(360deg); } }
 
-/* --- B. TEMA 2: LANGIT SYSTEM (SILUET AWAN ELEGAN) --- */
-.sun-rise-soft {
+/* --- B. TEMA 2: KEMBALI KE SAKURA NEON BERGUGURAN (OPTIMIZED) --- */
+.sakura-petal {
     position: absolute;
-    bottom: -10px; left: 12%;
-    width: 110px; height: 110px;
-    background: radial-gradient(circle, #fff6cc 20%, #f4a261 70%, #e76f51 100%);
-    border-radius: 50%;
+    background: #ff758f;
+    border-radius: 150% 0 150% 150%; /* Bentuk Kelopak Bunga */
     pointer-events: none;
-    box-shadow: 0 0 60px rgba(244,162,97,0.6);
-    animation: riseUpSlow 4.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    box-shadow: 0 0 10px rgba(255, 117, 143, 0.7); /* Kelopak sakura efek neon menyala */
+    transform-origin: center;
+    animation: sakuraFall var(--speed) linear forwards;
 }
-@keyframes riseUpSlow { from { transform: translateY(160px); } to { transform: translateY(0); } }
-
-.cloud-silhouette {
-    position: absolute;
-    background: rgba(255, 255, 255, 0.28);
-    backdrop-filter: blur(1px);
-    border-radius: 100px;
-    pointer-events: none;
-    animation: cloudWalkSlow var(--speed) linear infinite;
-    box-shadow: inset 0 -4px 12px rgba(255,255,255,0.2), 0 4px 15px rgba(0,0,0,0.03);
-}
-@keyframes cloudWalkSlow {
-    0% { left: -220px; }
-    100% { left: 100vw; }
+@keyframes sakuraFall {
+    0% {
+        top: -40px;
+        transform: translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% {
+        top: 105vh;
+        transform: translateX(var(--sway)) rotate(430deg);
+        opacity: 0;
+    }
 }
 
-/* --- C. TEMA 3: SAMUDRA SILUET SYSTEM --- */
+/* --- C. TEMA 3: SAMUDRA DEEP NEON (SILUET GELAP SOAL GELOMBANG & GELEMBUNG RAMAI) --- */
 .bubble-dense {
     position: absolute;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.18);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(0, 245, 212, 0.15);
+    border: 1.5px solid rgba(0, 245, 212, 0.5); /* Gelembung bersinar neon */
+    box-shadow: 0 0 8px rgba(0, 245, 212, 0.3);
     pointer-events: none;
     animation: floatUpDense var(--d) ease-in infinite;
 }
 @keyframes floatUpDense {
-    0% { transform: translateY(105vh) scale(0.7); opacity: 0; }
-    30% { opacity: 0.6; }
-    90% { opacity: 0.4; }
+    0% { transform: translateY(105vh) scale(0.6); opacity: 0; }
+    20% { opacity: 0.8; }
+    90% { opacity: 0.6; }
     100% { transform: translateY(-10vh) scale(1.3); opacity: 0; }
 }
 
 .fish-silhouette {
     position: absolute;
     font-size: var(--size);
-    color: #011627; /* Siluet Gelap Keberjauhan */
-    opacity: 0.45;
-    text-shadow: 0 0 5px rgba(1, 22, 39, 0.3);
+    color: #010d1a; /* Sangat Gelap Mendekati Hitam Kedalaman Palung */
+    opacity: 0.85; /* Ditingkatkan agar siluet tegas terlihat kontras */
     pointer-events: none;
     user-select: none;
-    filter: blur(0.5px); /* Efek kedalaman air laut */
-    animation: swimCrossUnderwater var(--speed) linear forwards;
+    /* Gabungan Berjalan Kanan Ke Kiri + Gelombang Sinusoidal Naik Turun */
+    animation: swimRightToLeft var(--speed) linear forwards, waveUpDown 3s ease-in-out infinite alternate;
 }
-@keyframes swimCrossUnderwater {
-    0% { left: -70px; transform: translateY(var(--y)) scaleX(var(--dir)); }
-    100% { left: 105vw; transform: translateY(var(--y2)) scaleX(var(--dir)); }
+@keyframes swimRightToLeft {
+    0% { right: -80px; transform: scaleX(1); } /* Menghadap kiri dan berjalan dari kanan */
+    100% { right: 105vw; transform: scaleX(1); }
+}
+@keyframes waveUpDown {
+    0% { margin-top: -25px; }
+    100% { margin-top: 25px; }
 }
 
-/* CORE INTERACTION UTILITY ANIMATIONS */
+/* DEKORASI UTILITY */
 @keyframes floating { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 
 .pulse-glow { animation: pulseGlow 2.5s infinite; }
-@keyframes pulseGlow { 0%, 100% { box-shadow: var(--neon-glow); } 50% { box-shadow: 0 0 30px var(--accent-color); } }
+@keyframes pulseGlow { 0%, 100% { box-shadow: var(--neon-glow); } 50% { box-shadow: 0 0 35px var(--accent-color), 0 0 10px var(--neon-color); } }
 
 .animate-zoom { animation: zoomIn 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
 @keyframes zoomIn { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
@@ -649,7 +662,7 @@ h1, h2, h3, h4 {
     opacity: 0.7;
     margin-top: 3rem;
     line-height: 1.6;
-    border-top: 1px solid var(--glass-border);
+    border-top: 2px solid var(--glass-border);
     padding-top: 1.5rem;
 }
 
