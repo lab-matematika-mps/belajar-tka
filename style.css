@@ -4,38 +4,38 @@
 :root {
     --font-heading: 'Fredoka', sans-serif;
     --font-body: 'Plus Jakarta Sans', sans-serif;
-    --transition-smooth: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    --transition-smooth: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
     
     /* Tema 1: Galaksi */
-    --bg-gradient: linear-gradient(135deg, #090614 0%, #100b26 50%, #030206 100%);
+    --bg-gradient: linear-gradient(135deg, #05030a 0%, #0c081d 50%, #020104 100%);
     --neon-color: #00f3ff;
     --neon-glow: 0 0 15px rgba(0, 243, 255, 0.6), 0 0 30px rgba(0, 243, 255, 0.3);
-    --glass-bg: rgba(16, 11, 38, 0.5);
-    --glass-border: rgba(0, 243, 255, 0.25);
+    --glass-bg: rgba(12, 8, 29, 0.4);
+    --glass-border: rgba(0, 243, 255, 0.2);
     --text-color: #ffffff;
     --accent-color: #ff007f;
 }
 
 [data-theme="sakura"] {
-    /* Tema 2: Langit (Warna Terbit Fajar) */
-    --bg-gradient: linear-gradient(135deg, #8ba8ff 0%, #ffbe9e 60%, #ffa17a 100%);
-    --neon-color: #ff477e;
-    --neon-glow: 0 0 15px rgba(255, 71, 126, 0.5), 0 0 30px rgba(255, 71, 126, 0.2);
-    --glass-bg: rgba(255, 255, 255, 0.35);
-    --glass-border: rgba(255, 255, 255, 0.4);
-    --text-color: #2a1b40;
-    --accent-color: #480ca8;
+    /* Tema 2: Langit (Ref: Gradasi Fajar Estetik Lembut) */
+    --bg-gradient: linear-gradient(180deg, #6b82a8 0%, #a3b8cc 40%, #e2b9a7 75%, #f5cfb3 100%);
+    --neon-color: #f07167;
+    --neon-glow: 0 0 15px rgba(240, 113, 103, 0.4);
+    --glass-bg: rgba(255, 255, 255, 0.18);
+    --glass-border: rgba(255, 255, 255, 0.3);
+    --text-color: #2b2d42;
+    --accent-color: #4a5759;
 }
 
 [data-theme="samudra"] {
-    /* Tema 3: Samudra */
-    --bg-gradient: linear-gradient(135deg, #02033b 0%, #005f73 50%, #0a9396 100%);
+    /* Tema 3: Samudra Deep Blue */
+    --bg-gradient: linear-gradient(135deg, #01021e 0%, #00283d 60%, #004c54 100%);
     --neon-color: #00f5d4;
-    --neon-glow: 0 0 15px rgba(0, 245, 212, 0.6), 0 0 30px rgba(0, 245, 212, 0.3);
-    --glass-bg: rgba(2, 48, 71, 0.5);
-    --glass-border: rgba(0, 245, 212, 0.3);
+    --neon-glow: 0 0 15px rgba(0, 245, 212, 0.5);
+    --glass-bg: rgba(1, 20, 31, 0.45);
+    --glass-border: rgba(0, 245, 212, 0.15);
     --text-color: #ffffff;
-    --accent-color: #9b5de5;
+    --accent-color: #028090;
 }
 
 /* ==========================================================================
@@ -53,7 +53,7 @@ body {
     background: var(--bg-gradient);
     min-height: 100vh;
     overflow-x: hidden;
-    transition: background 1s ease;
+    transition: background 1.2s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 h1, h2, h3, h4 {
@@ -72,16 +72,16 @@ h1, h2, h3, h4 {
 }
 
 /* ==========================================================================
-   3. LAYOUT COMPONENTS & GLASSMORPHISM
+   3. LAYOUT COMPONENTS & ULTRA GLASSMORPHISM (Lebih Transparan)
    ========================================================================== */
 .glass-card {
     background: var(--glass-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     border: 1px solid var(--glass-border);
     border-radius: 24px;
     padding: 2rem;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15);
     transition: var(--transition-smooth);
 }
 
@@ -130,12 +130,12 @@ h1, h2, h3, h4 {
 }
 
 .btn-primary:hover {
-    transform: translateY(-5px) scale(1.05);
+    transform: translateY(-4px) scale(1.03);
     box-shadow: 0 0 25px var(--neon-color);
 }
 
 .btn-secondary {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.08);
     color: var(--text-color);
     border: 1px solid var(--glass-border);
     padding: 0.75rem 2rem;
@@ -146,7 +146,7 @@ h1, h2, h3, h4 {
 }
 
 .btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.15);
     transform: translateY(-2px);
 }
 
@@ -178,14 +178,14 @@ h1, h2, h3, h4 {
     align-items: center;
     z-index: 100;
     background: var(--bg-gradient);
-    transition: opacity 0.8s ease, visibility 0.8s;
+    transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1), visibility 1s;
 }
 
 .page-view {
     display: none;
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    transform: translateY(15px);
+    transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1), transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .active-view {
@@ -197,43 +197,48 @@ h1, h2, h3, h4 {
 .hidden { display: none !important; }
 
 /* ==========================================================================
-   5. HALAMAN 0: LOADING SCREEN STYLES
+   5. HALAMAN 0: FIX LOADING SCREEN & SMOOTH TEXT
    ========================================================================== */
 .loading-wrapper {
     text-align: center;
 }
 
+/* Centering Orbit Sempurna agar tidak goyang saat berputar */
 .galaxy-loader {
     width: 100px;
     height: 100px;
     margin: 0 auto 2rem;
     position: relative;
+    box-sizing: border-box;
 }
 
 .orbit-line {
-    width: 100%;
-    height: 100%;
-    border: 4px solid transparent;
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border: 4px solid rgba(255, 255, 255, 0.05);
     border-top-color: var(--neon-color);
     border-bottom-color: var(--accent-color);
     border-radius: 50%;
-    animation: spin 1.5s linear infinite;
+    box-sizing: border-box;
+    animation: spinSempurna 1.2s linear infinite;
 }
 
 .core-glow {
     position: absolute;
-    top: 25%; left: 25%;
-    width: 50%; height: 50%;
+    top: 50%; left: 50%;
+    width: 40px; height: 40px;
+    margin-top: -20px; margin-left: -20px;
     background: var(--neon-color);
     border-radius: 50%;
     box-shadow: var(--neon-glow);
-    animation: pulse 2s ease-in-out infinite;
+    animation: pulseSempurna 2s ease-in-out infinite;
 }
 
 .progress-container {
     width: 300px;
-    height: 8px;
-    background: rgba(255,255,255,0.1);
+    height: 6px;
+    background: rgba(255,255,255,0.08);
     border-radius: 10px;
     margin: 1.5rem auto;
     overflow: hidden;
@@ -245,7 +250,14 @@ h1, h2, h3, h4 {
     height: 100%;
     background: linear-gradient(90deg, var(--neon-color), var(--accent-color));
     box-shadow: var(--neon-glow);
-    transition: width 0.4s ease;
+    transition: width 0.3s ease-out;
+}
+
+/* Transisi kemunculan teks loading super smooth */
+.loading-text {
+    font-size: 1.2rem;
+    font-weight: 600;
+    transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .hw-logo-glow {
@@ -255,13 +267,22 @@ h1, h2, h3, h4 {
     color: #fff;
     text-shadow: var(--neon-glow);
     opacity: 0;
-    transform: scale(0.5);
-    transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform: scale(0.92);
+    transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .hw-logo-glow.show {
     opacity: 1;
     transform: scale(1);
+}
+
+@keyframes spinSempurna {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+@keyframes pulseSempurna {
+    0%, 100% { transform: scale(1); opacity: 0.6; }
+    50% { transform: scale(1.12); opacity: 1; }
 }
 
 /* ==========================================================================
@@ -294,14 +315,14 @@ h1, h2, h3, h4 {
     width: 120px;
     height: 120px;
     margin: 0 auto 1.5rem;
-    background: rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.05);
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     border: 2px dashed var(--neon-color);
     box-shadow: var(--neon-glow);
-    animation: floating 3s ease-in-out infinite;
+    animation: floating 3.5s ease-in-out infinite;
 }
 
 .avatar-graphic {
@@ -315,7 +336,7 @@ h1, h2, h3, h4 {
 }
 
 .input-group input {
-    background: rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.05);
     border: 2px solid var(--glass-border);
     padding: 1rem;
     border-radius: 14px;
@@ -342,7 +363,7 @@ h1, h2, h3, h4 {
     align-items: center;
     gap: 1rem;
     padding: 1rem;
-    background: rgba(255,255,255,0.05);
+    background: rgba(255,255,255,0.03);
     border: 1px solid transparent;
     border-radius: 14px;
     cursor: pointer;
@@ -350,7 +371,7 @@ h1, h2, h3, h4 {
 }
 
 .theme-btn:hover {
-    background: rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.08);
     transform: translateX(5px);
 }
 
@@ -379,7 +400,7 @@ h1, h2, h3, h4 {
 
 .mentor-avatar {
     font-size: 2.5rem;
-    animation: floating 3s ease-in-out infinite;
+    animation: floating 3.5s ease-in-out infinite;
 }
 
 .divider {
@@ -427,7 +448,7 @@ h1, h2, h3, h4 {
 }
 
 .interactive-card:hover {
-    transform: translateY(-12px) scale(1.03);
+    transform: translateY(-10px) scale(1.02);
     border-color: var(--neon-color);
     box-shadow: var(--neon-glow);
 }
@@ -438,7 +459,7 @@ h1, h2, h3, h4 {
 }
 
 .locked-card {
-    opacity: 0.6;
+    opacity: 0.5;
     position: relative;
     cursor: not-allowed;
 }
@@ -447,10 +468,10 @@ h1, h2, h3, h4 {
     display: inline-block;
     margin-top: 1rem;
     padding: 0.25rem 1rem;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.3);
     border-radius: 50px;
     font-size: 0.85rem;
-    border: 1px solid rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.15);
 }
 
 .navigation-area { text-align: center; }
@@ -461,8 +482,8 @@ h1, h2, h3, h4 {
 .modal-overlay {
     position: fixed;
     top: 0; left: 0; width: 100vw; height: 100vh;
-    background: rgba(0,0,0,0.6);
-    backdrop-filter: blur(8px);
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(10px);
     z-index: 1000;
     display: flex;
     justify-content: center;
@@ -479,136 +500,145 @@ h1, h2, h3, h4 {
 #modalBody { margin-bottom: 2rem; font-size: 1.1rem; line-height: 1.5; }
 
 /* ==========================================================================
-   10. ADVANCED DYNAMIC THEME SYSTEM ANIMATIONS (60FPS)
+   10. ADVANCED DYNAMIC THEME SYSTEM ANIMATIONS
    ========================================================================== */
 
-/* --- TEMA 1: GALAKSI SYSTEM --- */
-.star {
+/* --- A. TEMA 1: REVOLUSI GALAKSI 3D MIRING --- */
+.star-twinkle {
     position: absolute;
     background: #fff;
     border-radius: 50%;
     pointer-events: none;
-    animation: blink var(--d) linear infinite;
+    animation: kelapKelip var(--d) ease-in-out infinite alternate;
 }
-@keyframes blink { 0%, 100% { opacity: 0.2; } 50% { opacity: 1; } }
+@keyframes kelapKelip { 
+    0% { opacity: 0.1; transform: scale(0.8); } 
+    100% { opacity: 1; transform: scale(1.2); box-shadow: 0 0 8px #fff; } 
+}
 
-.system-solar {
+/* Perspektif Miring 3D untuk seluruh tata surya */
+.system-solar-3d {
     position: absolute;
     top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: 500px; height: 500px;
+    width: 650px; height: 650px;
     pointer-events: none;
+    transform: translate(-50%, -50%) rotateX(65deg) rotateY(-10deg);
+    transform-style: preserve-3d;
 }
-.sun-center {
+
+.sun-center-3d {
     position: absolute;
     top: 50%; left: 50%;
-    width: 50px; height: 50px;
-    background: radial-gradient(circle, #fffb00 20%, #ff5100 100%);
+    width: 65px; height: 65px;
+    background: radial-gradient(circle, #fffbe0 10%, #ff8c00 60%, #ff3c00 100%);
     border-radius: 50%;
-    transform: translate(-50%, -50%);
-    box-shadow: 0 0 40px #ff5100, 0 0 80px rgba(255,81,0,0.4);
+    /* Mengembalikan kemiringan matahari agar tetap bulat sempurna di tengah */
+    transform: translate(-50%, -50%) rotateY(10deg) rotateX(-65deg);
+    box-shadow: 0 0 50px #ff3c00, 0 0 100px rgba(255,60,0,0.5);
 }
-.orbit-line-path {
+
+.orbit-ellipse-path {
     position: absolute;
     top: 50%; left: 50%;
-    border: 1px dashed rgba(255, 243, 255, 0.08);
+    border: 1.5px solid rgba(255, 255, 255, 0.08);
     border-radius: 50%;
     transform: translate(-50%, -50%);
-    animation: spin var(--speed) linear infinite;
+    transform-style: preserve-3d;
+    animation: spin3D var(--speed) linear infinite;
 }
-.planet-element {
+
+.planet-3d {
     position: absolute;
     top: 0; left: 50%;
     border-radius: 50%;
-    transform: translate(-50%, -50%);
-    box-shadow: inset -2px -2px 4px rgba(0,0,0,0.6);
+    transform: translate(-50%, -50%) rotateY(10deg) rotateX(-65deg); /* Counter rotasi biar planet bulat */
+    box-shadow: inset -4px -4px 10px rgba(0,0,0,0.7), 0 0 15px var(--glow);
 }
 
-/* Meteor Kejutan */
-.meteor-random {
+/* Meteor Jatuh acak */
+.meteor-streak {
     position: absolute;
-    width: 3px; height: 90px;
-    background: linear-gradient(transparent, #fff);
+    width: 2px; height: 75px;
+    background: linear-gradient(to top, rgba(255,255,255,0.9), transparent);
     opacity: 0;
-    transform: rotate(35deg);
     pointer-events: none;
-    animation: flyMeteor 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    animation: flyMeteorMove var(--dur) cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
-@keyframes flyMeteor {
-    0% { transform: translate(var(--startX), var(--startY)) rotate(35deg); opacity: 0; }
-    10% { opacity: 1; }
-    100% { transform: translate(var(--endX), var(--endY)) rotate(35deg); opacity: 0; }
+@keyframes flyMeteorMove {
+    0% { transform: translate(var(--startX), var(--startY)) rotate(40deg); opacity: 0; }
+    15% { opacity: 1; }
+    100% { transform: translate(var(--endX), var(--endY)) rotate(40deg); opacity: 0; }
 }
 
-/* --- TEMA 2: LANGIT SYSTEM --- */
-.sun-rise {
+@keyframes spin3D { 100% { transform: translate(-50%, -50%) rotate(360deg); } }
+
+/* --- B. TEMA 2: LANGIT SYSTEM (SILUET AWAN ELEGAN) --- */
+.sun-rise-soft {
     position: absolute;
-    bottom: -20px; left: 10%;
-    width: 120px; height: 120px;
-    background: radial-gradient(circle, #fff3b0 10%, #ca6702 100%);
+    bottom: -10px; left: 12%;
+    width: 110px; height: 110px;
+    background: radial-gradient(circle, #fff6cc 20%, #f4a261 70%, #e76f51 100%);
     border-radius: 50%;
     pointer-events: none;
-    box-shadow: 0 0 50px #ca6702;
-    animation: riseUp 4s cubic-bezier(0.175, 0.885, 0.32, 1) forwards;
+    box-shadow: 0 0 60px rgba(244,162,97,0.6);
+    animation: riseUpSlow 4.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
-@keyframes riseUp { from { transform: translateY(150px); } to { transform: translateY(0); } }
+@keyframes riseUpSlow { from { transform: translateY(160px); } to { transform: translateY(0); } }
 
-.cloud-transparent {
+.cloud-silhouette {
     position: absolute;
-    background: rgba(255, 255, 255, 0.45);
-    backdrop-filter: blur(2px);
+    background: rgba(255, 255, 255, 0.28);
+    backdrop-filter: blur(1px);
     border-radius: 100px;
     pointer-events: none;
-    animation: cloudWalk var(--speed) linear infinite;
+    animation: cloudWalkSlow var(--speed) linear infinite;
+    box-shadow: inset 0 -4px 12px rgba(255,255,255,0.2), 0 4px 15px rgba(0,0,0,0.03);
 }
-.cloud-transparent::before, .cloud-transparent::after {
-    content: '';
-    position: absolute;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 50%;
-}
-@keyframes cloudWalk {
-    0% { left: -200px; }
+@keyframes cloudWalkSlow {
+    0% { left: -220px; }
     100% { left: 100vw; }
 }
 
-/* --- TEMA 3: SAMUDRA SYSTEM --- */
-.bubble-element {
+/* --- C. TEMA 3: SAMUDRA SILUET SYSTEM --- */
+.bubble-dense {
     position: absolute;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.25);
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     pointer-events: none;
-    animation: floatUp var(--d) ease-in infinite;
+    animation: floatUpDense var(--d) ease-in infinite;
 }
-@keyframes floatUp {
-    0% { transform: translateY(105vh) scale(0.8); opacity: 0; }
-    50% { opacity: 0.7; }
-    100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+@keyframes floatUpDense {
+    0% { transform: translateY(105vh) scale(0.7); opacity: 0; }
+    30% { opacity: 0.6; }
+    90% { opacity: 0.4; }
+    100% { transform: translateY(-10vh) scale(1.3); opacity: 0; }
 }
 
-.fish-swim {
+.fish-silhouette {
     position: absolute;
     font-size: var(--size);
+    color: #011627; /* Siluet Gelap Keberjauhan */
+    opacity: 0.45;
+    text-shadow: 0 0 5px rgba(1, 22, 39, 0.3);
     pointer-events: none;
     user-select: none;
-    animation: swimCross var(--speed) linear forwards;
+    filter: blur(0.5px); /* Efek kedalaman air laut */
+    animation: swimCrossUnderwater var(--speed) linear forwards;
 }
-@keyframes swimCross {
-    0% { left: -60px; transform: translateY(var(--y)) scaleX(var(--dir)); }
+@keyframes swimCrossUnderwater {
+    0% { left: -70px; transform: translateY(var(--y)) scaleX(var(--dir)); }
     100% { left: 105vw; transform: translateY(var(--y2)) scaleX(var(--dir)); }
 }
 
-/* CORE KEYFRAMES UTILITY */
-@keyframes spin { 100% { transform: translate(-50%, -50%) rotate(360deg); } }
-@keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.5; } 50% { transform: scale(1.1); opacity: 1; } }
-@keyframes floating { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+/* CORE INTERACTION UTILITY ANIMATIONS */
+@keyframes floating { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 
-.pulse-glow { animation: pulseGlow 2s infinite; }
+.pulse-glow { animation: pulseGlow 2.5s infinite; }
 @keyframes pulseGlow { 0%, 100% { box-shadow: var(--neon-glow); } 50% { box-shadow: 0 0 30px var(--accent-color); } }
 
-.animate-zoom { animation: zoomIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-@keyframes zoomIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.animate-zoom { animation: zoomIn 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+@keyframes zoomIn { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
 /* ==========================================================================
    11. FOOTER & RESPONSIVE DESIGN
@@ -616,7 +646,7 @@ h1, h2, h3, h4 {
 .main-footer {
     text-align: center;
     font-size: 0.85rem;
-    opacity: 0.8;
+    opacity: 0.7;
     margin-top: 3rem;
     line-height: 1.6;
     border-top: 1px solid var(--glass-border);
@@ -625,7 +655,7 @@ h1, h2, h3, h4 {
 
 @media (max-width: 768px) {
     .menu-grid { grid-template-columns: 1fr; gap: 1.5rem; }
-    .main-title { font-size: 2.5rem; }
+    .main-title { font-size: 2.3rem; }
     .cards-container { gap: 1.5rem; }
     .main-content { padding: 1rem; }
 }
