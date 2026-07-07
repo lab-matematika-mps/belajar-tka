@@ -1,7 +1,6 @@
 /**
  * WEBSITE UTAMA LATIHAN TKA - HAYAM WURUK LES PRIVATE (HW LES PRIVATE)
- * Tahun Rilis: 2026
- * Arsitektur Ter-Update: Manajemen Tema Dinamis & Autoplay Audio Engine
+ * Versi Revisi Sistem Dinamis 60FPS: Memperbaiki Animasi Orbit 3D & Efek Siluet Laut
  */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -17,7 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
         narrationIndex: 0
     };
 
-    // Database Narasi Sesuai Karakter Tema
     const narrationData = {
         antariksa: {
             mentor: "Tentor Terbaik Galaksi 🚀",
@@ -33,9 +31,9 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         sakura: {
             mentor: "Tentor Terbaik Langit ☁️",
-            avatar: "🐱",
+            avatar: "☁️",
             dialogues: [
-                "Konichiwa! Selamat datang di atas langit impian...",
+                "Selamat datang di hamparan langit impian...",
                 "Aku sudah menyiapkan tempat yang hangat dan banyak latihan seru untukmu.",
                 "Belajar materi TKA ditemani awan yang tenang tentu sangat menyenangkan, bukan?",
                 "Tarik napas dalam-dalam, tenangkan pikiranmu.",
@@ -44,8 +42,8 @@ document.addEventListener("DOMContentLoaded", () => {
             ]
         },
         samudra: {
-            mentor: "Tentor Terbaik Samudra 🐢",
-            avatar: "🐢",
+            mentor: "Tentor Terbaik Samudra 🐬",
+            avatar: "🐬",
             dialogues: [
                 "Halo anak muda, selamat datang di kedalaman Akademi Samudra.",
                 "Di bawah laut ini tersimpan banyak sekali ilmu pengetahuan TKA.",
@@ -57,7 +55,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    // DOM Elements Mapping
     const elements = {
         progressBar: document.getElementById("progressBar"),
         loadingText: document.getElementById("loadingText"),
@@ -74,30 +71,24 @@ document.addEventListener("DOMContentLoaded", () => {
         pageViews: document.querySelectorAll(".page-view"),
         bgContainer: document.getElementById("bgContainer"),
         
-        // Narasi Elements
         mentorAvatar: document.getElementById("mentorAvatar"),
         mentorName: document.getElementById("mentorName"),
         typewriterText: document.getElementById("typewriterText"),
         btnSkip: document.getElementById("btnSkip"),
         btnNextNarration: document.getElementById("btnNextNarration"),
         
-        // Navigation Back Buttons
         backButtons: document.querySelectorAll(".btn-back"),
-        
-        // Cards Selection
         subjectMath: document.getElementById("subjectMath"),
         subjectIndo: document.getElementById("subjectIndo"),
         modeMaterial: document.getElementById("modeMaterial"),
         modeSimulation: document.getElementById("modeSimulation"),
         
-        // Modal
         globalModal: document.getElementById("globalModal"),
         modalTitle: document.getElementById("modalTitle"),
         modalBody: document.getElementById("modalBody"),
         btnModalClose: document.getElementById("btnModalClose")
     };
 
-    // Interval timers untuk pembersihan memori background
     let themeIntervals = [];
 
     function clearAllIntervals() {
@@ -106,13 +97,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================================================
-    // 2. AUDIO ENGINE & AUTOPLAY REVOLUTION
+    // 2. AUDIO ENGINE
     // ==========================================================================
     function triggerAudioOnInteraction() {
         if (!state.isMuted) {
             elements.bgMusic.muted = false;
-            elements.bgMusic.volume = 0.5;
-            elements.bgMusic.play().catch(e => console.log("Menunggu interaksi penuh..."));
+            elements.bgMusic.volume = 0.4;
+            elements.bgMusic.play().catch(() => {});
         }
     }
 
@@ -127,16 +118,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (type === 'click') {
                 oscillator.type = 'sine';
-                oscillator.frequency.setValueAtTime(400, audioCtx.currentTime);
-                gainNode.gain.setValueAtTime(0.08, audioCtx.currentTime);
+                oscillator.frequency.setValueAtTime(420, audioCtx.currentTime);
+                gainNode.gain.setValueAtTime(0.06, audioCtx.currentTime);
                 oscillator.start();
                 oscillator.stop(audioCtx.currentTime + 0.08);
             } else if (type === 'popup') {
                 oscillator.type = 'triangle';
-                oscillator.frequency.setValueAtTime(523.25, audioCtx.currentTime);
-                gainNode.gain.setValueAtTime(0.12, audioCtx.currentTime);
+                oscillator.frequency.setValueAtTime(550, audioCtx.currentTime);
+                gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
                 oscillator.start();
-                oscillator.stop(audioCtx.currentTime + 0.15);
+                oscillator.stop(audioCtx.currentTime + 0.12);
             }
         } catch (e) {}
     }
@@ -157,138 +148,147 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================================================
-    // 3. CORE MULTI-THEME ENGINE (GALAKSI, LANGIT, & SAMUDRA)
+    // 3. CORE MULTI-THEME REVISI ENGINE
     // ==========================================================================
     function generateBackgroundParticles(theme) {
         clearAllIntervals();
         elements.bgContainer.innerHTML = ""; 
 
-        if (theme === "antariksa") { // TEMA: GALAKSI
-            // 1. Render Bintang Berkelip latar belakang
-            for (let i = 0; i < 45; i++) {
+        if (theme === "antariksa") { // TEMA: REVOLUSI GALAKSI 3D
+            // 1. Bangkitkan Kembali Bintang Kelap-Kelip Dinamis
+            for (let i = 0; i < 50; i++) {
                 const star = document.createElement("div");
-                star.className = "star";
-                star.style.width = star.style.height = `${Math.random() * 2.5 + 1}px`;
+                star.className = "star-twinkle";
+                star.style.width = star.style.height = `${Math.random() * 2.8 + 1}px`;
                 star.style.left = `${Math.random() * 100}vw`;
                 star.style.top = `${Math.random() * 100}vh`;
-                star.style.setProperty('--d', `${Math.random() * 3 + 2}s`);
+                star.style.setProperty('--d', `${Math.random() * 2.5 + 1.5}s`);
                 elements.bgContainer.appendChild(star);
             }
 
-            // 2. Render Sistem Tata Surya (Matahari dikitari planet)
+            // 2. Kontainer Sistem Tata Surya 3D Miring (Elips Lonjong)
             const solarSystem = document.createElement("div");
-            solarSystem.className = "system-solar";
+            solarSystem.className = "system-solar-3d";
             
             const sun = document.createElement("div");
-            sun.className = "sun-center";
+            sun.className = "sun-center-3d";
             solarSystem.appendChild(sun);
 
-            // Buat 3 Lintasan Planet Bimasakti
             const planetsData = [
-                { size: '12px', color: '#00b4d8', orbit: '160px', speed: '9s' },
-                { size: '16px', color: '#ffbd00', orbit: '260px', speed: '15s' },
-                { size: '14px', color: '#ff4d6d', orbit: '370px', speed: '22s' }
+                { size: '14px', color: '#00f3ff', glow: 'rgba(0,243,255,0.5)', orbit: '200px', speed: '12s' },
+                { size: '20px', color: '#ffb703', glow: 'rgba(255,183,3,0.5)', orbit: '340px', speed: '20s' },
+                { size: '16px', color: '#ff477e', glow: 'rgba(255,71,126,0.5)', orbit: '480px', speed: '28s' }
             ];
 
             planetsData.forEach(p => {
                 const path = document.createElement("div");
-                path.className = "orbit-line-path";
+                path.className = "orbit-ellipse-path";
                 path.style.width = path.style.height = p.orbit;
                 path.style.setProperty('--speed', p.speed);
 
                 const planet = document.createElement("div");
-                planet.className = "planet-element";
+                planet.className = "planet-3d";
                 planet.style.width = planet.style.height = p.size;
                 planet.style.background = p.color;
+                planet.style.setProperty('--glow', p.glow);
 
                 path.appendChild(planet);
                 solarSystem.appendChild(path);
             });
             elements.bgContainer.appendChild(solarSystem);
 
-            // 3. Spawner Meteor Sesekali Berkejutan
-            const meteorSpawner = setInterval(() => {
+            // 3. Spawner Meteor Berjeda Acak Silih Berganti (Tidak Bersamaan)
+            const spawnMeteorStreak = () => {
                 const meteor = document.createElement("div");
-                meteor.className = "meteor-random";
-                const startX = Math.random() * 80 + 20; 
+                meteor.className = "meteor-streak";
+                const startX = Math.random() * 70 + 20;
                 meteor.style.setProperty('--startX', `${startX}vw`);
-                meteor.style.setProperty('--startY', `-100px`);
-                meteor.style.setProperty('--endX', `${startX - 40}vw`);
+                meteor.style.setProperty('--startY', `-80px`);
+                meteor.style.setProperty('--endX', `${startX - 35}vw`);
                 meteor.style.setProperty('--endY', `100vh`);
-                
+                meteor.style.setProperty('--dur', `${Math.random() * 0.4 + 1.0}s`);
+
                 elements.bgContainer.appendChild(meteor);
-                setTimeout(() => meteor.remove(), 1300);
-            }, 3500);
+                setTimeout(() => meteor.remove(), 1500);
+            };
+
+            const meteorSpawner = setInterval(() => {
+                spawnMeteorStreak();
+                // Komet kedua diberi delay acak kecil agar tidak berbarengan
+                if (Math.random() > 0.4) {
+                    setTimeout(spawnMeteorStreak, Math.random() * 800 + 600);
+                }
+            }, 4000);
             themeIntervals.push(meteorSpawner);
 
-        } else if (theme === "sakura") { // TEMA: LANGIT
-            // 1. Tambahkan 1 Matahari Terbit Elegan
+        } else if (theme === "sakura") { // TEMA: LANGIT DAWN ESTETIK
+            // 1. Matahari Terbit Elegan
             const sunRise = document.createElement("div");
-            sunRise.className = "sun-rise";
+            sunRise.className = "sun-rise-soft";
             elements.bgContainer.appendChild(sunRise);
 
-            // 2. Buat Awan Transparan Berjalan Beriringan
+            // 2. Awan Berjalan Halus Siluet Transparan
             const spawnCloud = (initial = false) => {
                 const cloud = document.createElement("div");
-                cloud.className = "cloud-transparent";
-                const scale = Math.random() * 0.6 + 0.6;
-                cloud.style.transform = `scale(${scale})`;
-                cloud.style.top = `${Math.random() * 45 + 5}%`;
-                cloud.style.setProperty('--speed', `${Math.random() * 20 + 25}s`);
+                cloud.className = "cloud-silhouette";
+                const width = Math.random() * 120 + 100;
+                const height = width * 0.35;
+                cloud.style.width = `${width}px`;
+                cloud.style.height = `${height}px`;
+                cloud.style.top = `${Math.random() * 50 + 8}%`;
+                cloud.style.setProperty('--speed', `${Math.random() * 25 + 30}s`);
                 
                 if (initial) {
                     cloud.style.left = `${Math.random() * 80}vw`;
                 }
                 elements.bgContainer.appendChild(cloud);
                 
-                // Hapus jika sudah keluar dari layar komputer
                 if (!initial) {
-                    setTimeout(() => cloud.remove(), 45000);
+                    setTimeout(() => cloud.remove(), 55000);
                 }
             };
 
-            // Spawns awal saat transparansi aktif
-            for(let i=0; i<4; i++) spawnCloud(true);
-            const cloudSpawner = setInterval(() => spawnCloud(false), 9000);
+            for (let i = 0; i < 4; i++) spawnCloud(true);
+            const cloudSpawner = setInterval(() => spawnCloud(false), 9500);
             themeIntervals.push(cloudSpawner);
 
-        } else if (theme === "samudra") { // TEMA: SAMUDRA
-            // 1. Gelembung Air Alami
-            for (let i = 0; i < 20; i++) {
+        } else if (theme === "samudra") { // TEMA: SAMUDRA GELEMBUNG PADAT & SILUET IKAN GELAP
+            // 1. Perbanyak Jumlah Gelembung Air (Lebih Ramai & Padat)
+            for (let i = 0; i < 45; i++) {
                 const bubble = document.createElement("div");
-                bubble.className = "bubble-element";
-                const size = Math.random() * 12 + 4;
+                bubble.className = "bubble-dense";
+                const size = Math.random() * 10 + 3;
                 bubble.style.width = bubble.style.height = `${size}px`;
                 bubble.style.left = `${Math.random() * 100}vw`;
-                bubble.style.setProperty('--d', `${Math.random() * 4 + 4}s`);
-                bubble.style.animationDelay = `${Math.random() * 5}s`;
+                bubble.style.setProperty('--d', `${Math.random() * 5 + 4}s`);
+                bubble.style.animationDelay = `${Math.random() * 6}s`;
                 elements.bgContainer.appendChild(bubble);
             }
 
-            // 2. Pembuat Gerombolan & Ikan Berkejaran Acak
-            const fishTypes = ["🐟", "🐠", "🐡", "🦑"];
-            const spawnFish = (isGerombolan = false) => {
-                const fishCount = isGerombolan ? Math.floor(Math.random() * 4) + 4 : 1;
-                const baseGroupY = Math.random() * 70 + 15;
-                const speed = isGerombolan ? Math.random() * 4 + 7 : Math.random() * 3 + 4; // Kejar-kejaran lebih cepat
+            // 2. Spawner Ikan Menjadi Siluet Biru Gelap Keberjauhan
+            const fishIcons = ["🐟", "🐠", "🐡", "🐬"];
+            const spawnSiluetFish = (isGroup = false) => {
+                const count = isGroup ? Math.floor(Math.random() * 5) + 5 : 1;
+                const baseGroupY = Math.random() * 75 + 12;
+                const speed = isGroup ? Math.random() * 5 + 8 : Math.random() * 4 + 5;
                 
-                for (let i = 0; i < fishCount; i++) {
+                for (let i = 0; i < count; i++) {
                     const fish = document.createElement("div");
-                    fish.className = "fish-swim";
-                    fish.innerText = fishTypes[Math.floor(Math.random() * fishTypes.length)];
+                    fish.className = "fish-silhouette";
+                    fish.innerText = fishIcons[Math.floor(Math.random() * fishIcons.length)];
                     
-                    const spreadY = isGerombolan ? (Math.random() * 60 - 30) : 0;
-                    const spreadX = isGerombolan ? (Math.random() * 80 - 40) : 0;
+                    const spreadY = isGroup ? (Math.random() * 70 - 35) : 0;
+                    const spreadX = isGroup ? (Math.random() * 90 - 45) : 0;
                     
                     fish.style.setProperty('--y', `${baseGroupY + spreadY}vh`);
-                    fish.style.setProperty('--y2', `${baseGroupY + spreadY + (Math.random() * 10 - 5)}vh`);
+                    fish.style.setProperty('--y2', `${baseGroupY + spreadY + (Math.random() * 12 - 6)}vh`);
                     fish.style.setProperty('--speed', `${speed}s`);
-                    fish.style.setProperty('--size', isGerombolan ? "1.5rem" : "2.2rem");
-                    fish.style.setProperty('--dir', "1"); // Arah berenang ke kanan
+                    fish.style.setProperty('--size', isGroup ? "1.4rem" : "2.3rem");
+                    fish.style.setProperty('--dir', "1");
                     
-                    if (isGerombolan) {
-                        fish.style.animationDelay = `${Math.random() * 0.5}s`;
-                        fish.style.left = `${-80 + spreadX}px`;
+                    if (isGroup) {
+                        fish.style.animationDelay = `${Math.random() * 0.6}s`;
+                        fish.style.left = `${-90 + spreadX}px`;
                     }
 
                     elements.bgContainer.appendChild(fish);
@@ -296,16 +296,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             };
 
-            // Loop Spawner Ikan Mandiri & Gerombolan berkala
-            spawnFish(true); // langsung panggil gerombolan pertama
-            const fishSpawner = setInterval(() => spawnFish(false), 2000);
-            const schoolFishSpawner = setInterval(() => spawnFish(true), 6500);
+            spawnSiluetFish(true);
+            const fishSpawner = setInterval(() => spawnSiluetFish(false), 2200);
+            const schoolFishSpawner = setInterval(() => spawnSiluetFish(true), 6000);
             themeIntervals.push(fishSpawner, schoolFishSpawner);
         }
     }
 
     // ==========================================================================
-    // 4. ROUTING SYSTEM (PERPINDAHAN HALAMAN HALUS)
+    // 4. ROUTING SYSTEM
     // ==========================================================================
     function switchView(targetViewId) {
         playSoundFX('click');
@@ -324,16 +323,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================================================
-    // 5. HALAMAN 0: PROSES LOADING SEQUENCE
+    // 5. LOADING SYSTEM SMOOTH KEMUNCULAN
     // ==========================================================================
-    const loadingPhases = [
-        "Menghubungkan ke Galaksi Belajar...",
-        "Menyiapkan Petualangan...",
-        "Memanggil Tentor Terbaik...",
-        "Menyiapkan Materi TKA...",
-        "Selamat Datang..."
-    ];
-
     function startLoadingSequence() {
         let currentPercent = 0;
         let phaseIndex = 0;
@@ -344,30 +335,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (currentPercent % 20 === 0 && phaseIndex < loadingPhases.length - 1) {
                 phaseIndex++;
-                elements.loadingText.style.opacity = 0;
+                elements.loadingText.style.opacity = "0"; // Fade out smooth
                 setTimeout(() => {
                     elements.loadingText.innerText = loadingPhases[phaseIndex];
-                    elements.loadingText.style.opacity = 1;
-                }, 200);
+                    elements.loadingText.style.opacity = "1"; // Fade in smooth
+                }, 250);
             }
 
             if (currentPercent >= 100) {
                 clearInterval(progressInterval);
-                elements.loadingText.classList.add("hidden");
-                elements.loadingLogo.classList.add("show");
-
+                elements.loadingText.style.opacity = "0";
+                
                 setTimeout(() => {
-                    elements.pageLoading.style.opacity = 0;
-                    elements.pageLoading.style.visibility = "hidden";
-                    elements.mainContent.classList.remove("hidden");
-                    generateBackgroundParticles(state.currentTheme);
-                }, 1300);
+                    elements.loadingText.classList.add("hidden");
+                    elements.loadingLogo.classList.add("show");
+
+                    setTimeout(() => {
+                        elements.pageLoading.style.opacity = "0";
+                        elements.pageLoading.style.visibility = "hidden";
+                        elements.mainContent.classList.remove("hidden");
+                        generateBackgroundParticles(state.currentTheme);
+                    }, 1400);
+                }, 400);
             }
-        }, 80); 
+        }, 70); 
     }
 
     // ==========================================================================
-    // 6. MANAGEMENT TEMA & AVATAR DINAMIS
+    // 6. MANAGEMENT TEMA
     // ==========================================================================
     function applyTheme(themeName) {
         document.body.setAttribute("data-theme", themeName);
@@ -394,7 +389,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // ==========================================================================
-    // 7. DIALOGUE TYPEWRITER ENGINE (HALAMAN 2)
+    // 7. DIALOGUE TYPEWRITER ENGINE
     // ==========================================================================
     let typewriterTimer;
 
@@ -411,7 +406,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 clearInterval(typewriterTimer);
                 if (callback) callback();
             }
-        }, 30);
+        }, 25);
     }
 
     function startNarrationEngine() {
@@ -465,7 +460,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // ==========================================================================
-    // 9. EVENT LISTENERS & LOGIKA INTERAKSI
+    // 9. EVENT LISTENERS & INTERAKSI
     // ==========================================================================
     elements.btnStart.addEventListener("click", () => {
         const inputName = elements.usernameInput.value.trim();
@@ -476,8 +471,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         state.username = inputName;
-        
-        // REVOLUSI AUTOPLAY: Sekali klik tombol mulai belajar, instrumen langsung dipaksa berbunyi!
         state.isMuted = false;
         initiateForcedPlay();
 
@@ -490,7 +483,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const playPromise = elements.bgMusic.play();
         if (playPromise !== undefined) {
             playPromise.catch(() => {
-                // Atasi pengaman sisa jika browser super protektif
                 document.body.addEventListener('click', () => {
                     elements.bgMusic.play();
                 }, { once: true });
@@ -517,7 +509,6 @@ document.addEventListener("DOMContentLoaded", () => {
         showAlertModal("Fitur simulasi sedang dipersiapkan.", "Nantikan update dari HW Les Private.");
     });
 
-    // Panel Pengaturan Tombol Gear
     elements.btnSetting.addEventListener("click", () => {
         playSoundFX('popup');
         elements.modalTitle.innerText = "Pusat Kontrol Website";
@@ -544,10 +535,8 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("btnResetSystem").addEventListener("click", () => window.location.reload());
     });
 
-    // Pemicu interaksi global cadangan untuk meloloskan aturan keras browser
     document.body.addEventListener('click', triggerAudioOnInteraction, { once: true });
 
-    // RUNNER UTAMA
     startLoadingSequence();
     initAudioControl();
 });
