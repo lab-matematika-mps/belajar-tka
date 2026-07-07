@@ -3,191 +3,177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HW Les Private - Petualangan TKA Pro</title>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Orbitron:wght@400..900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>HW Les Private - Petualangan TKA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Orbitron:wght@500;800&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="theme-neon">
 
-    <!-- BACKGROUND EFFECTS CONTAINER -->
     <div id="bg-effects-container"></div>
-    <div id="wind-overlay" class="wind-overlay"></div>
 
-    <!-- LOADING SCREEN -->
-    <div id="loading-screen" class="active">
-        <div class="loader-content">
-            <div class="hw-logo-anim">🚀</div>
-            <h2 class="loader-title">HW LES PRIVATE</h2>
-            <div class="neon-spinner"></div>
-            <p>Mempersiapkan Petualangan Belajarmu...</p>
+    <div id="loading-screen" class="modal-overlay active" style="background: #0b001a; z-index: 99999;">
+        <div style="text-align: center; color: white;">
+            <h2 style="font-family: 'Orbitron', sans-serif; margin-bottom: 10px;">HW ENGINE PRO</h2>
+            <p>Memuat Petualangan Sains...</p>
         </div>
     </div>
 
-    <!-- MAIN APP CONTAINER -->
-    <main id="app-container">
-
-        <!-- HEADER BUTTONS -->
-        <div class="header-controls">
+    <div id="app-container">
+        
+        <header class="header-controls">
             <button id="btn-settings" class="btn-icon">⚙️ Pengaturan</button>
-        </div>
+        </header>
 
-        <!-- ================= SCREEN 1: WELCOME ================= -->
-        <section id="screen-welcome" class="screen active">
-            <div class="hero-section">
-                <h1 class="main-title">🚀 HW LES PRIVATE</h1>
-                <blockquote class="subtitle">Latihan Tes Kemappan Akademik (TKA)</blockquote>
-                
-                <!-- Gamification: Badge, Level & Avatar -->
-                <div class="mascot-container">
-                    <div class="mascot-badge">Level 1</div>
-                    <div class="mascot-avatar" id="user-avatar">🧙‍♂️</div>
-                    <div class="xp-bar-container">
-                        <div class="xp-bar" style="width: 15%;"></div>
-                        <span class="xp-text">15 / 100 XP</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-container">
-                <div class="input-group">
-                    <label for="student-name">Siapa namamu, Petualang?</label>
-                    <input type="text" id="student-name" placeholder="Tuliskan namamu di sini..." autocomplete="off">
-                </div>
-
-                <h3 class="section-title">Pilih Dunia Petualanganmu</h3>
-                <div class="theme-grid">
-                    <!-- Theme 1 -->
-                    <div class="theme-card active" data-theme="neon">
-                        <div class="theme-icon">🌌</div>
-                        <h3>Neon Retro + Antariksa</h3>
-                        <p>Jelajahi bintang ilmu di galaksi futuristik!</p>
-                        <div class="check-indicator">✓</div>
-                    </div>
-                    <!-- Theme 2 -->
-                    <div class="theme-card" data-theme="anime">
-                        <div class="theme-icon">🌸</div>
-                        <h3>Anime Jepang</h3>
-                        <p>Belajar tenang di bawah guguran bunga Sakura.</p>
-                        <div class="check-indicator">✓</div>
-                    </div>
-                    <!-- Theme 3 -->
-                    <div class="theme-card" data-theme="ocean">
-                        <div class="theme-icon">🌊</div>
-                        <h3>Samudra</h3>
-                        <p>Menyelam dalam mencari mutiara pengetahuan.</p>
-                        <div class="check-indicator">✓</div>
+        <main style="flex: 1; display: flex; flex-direction: column; justify-content: center;">
+            
+            <section id="screen-welcome" class="screen active">
+                <div class="hero-section">
+                    <h1 class="main-title">HW LES PRIVATE</h1>
+                    <p class="subtitle">Petualangan Ujian TKA Engine v2.3</p>
+                    
+                    <div class="mascot-container">
+                        <span class="mascot-avatar">🚀</span>
+                        <div style="text-align: left;">
+                            <span class="mascot-badge">LEVEL 1</span>
+                            <div class="xp-bar-container">
+                                <div class="xp-bar" style="width: 30%;"></div>
+                                <div class="xp-text">30 / 100 XP</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <button id="btn-start" class="btn-primary pulse-effect">✨ MULAI BELAJAR</button>
-            </div>
-        </section>
+                <div class="form-container">
+                    <div class="input-group">
+                        <label for="student-name">Siapa namamu, Pejuang? 🧑‍🎓</label>
+                        <input type="text" id="student-name" placeholder="Ketik nama kamu di sini..." autocomplete="off">
+                    </div>
 
-        <!-- ================= SCREEN 2: NARRATIVE ================= -->
-        <section id="screen-narrative" class="screen">
-            <div class="narrative-box">
-                <!-- Skip button for returning users -->
-                <button id="btn-skip-narrative" class="btn-skip">Lewati Cerita ⏩</button>
-                
-                <div class="character-speaker">
-                    <div class="speaker-avatar" id="narrator-avatar">🧑‍✈️</div>
-                    <div class="speaker-info">
-                        <h4 id="narrator-name">Navigator Galaksi</h4>
-                        <small>Pemandu HW Les Private</small>
+                    <h3 style="margin-bottom: 15px; font-family: 'Fredoka', sans-serif;">Pilih Dunia Belajarmu:</h3>
+                    <div class="theme-grid">
+                        <div class="theme-card active" data-theme="neon">
+                            <span class="theme-icon">🌌</span>
+                            <h4>Neon Antariksa</h4>
+                            <span class="check-indicator">✓</span>
+                        </div>
+                        <div class="theme-card" data-theme="anime">
+                            <span class="theme-icon">🌸</span>
+                            <h4>Sakura Jepang</h4>
+                            <span class="check-indicator">✓</span>
+                        </div>
+                        <div class="theme-card" data-theme="ocean">
+                            <span class="theme-icon">🌊</span>
+                            <h4>Samudra Biru</h4>
+                            <span class="check-indicator">✓</span>
+                        </div>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 25px;">
+                        <button id="btn-start" class="btn-primary pulse-effect">Mulai Petualangan TKA 🔥</button>
                     </div>
                 </div>
-                <div class="dialogue-bubble">
-                    <p id="dialogue-text"></p>
-                </div>
-                <button id="btn-narrative-next" class="btn-primary">Lanjut ➔</button>
-            </div>
-            <button class="btn-back btn-secondary">⬅ Kembali</button>
-        </section>
+            </section>
 
-        <!-- ================= SCREEN 3: MENU MATPEL ================= -->
-        <section id="screen-menu" class="screen">
-            <h2 class="page-title text-center">Pilih Mata Pelajaran</h2>
-            <div class="menu-grid">
-                <div class="menu-card" id="matpel-math">
-                    <div class="card-icon">🧮</div>
-                    <h3>Matematika</h3>
-                    <p>Uji logika angka dan hitungan TKA-mu di sini!</p>
+            <section id="screen-narrative" class="screen">
+                <div class="narrative-box">
+                    <button id="btn-skip-narrative" class="btn-skip">Lewati cerita ⏭️</button>
+                    <div class="character-speaker">
+                        <div id="narrator-avatar" class="speaker-avatar">🧑‍✈️</div>
+                        <div class="speaker-info">
+                            <h4 id="narrator-name">Navigator Galaksi</h4>
+                            <p style="font-size: 0.8rem; opacity: 0.7;">Pemandu Belajarmu</p>
+                        </div>
+                    </div>
+                    <div id="dialogue-text" class="dialogue-bubble">Loading percakapan...</div>
+                    <div style="text-align: right;">
+                        <button id="btn-narrative-next" class="btn-primary" style="padding: 8px 25px; font-size: 1rem;">Lanjut ➡️</button>
+                    </div>
                 </div>
-                <div class="menu-card coming-soon" id="matpel-indo">
-                    <div class="badge-cs">COMING SOON</div>
-                    <div class="card-icon">📖</div>
-                    <h3>Bahasa Indonesia</h3>
-                    <p>Membaca cepat, tepat, dan menganalisis teks.</p>
-                </div>
-            </div>
-            <button class="btn-back btn-secondary">⬅ Kembali</button>
-        </section>
+            </section>
 
-        <!-- ================= SCREEN 4: SUB-MENU MATH ================= -->
-        <section id="screen-math" class="screen">
-            <h2 class="page-title text-center">Latihan Matematika</h2>
-            <div class="menu-grid">
-                <div class="menu-card coming-soon" id="math-materi">
-                    <div class="badge-cs">COMING SOON</div>
-                    <div class="card-icon">📚</div>
-                    <h3>Latihan per Materi</h3>
-                    <p>Fokus belajar bab demi bab yang kamu asah.</p>
+            <section id="screen-menu" class="screen">
+                <div class="hero-section">
+                    <h2 style="font-size: 2.2rem; margin-bottom: 10px;">Pusat Pembelajaran TKA</h2>
+                    <p>Pilih mata pelajaran yang ingin kamu taklukkan hari ini</p>
                 </div>
-                <div class="menu-card coming-soon" id="math-simulasi">
-                    <div class="badge-cs">COMING SOON</div>
-                    <div class="card-icon">🏆</div>
-                    <h3>Simulasi TKA</h3>
-                    <p>Ujian waktu nyata layaknya tes aslinya.</p>
+                <div class="menu-grid">
+                    <div id="matpel-math" class="menu-card">
+                        <span class="card-icon">📐</span>
+                        <h3>Matematika Saintek</h3>
+                        <p>Kalkulus, Aljabar, Trigonometri</p>
+                    </div>
+                    <div id="matpel-indo" class="menu-card coming-soon">
+                        <span class="badge-cs">Segera Hadir</span>
+                        <span class="card-icon">📖</span>
+                        <h3>Bahasa Indonesia</h3>
+                        <p>Literasi & Pemahaman Teks</p>
+                    </div>
                 </div>
-            </div>
-            <button class="btn-back btn-secondary">⬅ Kembali</button>
-        </section>
+                <button class="btn-secondary btn-back">↩️ Kembali ke Depan</button>
+            </section>
 
-        <!-- GLOBAL FOOTER -->
+            <section id="screen-math" class="screen">
+                <div class="hero-section">
+                    <h2 style="font-size: 2.2rem; margin-bottom: 10px;">Modul Matematika Saintek</h2>
+                    <p>Asah logikamu dengan materi interaktif</p>
+                </div>
+                <div class="menu-grid">
+                    <div id="math-materi" class="menu-card">
+                        <span class="card-icon">📚</span>
+                        <h3>Materi & Rumus Cepat</h3>
+                        <p>Kumpulan materi praktis TKA</p>
+                    </div>
+                    <div id="math-simulasi" class="menu-card">
+                        <span class="card-icon">🏆</span>
+                        <h3>Simulasi Ujian TKA</h3>
+                        <p>Uji kemampuanmu dengan batasan waktu</p>
+                    </div>
+                </div>
+                <button class="btn-secondary btn-back">↩️ Kembali ke Menu</button>
+            </section>
+
+        </main>
+
         <footer>
             <div class="footer-line"></div>
-            <p class="footer-brand">HW Les Private</p>
-            <p class="footer-copy">&copy; 2026 | Belajar Lebih Mudah, Raih Prestasi Lebih Tinggi</p>
+            <p class="footer-brand">HW LES PRIVATE</p>
+            <p class="footer-copy">&copy; 2026 HW Engine Pro. All Rights Reserved.</p>
         </footer>
-    </main>
+    </div>
 
-    <!-- POPUP MODAL SYSTEM -->
     <div id="custom-modal" class="modal-overlay">
         <div class="modal-box">
-            <div class="modal-icon" id="modal-icon">😊</div>
-            <h3 class="modal-title" id="modal-title">Pemberitahuan</h3>
-            <p class="modal-message" id="modal-message">Pesan disini.</p>
-            <button id="modal-close" class="btn-primary">Oke, Siap!</button>
+            <div id="modal-icon" style="font-size: 3.5rem; margin-bottom: 10px;">⚠️</div>
+            <h3 id="modal-title" class="modal-title">Pemberitahuan</h3>
+            <p id="modal-message" class="modal-message">Isi pesan ada di sini.</p>
+            <button id="modal-close" class="btn-primary" style="padding: 8px 25px;">Oke, Mengerti</button>
         </div>
     </div>
 
-    <!-- SETTINGS MODAL -->
     <div id="settings-modal" class="modal-overlay">
         <div class="modal-box settings-box">
-            <h3>⚙️ Pengaturan Dunia</h3>
-            <hr>
+            <h3 class="modal-title" style="text-align: center; margin-bottom: 20px;">⚙️ Pengaturan Fitur</h3>
+            
             <div class="setting-item">
-                <label>🎵 Musik Pengiring (OpenSource)</label>
+                <label>Musik Pengiring (Piano)</label>
                 <input type="checkbox" id="setting-music" class="toggle-switch">
             </div>
             <div class="setting-item">
-                <label>🎚️ Volume Audio</label>
-                <input type="range" id="setting-volume" min="0" max="1" step="0.1" value="0.5">
+                <label>Volume Musik</label>
+                <input type="range" id="setting-volume" min="0" max="1" step="0.1" style="width: 120px;">
             </div>
             <div class="setting-item">
-                <label>✨ Efek Partikel Padat</label>
-                <input type="checkbox" id="setting-particles" checked class="toggle-switch">
+                <label>Efek Partikel Atmosfer</label>
+                <input type="checkbox" id="setting-particles" class="toggle-switch" checked>
             </div>
             <div class="setting-item">
-                <label>🏃 Efek Animasi UI</label>
-                <input type="checkbox" id="setting-animations" checked class="toggle-switch">
+                <label>Efek Animasi UI</label>
+                <input type="checkbox" id="setting-animations" class="toggle-switch" checked>
             </div>
+
             <div class="settings-buttons">
-                <button id="settings-reset" class="btn-secondary">Reset</button>
-                <button id="settings-save" class="btn-primary">Simpan</button>
+                <button id="settings-reset" class="btn-secondary" style="font-size: 0.9rem; padding: 6px 15px;">Reset</button>
+                <button id="settings-save" class="btn-primary" style="font-size: 0.9rem; padding: 6px 20px;">Simpan</button>
             </div>
         </div>
     </div>
