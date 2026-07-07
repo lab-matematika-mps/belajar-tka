@@ -3,17 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HW Les Private - Petualangan TKA</title>
+    <title>HW Les Private - Petualangan TKA Pro</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Orbitron:wght@400..900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="theme-neon"> <!-- Default Theme -->
+<body class="theme-neon">
 
     <!-- BACKGROUND EFFECTS CONTAINER -->
     <div id="bg-effects-container"></div>
+    <div id="wind-overlay" class="wind-overlay"></div>
 
     <!-- LOADING SCREEN -->
     <div id="loading-screen" class="active">
@@ -28,7 +29,7 @@
     <!-- MAIN APP CONTAINER -->
     <main id="app-container">
 
-        <!-- HEADER BUTTONS (SETTINGS) -->
+        <!-- HEADER BUTTONS -->
         <div class="header-controls">
             <button id="btn-settings" class="btn-icon">⚙️ Pengaturan</button>
         </div>
@@ -37,13 +38,15 @@
         <section id="screen-welcome" class="screen active">
             <div class="hero-section">
                 <h1 class="main-title">🚀 HW LES PRIVATE</h1>
-                <blockquote class="subtitle">Latihan Tes Kemampuan Akademik (TKA)</blockquote>
+                <blockquote class="subtitle">Latihan Tes Kemappan Akademik (TKA)</blockquote>
+                
+                <!-- Gamification: Badge, Level & Avatar -->
                 <div class="mascot-container">
                     <div class="mascot-badge">Level 1</div>
                     <div class="mascot-avatar" id="user-avatar">🧙‍♂️</div>
                     <div class="xp-bar-container">
-                        <div class="xp-bar" style="width: 10%;"></div>
-                        <span class="xp-text">10 / 100 XP</span>
+                        <div class="xp-bar" style="width: 15%;"></div>
+                        <span class="xp-text">15 / 100 XP</span>
                     </div>
                 </div>
             </div>
@@ -86,6 +89,9 @@
         <!-- ================= SCREEN 2: NARRATIVE ================= -->
         <section id="screen-narrative" class="screen">
             <div class="narrative-box">
+                <!-- Skip button for returning users -->
+                <button id="btn-skip-narrative" class="btn-skip">Lewati Cerita ⏩</button>
+                
                 <div class="character-speaker">
                     <div class="speaker-avatar" id="narrator-avatar">🧑‍✈️</div>
                     <div class="speaker-info">
@@ -148,7 +154,7 @@
         </footer>
     </main>
 
-    <!-- MODERN MODAL (POPUP) -->
+    <!-- POPUP MODAL SYSTEM -->
     <div id="custom-modal" class="modal-overlay">
         <div class="modal-box">
             <div class="modal-icon" id="modal-icon">😊</div>
@@ -161,27 +167,27 @@
     <!-- SETTINGS MODAL -->
     <div id="settings-modal" class="modal-overlay">
         <div class="modal-box settings-box">
-            <h3>⚙️ Pengaturan Petualangan</h3>
+            <h3>⚙️ Pengaturan Dunia</h3>
             <hr>
             <div class="setting-item">
-                <label>🎵 Musik Latar</label>
+                <label>🎵 Musik Pengiring (OpenSource)</label>
                 <input type="checkbox" id="setting-music" class="toggle-switch">
             </div>
             <div class="setting-item">
-                <label>🎚️ Volume Musik</label>
+                <label>🎚️ Volume Audio</label>
                 <input type="range" id="setting-volume" min="0" max="1" step="0.1" value="0.5">
             </div>
             <div class="setting-item">
-                <label>✨ Efek Partikel</label>
+                <label>✨ Efek Partikel Padat</label>
                 <input type="checkbox" id="setting-particles" checked class="toggle-switch">
             </div>
             <div class="setting-item">
-                <label>🏃 Animasi UI</label>
+                <label>🏃 Efek Animasi UI</label>
                 <input type="checkbox" id="setting-animations" checked class="toggle-switch">
             </div>
             <div class="settings-buttons">
                 <button id="settings-reset" class="btn-secondary">Reset</button>
-                <button id="settings-save" class="btn-primary">Simpan Preferensi</button>
+                <button id="settings-save" class="btn-primary">Simpan</button>
             </div>
         </div>
     </div>
