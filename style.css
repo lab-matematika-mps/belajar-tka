@@ -1,44 +1,44 @@
 /* ==========================================================================
-   1. VARIABLES & THEMES (Sistem Neon Bersinar Kuat)
+   1. VARIABLES & THEMES (Tampilan Bersih, Lembut, dan Elegan)
    ========================================================================== */
 :root {
     --font-heading: 'Fredoka', sans-serif;
     --font-body: 'Plus Jakarta Sans', sans-serif;
     --transition-smooth: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
     
-    /* Tema 1: Galaksi Neon */
-    --bg-gradient: linear-gradient(135deg, #05030a 0%, #0c081d 50%, #020104 100%);
-    --neon-color: #00f3ff;
-    --neon-glow: 0 0 15px #00f3ff, 0 0 30px rgba(0, 243, 255, 0.6), 0 0 50px rgba(0, 243, 255, 0.3);
-    --glass-bg: rgba(12, 8, 29, 0.35);
-    --glass-border: rgba(0, 243, 255, 0.4); /* Border neon lebih tegas */
+    /* Tema 1: Galaksi Nebula (Hitam & Sentuhan Ungu) */
+    --bg-gradient: linear-gradient(135deg, #05020a 0%, #110924 50%, #030107 100%);
+    --neon-color: #8a2be2; /* Diubah jadi Ungu Nebula Lembut */
+    --neon-glow: 0 4px 15px rgba(138, 43, 226, 0.2); /* Glow tipis, bukan neon keras */
+    --glass-bg: rgba(17, 9, 36, 0.45);
+    --glass-border: rgba(138, 43, 226, 0.25);
     --text-color: #ffffff;
-    --accent-color: #ff007f;
-    --accent-glow: 0 0 15px #ff007f, 0 0 30px rgba(255, 0, 127, 0.5);
+    --accent-color: #ba55d3;
+    --accent-glow: 0 4px 15px rgba(186, 85, 211, 0.2);
 }
 
 [data-theme="sakura"] {
-    /* Tema 2: Sakura Neon (Pink & Ungu Menyala) */
-    --bg-gradient: linear-gradient(135deg, #1a0f1a 0%, #2d142c 50%, #110512 100%);
-    --neon-color: #ff758f;
-    --neon-glow: 0 0 15px #ff758f, 0 0 30px rgba(255, 117, 143, 0.6), 0 0 50px rgba(255, 117, 143, 0.3);
-    --glass-bg: rgba(45, 20, 44, 0.35);
-    --glass-border: rgba(255, 117, 143, 0.4);
-    --text-color: #fff0f5;
-    --accent-color: #be95c4;
-    --accent-glow: 0 0 15px #be95c4, 0 0 30px rgba(190, 149, 196, 0.5);
+    /* Tema 2: Langit Sakura (Pink Keputihan Lembut) */
+    --bg-gradient: linear-gradient(135deg, #fff5f7 0%, #fde2e4 50%, #fff0f3 100%);
+    --neon-color: #ff758f; /* Pink Lembut */
+    --neon-glow: 0 4px 15px rgba(255, 117, 143, 0.15);
+    --glass-bg: rgba(255, 255, 255, 0.65);
+    --glass-border: rgba(255, 117, 143, 0.25);
+    --text-color: #2b2d42; /* Teks gelap agar terbaca di latar putih */
+    --accent-color: #e0aaff;
+    --accent-glow: 0 4px 15px rgba(224, 170, 255, 0.15);
 }
 
 [data-theme="samudra"] {
-    /* Tema 3: Samudra Deep Blue Neon */
-    --bg-gradient: linear-gradient(135deg, #010214 0%, #001b29 50%, #002b30 100%);
-    --neon-color: #00f5d4;
-    --neon-glow: 0 0 15px #00f5d4, 0 0 30px rgba(0, 245, 212, 0.6), 0 0 50px rgba(0, 245, 212, 0.3);
-    --glass-bg: rgba(0, 27, 41, 0.4);
-    --glass-border: rgba(0, 245, 212, 0.4);
-    --text-color: #e0fbfc;
-    --accent-color: #00b4d8;
-    --accent-glow: 0 0 15px #00b4d8, 0 0 30px rgba(0, 180, 216, 0.5);
+    /* Tema 3: Samudra Deep Blue (Biru Klasik Tenang) */
+    --bg-gradient: linear-gradient(135deg, #03045e 0%, #0077b6 50%, #0096c7 100%);
+    --neon-color: #00b4d8; /* Biru Cerah Lembut */
+    --neon-glow: 0 4px 15px rgba(0, 180, 216, 0.2);
+    --glass-bg: rgba(3, 4, 94, 0.4);
+    --glass-border: rgba(0, 180, 216, 0.3);
+    --text-color: #caf0f8;
+    --accent-color: #90e0ef;
+    --accent-glow: 0 4px 15px rgba(144, 224, 239, 0.2);
 }
 
 /* ==========================================================================
@@ -75,16 +75,16 @@ h1, h2, h3, h4 {
 }
 
 /* ==========================================================================
-   3. LAYOUT COMPONENTS & ULTRA NEON GLASSMORPHISM
+   3. LAYOUT COMPONENTS & MODERN GLASSMORPHISM (CLEAN VERSION)
    ========================================================================== */
 .glass-card {
     background: var(--glass-bg);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border: 2px solid var(--glass-border); /* Dipertebal untuk efek garis neon */
+    border: 1px solid var(--glass-border); /* Diperpis menjadi 1px agar lebih bersih */
     border-radius: 24px;
     padding: 2rem;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3), var(--neon-glow); /* Efek pendaran neon di luar kartu */
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1), var(--neon-glow); /* Pendaran sangat halus */
     transition: var(--transition-smooth);
 }
 
@@ -110,7 +110,6 @@ h1, h2, h3, h4 {
     font-size: 1.5rem;
     letter-spacing: 1px;
     color: var(--neon-color);
-    text-shadow: var(--neon-glow);
 }
 
 .control-panel {
@@ -118,7 +117,7 @@ h1, h2, h3, h4 {
     gap: 1rem;
 }
 
-/* BUTTONS NEON */
+/* BUTTONS MODERN */
 .btn-primary {
     font-family: var(--font-heading);
     background: linear-gradient(45deg, var(--neon-color), var(--accent-color));
@@ -128,49 +127,45 @@ h1, h2, h3, h4 {
     font-size: 1.25rem;
     border-radius: 50px;
     cursor: pointer;
-    box-shadow: var(--neon-glow), var(--accent-glow);
+    box-shadow: var(--neon-glow);
     transition: var(--transition-smooth);
-    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
 }
 
 .btn-primary:hover {
-    transform: translateY(-4px) scale(1.03);
-    box-shadow: 0 0 25px var(--neon-color), 0 0 35px var(--accent-color);
+    transform: translateY(-3px);
+    opacity: 0.95;
 }
 
 .btn-secondary {
     background: rgba(255, 255, 255, 0.05);
     color: var(--text-color);
-    border: 2px solid var(--glass-border);
+    border: 1px solid var(--glass-border);
     padding: 0.75rem 2rem;
     border-radius: 50px;
     cursor: pointer;
     font-weight: 600;
-    box-shadow: inset 0 0 10px rgba(255,255,255,0.02);
     transition: var(--transition-smooth);
 }
 
 .btn-secondary:hover {
     background: rgba(255, 255, 255, 0.12);
     border-color: var(--neon-color);
-    box-shadow: var(--neon-glow);
     transform: translateY(-2px);
 }
 
 .btn-icon {
     background: var(--glass-bg);
-    border: 2px solid var(--glass-border);
+    border: 1px solid var(--glass-border);
     font-size: 1.2rem;
     padding: 0.5rem;
     border-radius: 50%;
     cursor: pointer;
-    box-shadow: var(--neon-glow);
+    color: var(--text-color);
     transition: var(--transition-smooth);
 }
 
 .btn-icon:hover {
-    transform: rotate(45deg) scale(1.1);
-    box-shadow: 0 0 20px var(--neon-color);
+    transform: rotate(45deg) scale(1.05);
 }
 
 /* ==========================================================================
@@ -206,7 +201,7 @@ h1, h2, h3, h4 {
 .hidden { display: none !important; }
 
 /* ==========================================================================
-   5. HALAMAN 0: FIX LOADING SCREEN & ULTRA SMOOTH FADE TEXT
+   5. HALAMAN 0: LOADING SCREEN
    ========================================================================== */
 .loading-wrapper {
     text-align: center;
@@ -217,20 +212,17 @@ h1, h2, h3, h4 {
     height: 100px;
     margin: 0 auto 2rem;
     position: relative;
-    box-sizing: border-box;
 }
 
 .orbit-line {
     position: absolute;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    border: 4px solid rgba(255, 255, 255, 0.03);
+    border: 3px solid rgba(255, 255, 255, 0.05);
     border-top-color: var(--neon-color);
     border-bottom-color: var(--accent-color);
     border-radius: 50%;
-    box-sizing: border-box;
     animation: spinSempurna 1.2s linear infinite;
-    filter: drop-shadow(0 0 8px var(--neon-color));
 }
 
 .core-glow {
@@ -240,7 +232,7 @@ h1, h2, h3, h4 {
     margin-top: -18px; margin-left: -18px;
     background: var(--neon-color);
     border-radius: 50%;
-    box-shadow: var(--neon-glow);
+    opacity: 0.6;
     animation: pulseSempurna 2s ease-in-out infinite;
 }
 
@@ -258,27 +250,23 @@ h1, h2, h3, h4 {
     width: 0%;
     height: 100%;
     background: linear-gradient(90deg, var(--neon-color), var(--accent-color));
-    box-shadow: var(--neon-glow);
     transition: width 0.3s ease-out;
 }
 
-/* Transisi kemunculan teks kata-kata yang super smooth */
 .loading-text {
     font-size: 1.25rem;
     font-weight: 600;
-    text-shadow: var(--neon-glow);
-    transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1), transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .hw-logo-glow {
     font-family: var(--font-heading);
     font-size: 3.2rem;
     font-weight: 800;
-    color: #fff;
-    text-shadow: var(--neon-glow), 0 0 30px var(--accent-color);
+    color: var(--text-color);
     opacity: 0;
     transform: scale(0.95);
-    transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+    transition: opacity 1.2s ease, transform 1.2s ease;
 }
 
 .hw-logo-glow.show {
@@ -291,8 +279,8 @@ h1, h2, h3, h4 {
     100% { transform: rotate(360deg); }
 }
 @keyframes pulseSempurna {
-    0%, 100% { transform: scale(1); opacity: 0.7; }
-    50% { transform: scale(1.15); opacity: 1; }
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.1); opacity: 0.8; }
 }
 
 /* ==========================================================================
@@ -310,8 +298,7 @@ h1, h2, h3, h4 {
 }
 
 .text-glow {
-    color: #fff;
-    text-shadow: var(--neon-glow);
+    color: var(--text-color);
 }
 
 .menu-grid {
@@ -330,8 +317,7 @@ h1, h2, h3, h4 {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 2px dashed var(--neon-color);
-    box-shadow: var(--neon-glow);
+    border: 1px dashed var(--neon-color);
     animation: floating 3.5s ease-in-out infinite;
 }
 
@@ -347,19 +333,17 @@ h1, h2, h3, h4 {
 
 .input-group input {
     background: rgba(255,255,255,0.03);
-    border: 2px solid var(--glass-border);
+    border: 1px solid var(--glass-border);
     padding: 1rem;
     border-radius: 14px;
     color: var(--text-color);
     font-size: 1rem;
     outline: none;
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
     transition: var(--transition-smooth);
 }
 
 .input-group input:focus {
     border-color: var(--neon-color);
-    box-shadow: var(--neon-glow), inset 0 0 5px rgba(255,255,255,0.1);
 }
 
 .theme-options {
@@ -375,22 +359,21 @@ h1, h2, h3, h4 {
     gap: 1rem;
     padding: 1rem;
     background: rgba(255,255,255,0.02);
-    border: 2px solid transparent;
+    border: 1px solid transparent;
     border-radius: 14px;
     cursor: pointer;
+    color: var(--text-color);
     transition: var(--transition-smooth);
 }
 
 .theme-btn:hover {
     background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255,255,255,0.1);
     transform: translateX(5px);
 }
 
 .theme-btn.active {
     background: var(--glass-bg);
     border-color: var(--neon-color);
-    box-shadow: var(--neon-glow);
 }
 
 .theme-icon { font-size: 1.5rem; }
@@ -412,7 +395,6 @@ h1, h2, h3, h4 {
 
 .mentor-avatar {
     font-size: 2.5rem;
-    text-shadow: var(--neon-glow);
     animation: floating 3.5s ease-in-out infinite;
 }
 
@@ -443,7 +425,6 @@ h1, h2, h3, h4 {
     text-align: center;
     font-size: 2.5rem;
     margin-bottom: 3rem;
-    text-shadow: var(--neon-glow);
 }
 
 .cards-container {
@@ -461,32 +442,28 @@ h1, h2, h3, h4 {
 }
 
 .interactive-card:hover {
-    transform: translateY(-10px) scale(1.02);
+    transform: translateY(-5px);
     border-color: var(--neon-color);
-    box-shadow: var(--neon-glow);
 }
 
 .card-icon {
     font-size: 4rem;
     margin-bottom: 1rem;
-    filter: drop-shadow(0 0 10px var(--neon-color));
 }
 
 .locked-card {
     opacity: 0.45;
     position: relative;
     cursor: not-allowed;
-    box-shadow: none !important;
 }
 
 .badge-lock {
     display: inline-block;
     margin-top: 1rem;
     padding: 0.25rem 1rem;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.2);
     border-radius: 50px;
     font-size: 0.85rem;
-    border: 1px solid rgba(255,255,255,0.1);
 }
 
 .navigation-area { text-align: center; }
@@ -497,7 +474,7 @@ h1, h2, h3, h4 {
 .modal-overlay {
     position: fixed;
     top: 0; left: 0; width: 100vw; height: 100vh;
-    background: rgba(0,0,0,0.6);
+    background: rgba(0,0,0,0.4);
     backdrop-filter: blur(10px);
     z-index: 1000;
     display: flex;
@@ -511,14 +488,14 @@ h1, h2, h3, h4 {
     text-align: center;
 }
 
-.modal-content h3 { margin-bottom: 1.5rem; font-size: 1.75rem; text-shadow: var(--neon-glow); }
+.modal-content h3 { margin-bottom: 1.5rem; font-size: 1.75rem; }
 #modalBody { margin-bottom: 2rem; font-size: 1.1rem; line-height: 1.5; }
 
 /* ==========================================================================
-   10. ADVANCED DYNAMIC THEME SYSTEM ANIMATIONS (60FPS HIGH-NEON)
+   10. BACKGROUND ATMOSPHERE (STAY COMPATIBLE WITH OLD SCRIPT)
    ========================================================================== */
 
-/* --- A. TEMA 1: REVOLUSI GALAKSI 3D MIRING --- */
+/* --- TEMA 1: REVOLUSI GALAKSI 3D MIRING --- */
 .star-twinkle {
     position: absolute;
     background: #fff;
@@ -528,7 +505,7 @@ h1, h2, h3, h4 {
 }
 @keyframes kelapKelip { 
     0% { opacity: 0.1; transform: scale(0.8); } 
-    100% { opacity: 1; transform: scale(1.2); box-shadow: 0 0 10px #fff, 0 0 4px var(--neon-color); } 
+    100% { opacity: 0.8; transform: scale(1.1); } 
 }
 
 .system-solar-3d {
@@ -544,16 +521,16 @@ h1, h2, h3, h4 {
     position: absolute;
     top: 50%; left: 50%;
     width: 65px; height: 65px;
-    background: radial-gradient(circle, #fffbe0 10%, #ff8c00 60%, #ff3c00 100%);
+    background: radial-gradient(circle, #fffbe0 10%, #ba55d3 60%, #110924 100%);
     border-radius: 50%;
     transform: translate(-50%, -50%) rotateY(10deg) rotateX(-65deg);
-    box-shadow: 0 0 40px #ff3c00, 0 0 80px rgba(255,60,0,0.6);
+    box-shadow: 0 0 30px rgba(138, 43, 226, 0.4); /* Dijinakkan dari merah pijar keras ke ungu lembut */
 }
 
 .orbit-ellipse-path {
     position: absolute;
     top: 50%; left: 50%;
-    border: 2px dashed rgba(0, 243, 255, 0.25); /* Garis orbit bersinar neon */
+    border: 1px dashed rgba(138, 43, 226, 0.2); /* Sangat tipis transparan */
     border-radius: 50%;
     transform: translate(-50%, -50%);
     transform-style: preserve-3d;
@@ -565,78 +542,65 @@ h1, h2, h3, h4 {
     top: 0; left: 50%;
     border-radius: 50%;
     transform: translate(-50%, -50%) rotateY(10deg) rotateX(-65deg);
-    box-shadow: inset -4px -4px 10px rgba(0,0,0,0.7), 0 0 20px var(--glow);
 }
 
 .meteor-streak {
     position: absolute;
-    width: 2px; height: 75px;
-    background: linear-gradient(to top, #00f3ff, transparent);
+    width: 1.5px; height: 60px;
+    background: linear-gradient(to top, var(--neon-color), transparent);
     opacity: 0;
     pointer-events: none;
     animation: flyMeteorMove var(--dur) cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 @keyframes flyMeteorMove {
     0% { transform: translate(var(--startX), var(--startY)) rotate(40deg); opacity: 0; }
-    15% { opacity: 1; filter: drop-shadow(0 0 8px #00f3ff); }
+    15% { opacity: 0.7; }
     100% { transform: translate(var(--endX), var(--endY)) rotate(40deg); opacity: 0; }
 }
 @keyframes spin3D { 100% { transform: translate(-50%, -50%) rotate(360deg); } }
 
-/* --- B. TEMA 2: KEMBALI KE SAKURA NEON BERGUGURAN (OPTIMIZED) --- */
+/* --- TEMA 2: KEMBALI KE SAKURA NEON BERGUGURAN --- */
 .sakura-petal {
     position: absolute;
-    background: #ff758f;
-    border-radius: 150% 0 150% 150%; /* Bentuk Kelopak Bunga */
+    background: rgba(255, 117, 143, 0.5);
+    border-radius: 150% 0 150% 150%;
     pointer-events: none;
-    box-shadow: 0 0 10px rgba(255, 117, 143, 0.7); /* Kelopak sakura efek neon menyala */
-    transform-origin: center;
     animation: sakuraFall var(--speed) linear forwards;
 }
 @keyframes sakuraFall {
-    0% {
-        top: -40px;
-        transform: translateX(0) rotate(0deg);
-        opacity: 0;
-    }
-    10% { opacity: 1; }
-    90% { opacity: 1; }
-    100% {
-        top: 105vh;
-        transform: translateX(var(--sway)) rotate(430deg);
-        opacity: 0;
-    }
+    0% { top: -40px; transform: translateX(0) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.8; }
+    100% { top: 105vh; transform: translateX(var(--sway)) rotate(360deg); opacity: 0; }
 }
 
-/* --- C. TEMA 3: SAMUDRA DEEP NEON (SILUET GELAP SOAL GELOMBANG & GELEMBUNG RAMAI) --- */
+/* --- TEMA 3: SAMUDRA DEEP BLUE --- */
 .bubble-dense {
     position: absolute;
     border-radius: 50%;
-    background: rgba(0, 245, 212, 0.15);
-    border: 1.5px solid rgba(0, 245, 212, 0.5); /* Gelembung bersinar neon */
-    box-shadow: 0 0 8px rgba(0, 245, 212, 0.3);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     pointer-events: none;
     animation: floatUpDense var(--d) ease-in infinite;
 }
 @keyframes floatUpDense {
     0% { transform: translateY(105vh) scale(0.6); opacity: 0; }
-    20% { opacity: 0.8; }
-    90% { opacity: 0.6; }
-    100% { transform: translateY(-10vh) scale(1.3); opacity: 0; }
+    20% { opacity: 0.7; }
+    90% { opacity: 0.5; }
+    100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
 }
 
 .fish-silhouette {
     position: absolute;
     font-size: var(--size);
-    color: #010d1a; /* Sangat Gelap Mendekati Hitam Kedalaman Palung */
-    opacity: 0.85; /* Ditingkatkan agar siluet tegas terlihat kontras */
+    color: #011424; /* Siluet gelap palung laut */
+    opacity: 0.5;
     pointer-events: none;
     user-select: none;
-    /* Gabungan Berjalan Kanan Ke Kiri + Gelombang Sinusoidal Naik Turun */
     animation: swimRightToLeft var(--speed) linear forwards, waveUpDown 3s ease-in-out infinite alternate;
 }
 @keyframes swimRightToLeft {
-    0% { right: -80px; transform: scaleX(1); } /* Menghadap kiri dan berjalan dari kanan */
+    0% { right: -80px; transform: scaleX(1); }
     100% { right: 105vw; transform: scaleX(1); }
 }
 @keyframes waveUpDown {
@@ -645,11 +609,8 @@ h1, h2, h3, h4 {
 }
 
 /* DEKORASI UTILITY */
+.pulse-glow { transition: var(--transition-smooth); } /* Dijinakkan dari denyut warna kasar */
 @keyframes floating { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
-
-.pulse-glow { animation: pulseGlow 2.5s infinite; }
-@keyframes pulseGlow { 0%, 100% { box-shadow: var(--neon-glow); } 50% { box-shadow: 0 0 35px var(--accent-color), 0 0 10px var(--neon-color); } }
-
 .animate-zoom { animation: zoomIn 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
 @keyframes zoomIn { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
@@ -659,10 +620,10 @@ h1, h2, h3, h4 {
 .main-footer {
     text-align: center;
     font-size: 0.85rem;
-    opacity: 0.7;
+    opacity: 0.6;
     margin-top: 3rem;
     line-height: 1.6;
-    border-top: 2px solid var(--glass-border);
+    border-top: 1px solid var(--glass-border);
     padding-top: 1.5rem;
 }
 
