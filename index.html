@@ -6,148 +6,139 @@
     <title>Latihan TKA - HW Les Private</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-<body data-theme="antariksa">
+<body data-theme="galaksi">
 
     <div class="bg-container" id="bgContainer"></div>
 
-    <audio id="bgMusic" loop src="assets/music/background-music.mp3"></audio>
+    <audio id="bgMusic" loop src="assets/music/relaxing_piano.mp3" preload="auto"></audio>
 
-    <section id="page-loading" class="page active">
-        <div class="loading-wrapper">
+    <section class="page-view active" id="page-loading">
+        <div class="loader-wrapper">
             <div class="galaxy-loader">
-                <div class="orbit-line"></div>
+                <div class="ring ring-1"></div>
+                <div class="ring ring-2"></div>
+                <div class="ring ring-3"></div>
                 <div class="core-glow"></div>
             </div>
+            <div class="loading-brand" id="loadingLogo">HW</div>
+            <h2 id="loadingText" class="neon-text-pulse">Menghubungkan ke Galaksi Belajar...</h2>
             <div class="progress-container">
                 <div class="progress-bar" id="progressBar"></div>
             </div>
-            <h2 id="loadingText" class="loading-text">Menghubungkan ke Galaksi Belajar...</h2>
-            <div class="hw-logo-glow" id="loadingLogo">HW Les Private</div>
         </div>
     </section>
 
-    <main class="main-content hidden" id="mainContent">
-        
-        <header class="top-bar">
-            <div class="logo-text">HW Les Private</div>
-            <div class="control-panel">
-                <button class="btn-icon" id="btnSetting" title="Pengaturan">⚙️</button>
-                <button class="btn-icon" id="btnAudioToggle" title="Mute/Unmute">🔊</button>
-            </div>
-        </header>
+    <main id="mainContent" class="hidden">
 
-        <section id="page-menu" class="page-view active-view">
-            <div class="hero-section">
-                <h1 class="main-title text-glow">LATIHAN TKA</h1>
+        <section class="page-view glass-card" id="page-menu">
+            <div class="menu-header">
+                <h1 class="main-title">LATIHAN TKA</h1>
                 <p class="subtitle">Hayam Wuruk Les Private</p>
             </div>
 
-            <div class="menu-grid">
-                <div class="glass-card profile-card">
-                    <div class="avatar-container" id="avatarContainer">
-                        <div class="avatar-graphic" id="avatarGraphic">🚀</div>
-                    </div>
-                    <div class="input-group">
-                        <label for="usernameInput">Siapa namamu, Petualang?</label>
-                        <input type="text" id="usernameInput" placeholder="Tuliskan namamu..." autocomplete="off">
-                    </div>
+            <div class="avatar-container">
+                <div class="avatar-frame animate-float">
+                    <span id="avatarGraphic" class="avatar-emoji">🚀</span>
                 </div>
+            </div>
 
-                <div class="glass-card theme-card">
-                    <h3>Pilih Dunia Petualanganmu</h3>
-                    <div class="theme-options">
-                        <div class="theme-btn active" data-choose-theme="antariksa">
-                            <span class="theme-icon">🚀</span>
-                            <span class="theme-name">Galaksi</span>
-                        </div>
-                        <div class="theme-btn" data-choose-theme="sakura">
-                            <span class="theme-icon">☁️</span>
-                            <span class="theme-name">Langit</span>
-                        </div>
-                        <div class="theme-btn" data-choose-theme="samudra">
-                            <span class="theme-icon">🐬</span>
-                            <span class="theme-name">Samudra</span>
-                        </div>
-                    </div>
+            <div class="input-group">
+                <input type="text" id="usernameInput" placeholder="Tuliskan namamu..." autocomplete="off">
+            </div>
+
+            <div class="theme-selection">
+                <p class="section-label">Pilih Dunia Petualanganmu:</p>
+                <div class="theme-cards">
+                    <button class="theme-card active" data-choose-theme="galaksi">
+                        <span class="theme-icon">🌌</span>
+                        <span class="theme-name">Galaksi</span>
+                    </button>
+                    <button class="theme-card" data-choose-theme="langit">
+                        <span class="theme-icon">☁️</span>
+                        <span class="theme-name">Langit</span>
+                    </button>
+                    <button class="theme-card" data-choose-theme="samudra">
+                        <span class="theme-icon">🐬</span>
+                        <span class="theme-name">Samudra</span>
+                    </button>
                 </div>
             </div>
 
             <div class="action-area">
-                <button class="btn-primary pulse-glow" id="btnStart">MULAI BELAJAR</button>
+                <button id="btnStart" class="btn-primary-neon">Mulai Belajar</button>
+                <button id="btnSetting" class="btn-icon-setting">⚙️</button>
             </div>
         </section>
 
-        <section id="page-narration" class="page-view">
-            <div class="glass-card narration-box">
-                <div class="narration-header">
-                    <div class="mentor-avatar" id="mentorAvatar">🚀</div>
-                    <h4 id="mentorName">Tentor Terbaik Galaksi</h4>
+        <section class="page-view glass-card hidden" id="page-narration">
+            <div class="narration-layout">
+                <div class="mentor-profile">
+                    <div class="mentor-avatar-glow">
+                        <span id="mentorAvatar" class="avatar-emoji">🚀</span>
+                    </div>
+                    <h3 id="mentorName">Tentor Terbaik Galaksi</h3>
                 </div>
-                <hr class="divider">
-                <div class="narration-body">
+                <div class="dialogue-box">
                     <p id="typewriterText"></p>
                 </div>
-                <div class="narration-footer">
-                    <button class="btn-secondary" id="btnSkip">Skip</button>
-                    <button class="btn-primary hidden" id="btnNextNarration">Lanjutkan</button>
+                <div class="dialogue-controls">
+                    <button id="btnSkip" class="btn-secondary-neon">Skip Cerita</button>
+                    <button id="btnNextNarration" class="btn-primary-neon hidden">Lanjutkan</button>
                 </div>
             </div>
         </section>
 
-        <section id="page-subjects" class="page-view">
-            <h2 class="section-title">Pilih Mata Pelajaran</h2>
-            <div class="cards-container">
-                <div class="glass-card selection-card interactive-card" id="subjectMath">
-                    <div class="card-icon">🧮</div>
+        <section class="page-view glass-card hidden" id="page-subjects">
+            <h2 class="page-title">Pilih Zona Pelajaran</h2>
+            <div class="card-grid">
+                <div class="interactive-card glow-hover" id="subjectMath">
+                    <div class="card-icon">📐</div>
                     <h3>Matematika</h3>
-                    <p>Uji kemampuan logika dan berhitungmu di sini!</p>
+                    <p>Uji logika angka dan hitungan serumu di sini!</p>
                 </div>
-                <div class="glass-card selection-card locked-card" id="subjectIndo">
-                    <div class="card-icon">🇮🇩</div>
+                <div class="interactive-card locked-card" id="subjectIndo">
+                    <div class="card-icon">📖</div>
                     <h3>Bahasa Indonesia</h3>
-                    <span class="badge-lock">Coming Soon</span>
+                    <span class="badge-soon">Coming Soon</span>
                 </div>
             </div>
-            <div class="navigation-area">
-                <button class="btn-secondary btn-back" data-target="page-menu">⬅ Kembali</button>
-            </div>
+            <button class="btn-back btn-secondary-neon" data-target="page-menu">⬅️ Kembali</button>
         </section>
 
-        <section id="page-modes" class="page-view">
-            <h2 class="section-title">Pilih Mode Latihan</h2>
-            <div class="cards-container">
-                <div class="glass-card selection-card locked-card" id="modeMaterial">
+        <section class="page-view glass-card hidden" id="page-modes">
+            <h2 class="page-title">Pilih Mode Latihan Matematika</h2>
+            <div class="card-grid">
+                <div class="interactive-card locked-card" id="modeMaterial">
                     <div class="card-icon">📚</div>
                     <h3>Latihan per Materi</h3>
-                    <span class="badge-lock">Coming Soon</span>
+                    <span class="badge-soon">Coming Soon</span>
                 </div>
-                <div class="glass-card selection-card locked-card" id="modeSimulation">
-                    <div class="card-icon">⏱️</div>
+                <div class="interactive-card locked-card" id="modeSimulation">
+                    <div class="card-icon">🏆</div>
                     <h3>Simulasi TKA</h3>
-                    <span class="badge-lock">Coming Soon</span>
+                    <span class="badge-soon">Coming Soon</span>
                 </div>
             </div>
-            <div class="navigation-area">
-                <button class="btn-secondary btn-back" data-target="page-subjects">⬅ Kembali</button>
-            </div>
+            <button class="btn-back btn-secondary-neon" data-target="page-subjects">⬅️ Kembali</button>
         </section>
 
-        <div class="modal-overlay hidden" id="globalModal">
-            <div class="glass-card modal-content animate-zoom">
-                <h3 id="modalTitle">Pengaturan</h3>
-                <div id="modalBody"></div>
-                <button class="btn-primary" id="btnModalClose">Tutup</button>
-            </div>
-        </div>
-
-        <footer class="main-footer">
-            <p>Website Latihan TKA | Dikembangkan oleh <strong>Hayam Wuruk Les Private (HW Les Private)</strong></p>
+        <footer class="global-footer">
+            <p>Website Latihan TKA | Dikembangkan oleh Hayam Wuruk Les Private (HW Les Private)</p>
             <p>© 2026 - Semangat Belajar, Raih Prestasi Terbaik!</p>
         </footer>
     </main>
+
+    <div class="modal-overlay hidden" id="globalModal">
+        <div class="modal-card glass-card animate-zoom">
+            <h3 id="modalTitle">Pusat Informasi</h3>
+            <div id="modalBody" class="modal-content-body">
+                </div>
+            <button id="btnModalClose" class="btn-primary-neon">Tutup</button>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
