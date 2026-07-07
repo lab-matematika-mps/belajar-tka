@@ -15,8 +15,8 @@
 
     <audio id="bgMusic" loop src="assets/music/background-music.mp3" preload="auto"></audio>
 
-    <section class="page-view active" id="page-loading">
-        <div class="loader-wrapper">
+    <section class="loading-screen" id="page-loading">
+        <div class="loader-center-box">
             <div class="galaxy-loader">
                 <div class="ring ring-1"></div>
                 <div class="ring ring-2"></div>
@@ -34,47 +34,37 @@
 
         <section class="page-view" id="page-menu">
             
-            <div class="glass-box box-top">
+            <div class="glass-card menu-top-box">
                 <div class="menu-header">
                     <h1 class="main-title">LATIHAN TKA</h1>
                     <p class="subtitle">Hayam Wuruk Les Private</p>
                 </div>
-
                 <div class="avatar-container">
                     <div class="avatar-frame animate-float">
                         <span id="avatarGraphic" class="avatar-emoji">🚀</span>
                     </div>
                 </div>
-
                 <div class="input-group">
                     <input type="text" id="usernameInput" placeholder="Tuliskan namamu..." autocomplete="off">
                 </div>
             </div>
 
-            <div class="glass-box box-bottom">
-                <p class="section-label">Pilih Dunia Petualanganmu (Geser Kanan-Kiri):</p>
-                
-                <div class="theme-scroll-wrapper">
-                    <div class="theme-cards">
-                        <button class="theme-card active" data-choose-theme="galaksi">
-                            <span class="theme-icon">🌌</span>
-                            <span class="theme-name">Galaksi</span>
-                        </button>
-                        <button class="theme-card" data-choose-theme="langit">
-                            <span class="theme-icon">☁️</span>
-                            <span class="theme-name">Langit</span>
-                        </button>
-                        <button class="theme-card" data-choose-theme="samudra">
-                            <span class="theme-icon">🐬</span>
-                            <span class="theme-name">Samudra</span>
-                        </button>
-                    </div>
+            <div class="glass-card menu-bottom-box">
+                <p class="section-label">Pilih Dunia Petualangan (Geser Kanan-Kiri):</p>
+                <div class="theme-scroll-row">
+                    <button class="theme-card active" data-choose-theme="galaksi">
+                        <span class="theme-icon">🌌</span>
+                        <span class="theme-name">Galaksi</span>
+                    </button>
+                    <button class="theme-card" data-choose-theme="langit">
+                        <span class="theme-icon">☁️</span>
+                        <span class="theme-name">Langit</span>
+                    </button>
+                    <button class="theme-card" data-choose-theme="samudra">
+                        <span class="theme-icon">🐬</span>
+                        <span class="theme-name">Samudra</span>
+                    </button>
                 </div>
-
-                <div class="theme-lore-box">
-                    <p id="themeLoreText">Mengorbit di ruang angkasa luas penuh misteri rumus-rumus bintang bersinar.</p>
-                </div>
-
                 <div class="action-area">
                     <button id="btnStart" class="btn-primary-neon">Mulai Belajar</button>
                     <button id="btnSetting" class="btn-icon-setting">⚙️</button>
@@ -84,11 +74,13 @@
 
         <section class="page-view glass-card hidden" id="page-narration">
             <div class="narration-layout">
+                <div class="lore-box" id="loreBox">
+                    </div>
                 <div class="mentor-profile">
                     <div class="mentor-avatar-glow">
                         <span id="mentorAvatar" class="avatar-emoji">🚀</span>
                     </div>
-                    <h3 id="mentorName">Tentor Terbaik Galaksi</h3>
+                    <h3 id="mentorName">Tentor Terbaik</h3>
                 </div>
                 <div class="dialogue-box">
                     <p id="typewriterText"></p>
@@ -118,7 +110,7 @@
         </section>
 
         <section class="page-view glass-card hidden" id="page-modes">
-            <h2 class="page-title">Pilih Mode Latihan Matematika</h2>
+            <h2 class="page-title">Pilih Mode Latihan</h2>
             <div class="card-grid">
                 <div class="interactive-card locked-card" id="modeMaterial">
                     <div class="card-icon">📚</div>
