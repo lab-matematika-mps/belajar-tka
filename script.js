@@ -1,12 +1,12 @@
 /**
- * HW Les Private - Petualangan TKA Engine Pro v2.2
- * REVISI: SFX DIHAPUS, PIANO INSTRUMENTAL, SILUET ATMOSFER, ANGIN SAKURA DINAMIS
+ * HW Les Private - Petualangan TKA Engine Pro v2.3
+ * FULL SYNCHRONIZED VERSION (ANTI LAYAR EROR)
  */
 
 document.addEventListener("DOMContentLoaded", () => {
     
     // ==========================================================================
-    // STATE ENGINE CONFIG
+    // 1. STATE MANAGEMENT CONFIG
     // ==========================================================================
     let state = {
         name: localStorage.getItem("hw_student_name") || "",
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
         currentScreen: "screen-welcome"
     };
 
-    // Musik Baru: Khusus Piano Instrumen (Jazz, Klasik, & Fun Learning)
+    // Musik Baru: Khusus Piano Instrumen Esensial (Fun, Klasik & Jazz)
     const audioStreams = {
         neon: "https://ia601409.us.archive.org/21/items/polyphonic-piano-jazz/jazz_piano_improvisation.mp3", 
         anime: "https://ia800100.us.archive.org/33/items/classical-piano-relaxing/beethoven_moonlight_sonata.mp3", 
@@ -33,27 +33,22 @@ document.addEventListener("DOMContentLoaded", () => {
             character: "Navigator Galaksi", avatar: "🧑‍✈️",
             script: [
                 "Halo [NAMA]...", "Aku adalah Navigator Galaksi.",
-                "Kami mendeteksi sinyal kosmis bahwa kamu akan menghadapi Tes Kemampuan Akademik.",
-                "Jangan khawatir!", "Aku dan tim HW Les Private akan mendampingimu memetakan rasi bintang ilmu.",
-                "Setiap modul latihan akan mengisi tabung energi kecerdasanmu.", "Siap meluncur menembus batas?"
+                "Kami mendeteksi sinyal kosmis bahwa kamu akan menghadapi Tes Kemampuan Akademik TKA Saintek.",
+                "Jangan khawatir! Aku dan tim HW Les Private siap mendampingimu menembus batas kecerdasan."
             ]
         },
         anime: {
             character: "Sensei Sakura", avatar: "🧓",
             script: [
-                "Konnichiwa, [NAMA]-kun! ✨", "Selamat datang di Akademi Sakura HW Les Private.",
-                "Ujian TKA di depan mata layaknya badai kelopak bunga, tapi ketahuilah fokusmu adalah pedang terbaikmu.",
-                "Jangan cemas, para guru andalan kami siap melatih jurus-jurus jitumu.",
-                "Mari ambil napas dalam-dalam, bersihkan pikiran, dan bersiap memetik kemenangan!"
+                "Konnichiwa, [NAMA]-kun! ✨ Selamat datang di Akademi Sakura HW Les Private.",
+                "Ujian TKA di depan mata layaknya badai kelopak bunga, mari berlatih keras memetik kemenangan!"
             ]
         },
         ocean: {
-            character: "Penjaga Laut Pengetahuan", avatar: "🧜‍♂️",
+            character: "Penjaga Laut Ilmu", avatar: "🧜‍♂️",
             script: [
-                "Selamat datang penyelam berani, [NAMA]...", "Aku Penjaga Samudra Terdalam Ilmu TKA.",
-                "Di bawah perairan biru yang luas ini, tersimpan mutiara emas prestasi.",
-                "Bersama bimbingan kuat HW Les Private, kamu akan menyelam dengan aman menembus palung tersulit.",
-                "Ayo pasang tabung oksigen semangatmu, dayung sirip logikamu, dan temukan mutiaranya!"
+                "Selamat datang penyelam berani, [NAMA]...",
+                "Bersama bimbingan kuat HW Les Private, kamu akan menyelam dengan aman menembus palung soal ujian tersulit!"
             ]
         }
     };
@@ -67,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let isAudioContextInitialized = false;
 
     // ==========================================================================
-    // AUDIO PLAYER SYSTEM (SFX SUARA SUDAH DIHAPUS)
+    // 2. AUDIO INSTRUMENTAL ENGINE (SUARA SFX SINTESIS DIHAPUS)
     // ==========================================================================
     function initAudioStreams() {
         Object.keys(audioStreams).forEach(key => {
@@ -87,8 +82,8 @@ document.addEventListener("DOMContentLoaded", () => {
             let ctx = new (window.AudioContext || window.webkitAudioContext)();
             let osc = ctx.createOscillator(); let gain = ctx.createGain();
             osc.connect(gain); gain.connect(ctx.destination);
-            osc.type = 'sine'; osc.frequency.setValueAtTime(580, ctx.currentTime);
-            gain.gain.setValueAtTime(0.08, ctx.currentTime);
+            osc.type = 'sine'; osc.frequency.setValueAtTime(550, ctx.currentTime);
+            gain.gain.setValueAtTime(0.06, ctx.currentTime);
             gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.08);
             osc.start(); osc.stop(ctx.currentTime + 0.08);
         } catch(e){}
@@ -112,81 +107,68 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================================================
-    // MANAGEMENT ELEMEN KHUSUS TIAP TEMA (DENGAN TIMING REVISI)
+    // 3. GENERATOR ELEMEN TEMATIK (TIMING & GERAKAN REVISI)
     // ==========================================================================
-    
-    // 1. REVISI NEON: Meteor Besar tiap 5 Detik
     function triggerBigMeteor() {
         if (state.currentScreen !== "screen-welcome" || state.currentTheme !== "neon" || !state.settings.particles) return;
         const container = document.getElementById("bg-effects-container");
         if (!container) return;
 
-        let meteor = document.createElement("div");
-        meteor.className = "big-meteor";
-        meteor.style.top = Math.random() * -50 + "px";
-        meteor.style.left = Math.random() * 40 + 50 + "vw"; // Muncul dari kanan atas
-        container.appendChild(meteor);
-        setTimeout(() => meteor.remove(), 1500);
+        let m = document.createElement("div");
+        m.className = "big-meteor";
+        m.style.top = "-40px";
+        m.style.left = (Math.random() * 30 + 60) + "vw"; 
+        container.appendChild(m);
+        setTimeout(() => m.remove(), 1500);
     }
 
-    // 2. REVISI SAKURA: Hembusan Angin Dinamis tiap 7 Detik (Miring 2 detik, lalu normal)
     function triggerSakuraWindGust() {
         if (state.currentScreen !== "screen-welcome" || state.currentTheme !== "anime" || !state.settings.particles) return;
-        
         const petals = document.querySelectorAll(".sakura-node");
         
-        // Aktifkan animasi hempasan angin kencang ke kanan
-        petals.forEach(petal => {
-            petal.classList.add("sakura-wind-active");
-        });
-
-        // Setelah 2 detik, kembalikan ke kondisi jatuh normal secara perlahan
+        petals.forEach(p => p.classList.add("sakura-wind-active"));
         setTimeout(() => {
-            petals.forEach(petal => {
-                petal.classList.remove("sakura-wind-active");
-            });
-        }, 2000);
+            petals.forEach(p => p.classList.remove("sakura-wind-active"));
+        }, 2000); // Angin berhembus 2 detik, lalu normal lagi
     }
 
-    // 3. REVISI SAMUDRA: Kawanan ikan hidup melintas acak tiap 6 detik
     function triggerSchoolOfFish() {
         if (state.currentScreen !== "screen-welcome" || state.currentTheme !== "ocean" || !state.settings.particles) return;
         const container = document.getElementById("bg-effects-container");
         if (!container) return;
 
-        let randomTop = Math.random() * 60 + 20; // Posisi tinggi acak
-        let fishCount = Math.floor(Math.random() * 4) + 3; // 3 sampai 6 ikan berkelompok
+        let targetY = Math.random() * 50 + 25;
+        let totalFish = Math.floor(Math.random() * 3) + 3;
 
-        for(let i=0; i < fishCount; i++) {
+        for(let i=0; i < totalFish; i++) {
             setTimeout(() => {
                 let fish = document.createElement("div");
                 fish.className = "school-fish";
                 fish.innerText = Math.random() > 0.5 ? "🐟" : "🐠";
-                fish.style.top = (randomTop + (i * 15)) + "vh";
-                fish.style.animationDelay = (i * 0.2) + "s";
+                fish.style.top = (targetY + (i * 12)) + "vh";
+                fish.style.animationDelay = (i * 0.15) + "s";
                 container.appendChild(fish);
-                setTimeout(() => fish.remove(), 9000);
-            }, i * 100);
+                setTimeout(() => fish.remove(), 9200);
+            }, i * 80);
         }
     }
 
-    // Mengatur siklus interval agar tidak bertabrakan antar tema
     function startThemeLoops() {
         if(meteorInterval) clearInterval(meteorInterval);
         if(windInterval) clearInterval(windInterval);
         if(fishInterval) clearInterval(fishInterval);
 
         if(state.currentTheme === "neon") {
-            meteorInterval = setInterval(triggerBigMeteor, 5000); // 5 Detik sekali
+            meteorInterval = setInterval(triggerBigMeteor, 5000); // Tiap 5 Detik
         } else if(state.currentTheme === "anime") {
-            windInterval = setInterval(triggerSakuraWindGust, 7000); // 7 Detik sekali
+            windInterval = setInterval(triggerSakuraWindGust, 7000); // Tiap 7 Detik
         } else if(state.currentTheme === "ocean") {
-            fishInterval = setInterval(triggerSchoolOfFish, 6000); // 6 Detik sekali
+            fishInterval = setInterval(triggerSchoolOfFish, 6000); // Tiap 6 Detik
         }
     }
 
     // ==========================================================================
-    // REVISI PARTIKEL UTAMA & SILUET BACKGROUND
+    // 4. RENDERING BACKGROUND FX ENGINE
     // ==========================================================================
     const bgContainer = document.getElementById("bg-effects-container");
 
@@ -195,62 +177,64 @@ document.addEventListener("DOMContentLoaded", () => {
         bgContainer.innerHTML = "";
         if (!state.settings.particles) return;
 
-        // Tambahkan Garis Grid Tajam (Diaktifkan untuk Neon & Anime/Sakura dengan CSS yang diperjelas)
-        if (state.currentTheme === 'neon' || state.currentTheme === 'anime') {
+        // Pasang Garis Grid Terpisah Agar Aman
+        if (state.currentTheme === 'neon') {
             let grid = document.createElement("div");
             grid.className = "retro-grid";
             bgContainer.appendChild(grid);
+        } else if (state.currentTheme === 'anime') {
+            let sGrid = document.createElement("div");
+            sGrid.className = "sakura-clean-grid";
+            bgContainer.appendChild(sGrid);
         }
 
-        // TAMBAHKAN SILUET ATMOSFER LAMBAT (Ambient Silhouette)
+        // Pasang Siluet Atmosfer Berkelanjutan
         let silhouette = document.createElement("div");
         silhouette.className = "ambient-silhouette";
         if(state.currentTheme === "neon") silhouette.innerText = "🛸";
-        else if(state.currentTheme === "anime") silhouette.innerText = "鶴"; // Kanze/Bangau Jepang klasik
-        else if(state.currentTheme === "ocean") silhouette.innerText = "🦑"; // Gurita raksasa legendaris
+        else if(state.currentTheme === "anime") silhouette.innerText = "鶴";
+        else if(state.currentTheme === "ocean") silhouette.innerText = "🦑";
         bgContainer.appendChild(silhouette);
 
-        // Render partikel dasar masing-masing tema secara random acak sempurna
+        // Pasang Partikel Inti Alami secara acak sempurna (Random delay)
         if (state.currentTheme === 'neon') {
-            for (let i = 0; i < 70; i++) {
+            for (let i = 0; i < 60; i++) {
                 let star = document.createElement("div");
                 star.className = "star-node";
                 star.style.width = star.style.height = Math.random() * 3 + "px";
                 star.style.top = Math.random() * 100 + "vh";
                 star.style.left = Math.random() * 100 + "vw";
-                star.style.animationDuration = `${2 + Math.random() * 4}s`;
+                star.style.animationDuration = `${2 + Math.random() * 3}s`;
                 star.style.animationDelay = `${Math.random() * 4}s`;
                 bgContainer.appendChild(star);
             }
         } else if (state.currentTheme === 'anime') {
-            // REVISI: Kelopak Bunga Jatuh Random Sempurna tidak berbarengan
-            for (let i = 0; i < 40; i++) {
+            for (let i = 0; i < 35; i++) {
                 let sakura = document.createElement("div");
                 sakura.className = "sakura-node";
-                sakura.style.width = sakura.style.height = Math.random() * 12 + 6 + "px";
+                sakura.style.width = sakura.style.height = Math.random() * 10 + 6 + "px";
                 sakura.style.left = Math.random() * 100 + "vw";
-                sakura.style.top = `-${Math.random() * 50 + 20}px`;
-                sakura.style.animationDelay = `${Math.random() * 8}s`; // Delay super acak
-                sakura.style.animationDuration = `${4 + Math.random() * 5}s`; // Kecepatan acak
+                sakura.style.top = `-${Math.random() * 40 + 20}px`;
+                sakura.style.animationDelay = `${Math.random() * 8}s`; // Jatuh acak bergantian
+                sakura.style.animationDuration = `${4 + Math.random() * 4}s`;
                 bgContainer.appendChild(sakura);
             }
         } else if (state.currentTheme === 'ocean') {
-            // REVISI: Mengaktifkan kembali Gelembung Air Konstan yang Indah
-            for (let i = 0; i < 50; i++) {
+            for (let i = 0; i < 40; i++) {
                 let bubble = document.createElement("div");
                 bubble.className = "bubble-node";
-                bubble.style.width = bubble.style.height = Math.random() * 16 + 5 + "px";
+                bubble.style.width = bubble.style.height = Math.random() * 14 + 5 + "px";
                 bubble.style.left = Math.random() * 100 + "vw";
                 bubble.style.top = "105vh";
                 bubble.style.animationDelay = `${Math.random() * 6}s`;
-                bubble.style.animationDuration = `${5 + Math.random() * 5}s`;
+                bubble.style.animationDuration = `${5 + Math.random() * 4}s`;
                 bgContainer.appendChild(bubble);
             }
         }
     }
 
     // ==========================================================================
-    // SYSTEM NAVIGATION & INTERFACES
+    // 5. MASTER ROUTER SYSTEM NAVIGATION
     // ==========================================================================
     function navigateTo(screenId) {
         playClickSound();
@@ -286,12 +270,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function runTypingEffect(text, element) {
         element.innerHTML = "";
-        let i = 0;
-        clearTimeout(typingTimeout);
+        let i = 0; clearTimeout(typingTimeout);
         function type() {
             if (i < text.length) {
-                element.innerHTML += text.charAt(i);
-                i++;
+                element.innerHTML += text.charAt(i); i++;
                 typingTimeout = setTimeout(type, 25);
             }
         }
@@ -309,9 +291,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // ==========================================================================
-    // DISPATCHER MASTER
-    // ==========================================================================
     function applyPreferences() {
         if(state.name) document.getElementById("student-name").value = state.name;
 
@@ -326,15 +305,12 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("setting-particles").checked = state.settings.particles;
         document.getElementById("setting-animations").checked = state.settings.animations;
 
-        if(!state.settings.animations) document.body.classList.add("no-animations");
-        else document.body.classList.remove("no-animations");
-
         renderBackgroundFX();
         startThemeMusic();
         startThemeLoops();
     }
 
-    // Unblock audio policy on interaction
+    // Unblock browser autoplay policy
     function unlockBrowserAudio() {
         if (!isAudioContextInitialized) {
             initAudioStreams();
@@ -342,20 +318,18 @@ document.addEventListener("DOMContentLoaded", () => {
             startThemeLoops();
             isAudioContextInitialized = true;
             window.removeEventListener("click", unlockBrowserAudio);
-            window.removeEventListener("touchstart", unlockAudioFallback);
         }
     }
-    function unlockAudioFallback() { unlockBrowserAudio(); }
-    
     window.addEventListener("click", unlockBrowserAudio);
-    window.addEventListener("touchstart", unlockAudioFallback);
 
+    // Turn off loader
     setTimeout(() => {
         const loader = document.getElementById("loading-screen");
         if(loader) loader.classList.remove("active");
         applyPreferences();
-    }, 2000);
+    }, 1500);
 
+    // Bindings
     document.querySelectorAll(".theme-card").forEach(card => {
         card.addEventListener("click", () => {
             state.currentTheme = card.getAttribute("data-theme");
@@ -377,48 +351,31 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("narrator-name").innerText = themeConfig.character;
         document.getElementById("narrator-avatar").innerText = themeConfig.avatar;
         dialogueIndex = 0;
-
         navigateTo("screen-narrative");
         advanceDialogue();
     });
 
     document.getElementById("btn-narrative-next").addEventListener("click", advanceDialogue);
-    document.getElementById("btn-skip-narrative").addEventListener("click", () => {
-        playClickSound();
-        clearTimeout(typingTimeout);
-        navigateTo("screen-menu");
-    });
-
+    document.getElementById("btn-skip-narrative").addEventListener("click", () => navigateTo("screen-menu"));
     document.getElementById("matpel-math").addEventListener("click", () => navigateTo("screen-math"));
     document.getElementById("matpel-indo").addEventListener("click", () => showModal("Mohon bersabar 😊", "Materi Bahasa Indonesia sedang disiapkan oleh tim HW Les Private.", "📖"));
-    document.getElementById("math-materi").addEventListener("click", () => showModal("Fitur ini akan segera hadir.", "Fitur ini akan segera hadir.", "📚"));
-    document.getElementById("math-simulasi").addEventListener("click", () => showModal("Fitur ini sedang dibuat.", "Fitur ini sedang dibuat.", "🏆"));
-
-    document.getElementById("modal-close").addEventListener("click", () => {
-        playClickSound();
-        document.getElementById("custom-modal").classList.remove("active");
-    });
-
-    document.getElementById("btn-settings").addEventListener("click", () => {
-        playClickSound();
-        document.getElementById("settings-modal").classList.add("active");
-    });
-
+    document.getElementById("math-materi").addEventListener("click", () => showModal("Fitur segera hadir.", "Modul ringkasan rumus cepat sedang disusun.", "📚"));
+    document.getElementById("math-simulasi").addEventListener("click", () => showModal("Fitur sedang dibuat.", "Ruang simulasi ujian sedang dikonfigurasi.", "🏆"));
+    document.getElementById("modal-close").addEventListener("click", () => document.getElementById("custom-modal").classList.remove("active"));
+    
+    document.getElementById("btn-settings").addEventListener("click", () => document.getElementById("settings-modal").classList.add("active"));
     document.getElementById("settings-save").addEventListener("click", () => {
         state.settings.music = document.getElementById("setting-music").checked;
         state.settings.volume = parseFloat(document.getElementById("setting-volume").value);
         state.settings.particles = document.getElementById("setting-particles").checked;
         state.settings.animations = document.getElementById("setting-animations").checked;
-
         localStorage.setItem("hw_settings", JSON.stringify(state.settings));
         document.getElementById("settings-modal").classList.remove("active");
         applyPreferences();
     });
-
     document.getElementById("settings-reset").addEventListener("click", () => {
         state.settings = { music: false, volume: 0.5, particles: true, animations: true };
         applyPreferences();
     });
-
     document.querySelectorAll(".btn-back").forEach(btn => btn.addEventListener("click", navigateBack));
 });
