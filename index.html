@@ -3,141 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mugeb Primary School - Media Latihan TKA</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <title>Mugeb TKA Learning Center</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="theme-galaxy" data-theme="galaxy">
+<body class="theme-galaksi">
 
-    <div class="bg-effects" id="bg-effects-container"></div>
-    <audio id="bg-music" src="assets/music/background-music.mp3" loop></audio>
-    <button class="btn-settings-toggle" id="btn-settings">⚙️ Pengaturan</button>
+    <canvas id="bg-canvas"></canvas>
 
-    <div class="screen active" id="loading-screen">
-        <div class="glass-card text-center" style="max-width: 450px;">
-            <img src="logo-mugeb.png" alt="Logo Mugeb" style="width: 90px; height: auto; margin-bottom: 20px; filter: drop-shadow(0 0 10px rgba(255,255,255,0.2));">
-            <h1 class="brand-title-load">MUGEB</h1>
-            <p class="sub-title-load">Primary School</p>
-            <div class="progress-bar-container">
-                <div class="progress-bar-fill"></div>
-            </div>
-            <div class="loading-status-text" id="loading-text">Menginisialisasi sistem...</div>
-        </div>
-        <div class="screen-footer">
-            Tahun &copy; 2026 SD Muhammadiyah 1 GKB Gresik <br>
-            "Berakhlak Mulia dan Berprestasi"
-        </div>
-    </div>
+    <header>
+        <div class="logo">✨ Mugeb TKA</div>
+        <button id="btn-settings" class="icon-btn ripple" title="Pengaturan">⚙️</button>
+    </header>
 
-    <div class="screen" id="welcome-screen">
-        <div class="glass-card text-center">
-            <img src="logo-mugeb.png" alt="Logo Mugeb" style="width: 75px; height: auto; margin-bottom: 15px;">
-            <h1 class="main-title">Selamat Datang di <br><span class="glow-text">Mugeb Primary School</span></h1>
-            <p class="subtitle">Media Latihan Resmi Tes Kemampuan Akademik (TKA)</p>
-            
-            <div class="form-group">
-                <label for="student-name">Masukkan Nama Lengkap Kamu:</label>
-                <input type="text" id="student-name" placeholder="Ketik namamu di sini..." autocomplete="off">
-            </div>
-            <button class="btn btn-neon btn-full" id="btn-start">Mulai Petualangan 🚀</button>
-        </div>
-        <div class="screen-footer">Tahun &copy; 2026 SD Muhammadiyah 1 GKB Gresik</div>
-    </div>
-
-    <div class="screen" id="theme-screen">
-        <div class="theme-layout">
-            
-            <div class="avatar-narration-side">
-                <div class="avatar-container">
-                    <div id="dynamic-avatar" class="dynamic-avatar"></div>
+    <div id="app-container">
+        
+        <main id="page-landing" class="page active">
+            <div class="glass-panel text-center float-anim">
+                <h1 class="neon-text">Mugeb TKA Learning Center</h1>
+                <p class="subtitle">Berlatih TKA dengan pengalaman belajar yang menyenangkan.</p>
+                
+                <div class="input-group">
+                    <input type="text" id="student-name" placeholder="Masukkan nama kamu..." autocomplete="off">
                 </div>
-                <div class="glass-card narration-card">
-                    <p id="narration-text">Memuat narasi...</p>
-                </div>
-            </div>
 
-            <div class="controls-side">
-                <div class="glass-card selection-card" style="margin-bottom: 20px;">
-                    <h3>Pilih Dunia Petualangan</h3>
-                    <div class="theme-options">
-                        <button class="btn-theme-select active" data-theme="galaxy">🌌 Galaksi</button>
-                        <button class="btn-theme-select" data-theme="langit">☀️ Langit</button>
-                        <button class="btn-theme-select" data-theme="ocean">🌊 Samudra</button>
-                    </div>
-                    <div class="theme-summary-box">
-                        <p id="theme-description">Menjelajahi luasnya galaksi logika dan penalaran matematika Mugeb.</p>
+                <div class="theme-selection">
+                    <p class="section-title">Pilih Tema Belajar</p>
+                    <div class="theme-cards">
+                        <div class="theme-card active" data-theme="theme-galaksi">
+                            <span class="icon">🌌</span>
+                            <span>Galaksi</span>
+                        </div>
+                        <div class="theme-card" data-theme="theme-langit">
+                            <span class="icon">🌅</span>
+                            <span>Langit</span>
+                        </div>
+                        <div class="theme-card" data-theme="theme-samudra">
+                            <span class="icon">🌊</span>
+                            <span>Samudra</span>
+                        </div>
                     </div>
                 </div>
-                <div class="glass-card navigation-card">
-                    <button class="btn btn-neon btn-full" id="btn-continue-narration">Masuk ke Ruang Ujian 🌟</button>
+
+                <button id="btn-start" class="btn-primary glow-pulse ripple">🚀 Mulai Belajar</button>
+            </div>
+        </main>
+
+        <main id="page-dashboard" class="page hidden">
+            <div class="glass-panel">
+                <div class="narrative-box">
+                    <p id="dynamic-narrative">Halo! Selamat datang di Mugeb TKA Learning Center.</p>
+                </div>
+                
+                <div class="subject-cards" id="main-subjects">
+                    <div class="subject-card ripple" id="card-matematika">
+                        <span class="subject-icon">📘</span>
+                        <h3>Matematika</h3>
+                    </div>
+                    <div class="subject-card ripple" id="card-bahasa">
+                        <span class="subject-icon">📖</span>
+                        <h3>Bahasa Indonesia</h3>
+                        <span class="badge">COMING SOON</span>
+                    </div>
+                </div>
+
+                <div class="subject-cards hidden" id="sub-matematika">
+                    <div class="subject-card ripple action-coming-soon">
+                        <span class="subject-icon">📝</span>
+                        <h3>Latihan Per Materi</h3>
+                        <span class="badge">COMING SOON</span>
+                    </div>
+                    <div class="subject-card ripple action-coming-soon">
+                        <span class="subject-icon">⏱️</span>
+                        <h3>Simulasi TKA</h3>
+                        <span class="badge">COMING SOON</span>
+                    </div>
                 </div>
             </div>
 
-        </div>
-        <div class="bottom-nav"><button class="btn-back" id="btn-back-to-welcome">⬅️ Kembali</button></div>
+            <div class="bottom-nav">
+                <button id="btn-back" class="btn-secondary ripple hidden">← Kembali</button>
+            </div>
+        </main>
+
     </div>
 
-    <div class="screen" id="menu-screen">
-        <div class="glass-card menu-card">
-            <h2 class="section-title">Pilih Bidang Studi</h2>
-            <p class="section-desc">Halo <span id="display-student-name" class="brand-highlight">Siswa</span>, mari asah kemampuanmu!</p>
+    <footer>
+        <p><strong>© 2026 Mugeb Primary School (SD Muhammadiyah 1 GKB)</strong></p>
+        <p class="jargon">Berakhlak Mulia dan Berprestasi</p>
+        <p class="small-text">Website dibuat khusus sebagai media latihan TKA.</p>
+    </footer>
+
+    <div id="alert-modal" class="modal-overlay hidden">
+        <div class="modal-content glass-panel">
+            <h3 id="alert-title">Perhatian</h3>
+            <p id="alert-message">Pesan di sini.</p>
+            <button id="btn-close-alert" class="btn-primary ripple">Mengerti</button>
+        </div>
+    </div>
+
+    <div id="settings-modal" class="modal-overlay hidden">
+        <div class="modal-content glass-panel">
+            <h3>⚙️ Pengaturan</h3>
             
-            <div class="subject-grid">
-                <div class="subject-item active-subject" id="subject-math">
-                    <span class="subject-icon">📐</span>
-                    <h3>Matematika</h3>
-                    <p>Uji kemampuan logika hitung, geometri, aljabar dasar, dan pemecahan masalah numerik.</p>
-                    <span class="badge badge-ready">Siap Berlatih</span>
-                </div>
-                <div class="subject-item coming-soon-subject" id="subject-indo">
-                    <span class="subject-icon">✍️</span>
-                    <h3>Bahasa Indonesia</h3>
-                    <p>Latihan pemahaman isi bacaan cerita, ejaan, struktur kalimat, dan makna kata.</p>
-                    <span class="badge badge-soon">Segera Hadir</span>
-                </div>
+            <div class="setting-item">
+                <label>Musik Latar</label>
+                <label class="switch">
+                    <input type="checkbox" id="toggle-music">
+                    <span class="slider round"></span>
+                </label>
             </div>
-        </div>
-        <div class="bottom-nav"><button class="btn-back" id="btn-back-to-narration">⬅️ Kembali</button></div>
-    </div>
+            
+            <div class="setting-item">
+                <label>Efek Animasi / Partikel</label>
+                <label class="switch">
+                    <input type="checkbox" id="toggle-particles" checked>
+                    <span class="slider round"></span>
+                </label>
+            </div>
 
-    <div class="screen" id="math-submenu-screen">
-        <div class="glass-card menu-card">
-            <h2 class="section-title">Kategori Latihan Matematika</h2>
-            <div class="subject-grid">
-                <div class="subject-item active-subject sub-item" id="btn-math-easy">
-                    <span class="subject-icon">🍀</span>
-                    <h3>Latihan Mandiri</h3>
-                </div>
-                <div class="subject-item active-subject sub-item" id="btn-math-exam">
-                    <span class="subject-icon">⏱️</span>
-                    <h3>Simulasi Ujian TKA</h3>
-                </div>
+            <div class="setting-item">
+                <label>Volume</label>
+                <input type="range" id="volume-slider" min="0" max="100" value="50">
             </div>
-        </div>
-        <div class="bottom-nav"><button class="btn-back" id="btn-back-to-menu">⬅️ Kembali</button></div>
-    </div>
 
-    <div class="modal-overlay" id="settings-modal">
-        <div class="glass-card modal-content">
-            <div class="modal-header">
-                <h3>⚙️ Pengaturan Media</h3>
-                <button class="modal-close" id="btn-close-settings">&times;</button>
-            </div>
-            <div class="setting-row"><span>Musik Latar</span><button class="btn-toggle-switch active" id="btn-toggle-music">ON</button></div>
-            <div class="setting-row"><span>Volume Audio</span><input type="range" class="slider" id="volume-slider" min="0" max="1" step="0.1" value="0.5"></div>
-            <div class="setting-row"><span>Efek Visual</span><button class="btn-toggle-switch active" id="btn-toggle-effects">ON</button></div>
+            <button id="btn-save-settings" class="btn-primary ripple">Simpan</button>
         </div>
     </div>
 
-    <div class="modal-overlay" id="popup-alert">
-        <div class="glass-card modal-content custom-alert text-center">
-            <div class="popup-alert-icon" id="popup-icon">⚠️</div>
-            <div class="popup-alert-message" id="popup-message">Pesan</div>
-            <button class="btn btn-neon btn-small" id="btn-close-popup">Oke, Siap!</button>
-        </div>
-    </div>
+    <audio id="bg-music" loop>
+        <source src="" type="audio/mpeg">
+    </audio>
 
     <script src="script.js"></script>
 </body>
