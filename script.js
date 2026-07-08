@@ -1,10 +1,5 @@
-/* ==========================================================================
-   VANILLA JAVASCRIPT ARCHITECTURE - MUGEB PRIMARY SCHOOL UPDATE 2026
-   ========================================================================== */
-
 document.addEventListener("DOMContentLoaded", () => {
     
-    // STATE MANAGEMENT
     const state = {
         studentName: "",
         currentTheme: "galaxy",
@@ -13,7 +8,6 @@ document.addEventListener("DOMContentLoaded", () => {
         visualEffectsEnabled: true
     };
 
-    // DOM ELEMENTS - SCREENS
     const screens = {
         loading: document.getElementById("loading-screen"),
         welcome: document.getElementById("welcome-screen"),
@@ -22,78 +16,27 @@ document.addEventListener("DOMContentLoaded", () => {
         mathSubmenu: document.getElementById("math-submenu-screen")
     };
 
-    // DOM ELEMENTS - CONTROLS
-    const inputName = document.getElementById("student-name");
-    const btnStart = document.getElementById("btn-start");
-    const btnContinueNarration = document.getElementById("btn-continue-narration");
-    const subjectMath = document.getElementById("subject-math");
-    const displayStudentName = document.getElementById("display-student-name");
-    const loadingText = document.getElementById("loading-text");
-    
-    // AUDIO & SETTINGS ELEMENTS
     const bgMusic = document.getElementById("bg-music");
-    const btnSettings = document.getElementById("btn-settings");
-    const settingsModal = document.getElementById("settings-modal");
-    const btnCloseSettings = document.getElementById("btn-close-settings");
-    const btnToggleMusic = document.getElementById("btn-toggle-music");
-    const volumeSlider = document.getElementById("volume-slider");
-    const btnToggleEffects = document.getElementById("btn-toggle-effects");
+    const bgContainer = document.getElementById("bg-effects-container");
+    let backgroundIntervals = [];
 
-    // NAVIGATION BACK BUTTONS
-    const btnBackToWelcome = document.getElementById("btn-back-to-welcome");
-    const btnBackToNarration = document.getElementById("btn-back-to-narration");
-    const btnBackToMenu = document.getElementById("btn-back-to-menu");
-
-    // BRAND PHRASES (Mugeb Primary School Theme)
-    const loadingPhrases = [
-        "Menghubungkan ke server Mugeb Primary School...",
-        "Menyiapkan petualangan berakhlak mulia...",
-        "Membangun koordinat ruang tema...",
-        "Memuat energi berprestasi...",
-        "Mugeb Primary School siap!"
-    ];
-
-    // INITIALIZATION RUNNER
-    initLoadingEngine();
-    initThemeSelector();
-    initMusicControls();
+    // INISIALISASI
     initNavigation();
-    renderAvatar();
+    initThemeSelector();
+    renderUniversalAvatar(); // Avatar yang sama untuk semua tema
+
+    // Loading Screen
+    setTimeout(() => {
+        switchScreen("welcome");
+        if (bgMusic) bgMusic.volume = state.musicVolume;
+    }, 3000);
 
     /* ==========================================================================
-       0. ENGINE SCREEN LOADING REVISI
-       ========================================================================== */
-    function initLoadingEngine() {
-        let phraseIndex = 0;
-        const phraseInterval = setInterval(() => {
-            if (phraseIndex < loadingPhrases.length - 1) {
-                loadingText.style.opacity = 0;
-                setTimeout(() => {
-                    loadingText.textContent = loadingPhrases[phraseIndex];
-                    loadingText.style.opacity = 1;
-                    phraseIndex++;
-                }, 300);
-            } else {
-                clearInterval(phraseInterval);
-            }
-        }, 600);
-
-        // Auto transition dari loading screen setelah animasi bar selesai (~2.8s)
-        setTimeout(() => {
-            switchScreen("welcome");
-            // Set volume awal audio sesuai default state
-            if (bgMusic) bgMusic.volume = state.musicVolume;
-        }, 3200);
-    }
-
-    /* ==========================================================================
-       1. CONTROLLER NAVIGASI SCREEN AUTOMATION (SPA)
+       NAVIGATION & MODALS
        ========================================================================== */
     function switchScreen(targetKey) {
-        Object.keys(screens).forEach(key => {
-            if (screens[key]) {
-                screens[key].classList.remove("active");
-            }
+        Object.values(screens).forEach(screen => {
+            if (screen) screen.classList.remove("active");
         });
         if (screens[targetKey]) {
             screens[targetKey].classList.add("active");
@@ -102,262 +45,181 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function initNavigation() {
-        // Tombol Mulai Petualangan
-        btnStart.addEventListener("click", () => {
-            const nameValue = inputName.value.trim();
-            if (nameValue === "") {
-                triggerCustomPopup("🎒 Halo!", "Masukkan nama lengkap kamu terlebih dahulu sebelum memulai petualangan di Mugeb Primary School!");
-                return;
-            }
+        document.getElementById("btn-start").addEventListener("click", () => {
+            const nameValue = document.getElementById("student-name").value.trim();
+            if (nameValue === "") return alert("Silakan isi namamu terlebih dahulu!");
+            
             state.studentName = nameValue;
-            displayStudentName.textContent = state.studentName;
+            document.getElementById("display-student-name").textContent = state.studentName;
             
-            // Jalankan audio musik secara otomatis saat masuk halaman narasi
             if (!state.isMusicPlaying && bgMusic) {
-                playAudioSystem();
+                bgMusic.play().then(() => state.isMusicPlaying = true).catch(()=>{});
             }
-            
             switchScreen("theme");
-            startNarrationTypewriter();
+            startNarration();
         });
 
-        // Halaman Narasi -> Menu Utama
-        btnContinueNarration.addEventListener("click", () => switchScreen("menu"));
+        document.getElementById("btn-continue-narration").addEventListener("click", () => switchScreen("menu"));
+        document.getElementById("subject-math").addEventListener("click", () => switchScreen("mathSubmenu"));
+        
+        document.getElementById("subject-indo").addEventListener("click", () => alert("Fitur Bahasa Indonesia sedang disiapkan!"));
 
-        // Menu Utama -> Submenu Matematika
-        subjectMath.addEventListener("click", () => switchScreen("mathSubmenu"));
-
-        // Event-Event Tombol Kembali (Back Navigation Mapping)
-        btnBackToWelcome.addEventListener("click", () => switchScreen("welcome"));
-        btnBackToNarration.addEventListener("click", () => switchScreen("theme"));
-        btnBackToMenu.addEventListener("click", () => switchScreen("menu"));
-
-        // Tombol Kategori Soal Matematika (Placeholder Event Latihan)
-        document.getElementById("btn-math-easy").addEventListener("click", () => {
-            triggerCustomPopup("📐 Latihan Mandiri", `Selamat berlatih, ${state.studentName}! Fitur bank soal TKA Matematika sedang disiapkan.`);
-        });
-        document.getElementById("btn-math-exam").addEventListener("click", () => {
-            triggerCustomPopup("⏱️ Simulasi TKA", "Ujian Simulasi Matematika berwaktu ketat akan segera dibuka. Siapkan alat tulismu!");
-        });
+        document.getElementById("btn-back-to-welcome").addEventListener("click", () => switchScreen("welcome"));
+        document.getElementById("btn-back-to-narration").addEventListener("click", () => switchScreen("theme"));
+        document.getElementById("btn-back-to-menu").addEventListener("click", () => switchScreen("menu"));
     }
 
-    /* ==========================================================================
-       2. IMPLEMENTASI ENGINE TYPEWRITER & AVATAR NARRATION
-       ========================================================================== */
-    function startNarrationTypewriter() {
-        const narrationBox = document.getElementById("narration-text");
-        const fullText = `Halo Pejuang Hebat, ${state.studentName}! Selamat datang di gerbang ujian kemampuan akademik Mugeb Primary School. Di sini, semangat belajar, kejujuran, dan kegigihanmu akan diuji di dalam dimensi ${state.currentTheme.toUpperCase()} yang luar biasa. Jadilah siswa yang berakhlak mulia dan ukir prestasi tertinggi hari ini!`;
+    function startNarration() {
+        const text = `Halo, ${state.studentName}! Selamat datang di dimensi petualangan Mugeb Primary School. Pilih tema belajarmu, dan mari kita mulai mengasah kemampuan TKA-mu bersama-sama!`;
+        const box = document.getElementById("narration-text");
+        box.textContent = "";
+        let i = 0;
         
-        narrationBox.textContent = "";
-        let charIndex = 0;
-        
-        // Bersihkan interval pengetikan sebelumnya jika ada
-        if (window.typewriterInterval) clearInterval(window.typewriterInterval);
-
-        window.typewriterInterval = setInterval(() => {
-            if (charIndex < fullText.length) {
-                narrationBox.textContent += fullText.charAt(charIndex);
-                charIndex++;
+        if (window.typeTimer) clearInterval(window.typeTimer);
+        window.typeTimer = setInterval(() => {
+            if (i < text.length) {
+                box.textContent += text.charAt(i);
+                i++;
             } else {
-                clearInterval(window.typewriterInterval);
+                clearInterval(window.typeTimer);
             }
         }, 25);
     }
 
-    function renderAvatar() {
-        const container = document.getElementById("avatar-graphic");
+    /* ==========================================================================
+       AVATAR & THEME ENGINE
+       ========================================================================== */
+    // Satu avatar universal, desain modern dan cerdas sesuai link referensimu.
+    function renderUniversalAvatar() {
+        const container = document.getElementById("dynamic-avatar");
         if (!container) return;
-        
-        // Render Maskot Edukatif Robot Mugeb Menggunakan Struktur SVG Clean Inline
         container.innerHTML = `
             <svg viewBox="0 0 200 200" width="100%" height="100%">
-                <defs>
-                    <linearGradient id="grad-head" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#4338ca;stop-opacity:1" />
-                    </linearGradient>
-                    <linearGradient id="grad-eye" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#a5f3fc;stop-opacity:1" />
-                    </linearGradient>
-                </defs>
-                <line x1="100" y1="50" x2="100" y2="25" stroke="#06b6d4" stroke-width="4" stroke-linecap="round"/>
-                <circle cx="100" cy="20" r="8" fill="#8b5cf6"/>
-                <rect x="50" y="50" width="100" height="90" rx="20" fill="url(#grad-head)" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
-                <rect x="65" y="70" width="70" height="30" rx="10" fill="#0f172a"/>
-                <circle cx="85" cy="85" r="7" fill="url(#grad-eye)"/>
-                <circle cx="115" cy="85" r="7" fill="url(#grad-eye)"/>
-                <path d="M 80 115 Q 100 125 120 115" stroke="#06b6d4" stroke-width="3" fill="none" stroke-linecap="round"/>
-                <rect x="42" y="80" width="8" height="30" rx="3" fill="#8b5cf6"/>
-                <rect x="150" y="80" width="8" height="30" rx="3" fill="#8b5cf6"/>
+                <circle cx="100" cy="100" r="90" fill="var(--accent-color)" opacity="0.15"/>
+                <circle cx="100" cy="100" r="75" fill="#fde047" />
+                <path d="M 60 90 Q 80 60 100 90 T 140 90" fill="none" stroke="#ca8a04" stroke-width="6" stroke-linecap="round"/>
+                <circle cx="75" cy="100" r="9" fill="#422006" />
+                <circle cx="125" cy="100" r="9" fill="#422006" />
+                <path d="M 85 130 Q 100 150 115 130" fill="none" stroke="#422006" stroke-width="7" stroke-linecap="round" />
+                <path d="M 50 180 C 50 140 150 140 150 180" fill="#0284c7" />
             </svg>
         `;
     }
 
-    /* ==========================================================================
-       3. INTERACTIVE THEME SWITCHER ENGINE & BACKGROUND PARTICLE
-       ========================================================================== */
     function initThemeSelector() {
-        const themeButtons = document.querySelectorAll(".btn-theme-select");
-        themeButtons.forEach(button => {
-            button.addEventListener("click", (e) => {
-                themeButtons.forEach(btn => btn.classList.remove("active"));
+        const buttons = document.querySelectorAll(".btn-theme-select");
+        buttons.forEach(btn => {
+            btn.addEventListener("click", (e) => {
+                buttons.forEach(b => b.classList.remove("active"));
                 e.target.classList.add("active");
                 
-                const selectedTheme = e.target.getAttribute("data-theme");
-                state.currentTheme = selectedTheme;
+                const theme = e.target.getAttribute("data-theme");
+                state.currentTheme = theme;
+                document.body.className = `theme-${theme}`;
                 
-                // Ubah class body untuk memicu transisi warna CSS variabel global
-                document.body.className = `theme-${selectedTheme}`;
-                
-                // Perbarui deskripsi info petualangan di halaman narasi secara real-time
-                updateThemeDescription(selectedTheme);
-                
-                // Re-render engine latar belakang efek partikel 3D bawaan jika aktif
-                if (state.visualEffectsEnabled) {
-                    generateBackgroundEnvironment(selectedTheme);
-                }
+                const desc = document.getElementById("theme-description");
+                if (theme === "galaxy") desc.textContent = "Menjelajahi luasnya galaksi logika dan penalaran matematika Mugeb.";
+                if (theme === "langit") desc.textContent = "Belajar dengan tenang di bawah langit sunrise berhias daun mapel yang gugur.";
+                if (theme === "ocean") desc.textContent = "Menyelami samudra ilmu bersama kawanan ikan di kedalaman laut biru.";
+
+                generateParticles(theme);
             });
         });
-        
-        // Pemicu awal render partikel latar belakang bawaan
-        generateBackgroundEnvironment(state.currentTheme);
+        generateParticles("galaxy");
     }
 
-    function updateThemeDescription(theme) {
-        const descBox = document.getElementById("theme-description");
+    function clearParticles() {
+        backgroundIntervals.forEach(clearInterval);
+        backgroundIntervals = [];
+        bgContainer.innerHTML = "";
+    }
+
+    /* ==========================================================================
+       PARTICLE ENGINE (BINTANG SMOOTH, MAPEL SUNRISE, IKAN GELOMBANG SINUS)
+       ========================================================================== */
+    function generateParticles(theme) {
+        clearParticles();
+        if (!state.visualEffectsEnabled) return;
+
         if (theme === "galaxy") {
-            descBox.textContent = "Dimensi Ruang Antariksa: Selesaikan tantangan logika matematika di bawah naungan gugusan bintang galaksi dan orbit planet Mugeb.";
-        } else if (theme === "autumn") {
-            descBox.textContent = "Dimensi Langit Sakura: Suasana belajar yang bersih, teduh, damai, dan penuh konsentrasi tinggi ditemani guguran kelopak bunga sakura yang lembut.";
-        } else if (theme === "ocean") {
-            descBox.textContent = "Dimensi Lautan Samudra: Rasakan ketenangan air laut dalam yang berwibawa, membantumu tetap rileks menjawab butir soal tersulit.";
+            // Bintang smooth bergerak acak
+            for (let i = 0; i < 60; i++) {
+                const star = document.createElement("div");
+                star.className = "star-smooth";
+                star.style.width = star.style.height = `${Math.random() * 3 + 1}px`;
+                star.style.left = `${Math.random() * 100}vw`;
+                star.style.top = `${Math.random() * 100}vh`;
+                star.style.setProperty('--dur', `${Math.random() * 3 + 2}s`);
+                star.style.setProperty('--drift', `${Math.random() * 20 + 10}s`);
+                star.style.setProperty('--mx', `${(Math.random() - 0.5) * 100}px`);
+                star.style.setProperty('--my', `${(Math.random() - 0.5) * 100}px`);
+                bgContainer.appendChild(star);
+            }
+        } 
+        else if (theme === "langit") {
+            // Daun Mapel Berguguran (Sunrise)
+            const spawnMaple = () => {
+                const leaf = document.createElement("div");
+                leaf.className = "maple-leaf";
+                leaf.innerText = "🍁";
+                leaf.style.setProperty('--size', `${Math.random() * 15 + 15}px`);
+                leaf.style.left = `${Math.random() * 100}vw`;
+                leaf.style.setProperty('--speed', `${Math.random() * 5 + 7}s`);
+                leaf.style.setProperty('--sway', `${(Math.random() - 0.5) * 200}px`);
+                bgContainer.appendChild(leaf);
+                setTimeout(() => leaf.remove(), 12000);
+            };
+            for (let i = 0; i < 15; i++) setTimeout(spawnMaple, Math.random() * 5000);
+            backgroundIntervals.push(setInterval(spawnMaple, 800));
+        } 
+        else if (theme === "ocean") {
+            // Gelembung banyak
+            for (let i = 0; i < 40; i++) {
+                const bubble = document.createElement("div");
+                bubble.className = "ocean-bubble";
+                const size = Math.random() * 10 + 4;
+                bubble.style.width = bubble.style.height = `${size}px`;
+                bubble.style.left = `${Math.random() * 100}vw`;
+                bubble.style.setProperty('--speed', `${Math.random() * 6 + 4}s`);
+                bubble.style.animationDelay = `-${Math.random() * 5}s`;
+                bgContainer.appendChild(bubble);
+            }
+
+            // Ikan Biru Gelap Bergelombang Sinus (Kanan ke Kiri)
+            const spawnFish = () => {
+                const fish = document.createElement("div");
+                fish.className = "dark-fish";
+                const safeFishes = ["🐟", "🐠"]; // Hanya ikan normal
+                fish.innerText = safeFishes[Math.floor(Math.random() * safeFishes.length)];
+                fish.style.setProperty('--size', `${Math.random() * 15 + 20}px`);
+                
+                let startY = Math.random() * 80 + 10; 
+                let posX = -10; // Start dari luar layar kanan (kita pakai koordinat right)
+                let waveHeight = Math.random() * 30 + 10;
+                let waveSpeed = Math.random() * 0.05 + 0.03;
+                let speedX = Math.random() * 0.15 + 0.1; // Kecepatan maju
+                let time = 0;
+
+                fish.style.right = posX + "%";
+                fish.style.top = startY + "vh";
+
+                const swimInterval = setInterval(() => {
+                    time += waveSpeed;
+                    posX += speedX;
+                    fish.style.right = posX + "%";
+                    // Gerak ombak menggunakan fungsi Sinus Murni
+                    fish.style.transform = `translateY(${Math.sin(time) * waveHeight}px)`;
+
+                    if (posX > 110) {
+                        clearInterval(swimInterval);
+                        fish.remove();
+                    }
+                }, 16);
+                bgContainer.appendChild(fish);
+            };
+            
+            spawnFish(); spawnFish();
+            backgroundIntervals.push(setInterval(spawnFish, 3000));
         }
-    }
-
-    function generateBackgroundEnvironment(theme) {
-        const container = document.getElementById("bg-effects-container");
-        if (!container) return;
-        container.innerHTML = ""; // Bersihkan objek partikel lama
-        
-        let particleCount = 25;
-        let className = "star";
-        
-        if (theme === "autumn") { className = "leaf"; particleCount = 15; }
-        if (theme === "ocean") { className = "bubble"; particleCount = 35; }
-        
-        for (let i = 0; i < particleCount; i++) {
-            const element = document.createElement("div");
-            element.className = className;
-            element.style.left = Math.random() * 100 + "vw";
-            element.style.top = Math.random() * 100 + "vh";
-            element.style.opacity = Math.random() * 0.6 + 0.2;
-            
-            // Skala ukuran acak proporsional
-            const scale = Math.random() * 0.8 + 0.4;
-            element.style.transform = `scale(${scale})`;
-            
-            // Set penanda visual dasar CSS shapes sesuai jenis partikel
-            if (className === "star") {
-                element.style.width = "3px";
-                element.style.height = "3px";
-                element.style.backgroundColor = "#ffffff";
-                element.style.borderRadius = "50%";
-                element.style.boxShadow = "0 0 8px #ffffff";
-            } else if (className === "leaf") {
-                element.style.width = "12px";
-                element.style.height = "8px";
-                element.style.backgroundColor = "#ffd166";
-                element.style.borderRadius = "0 10px 0 10px";
-            } else if (className === "bubble") {
-                element.style.width = "8px";
-                element.style.height = "8px";
-                element.style.border = "1px solid rgba(255,255,255,0.4)";
-                element.style.borderRadius = "50%;";
-            }
-            
-            container.appendChild(element);
-        }
-    }
-
-    /* ==========================================================================
-       4. AUDIO CONTROLLER & MODAL MANAGEMENT ENGINE
-       ========================================================================== */
-    function initMusicControls() {
-        // Toggle Buka/Tutup Modal Pengaturan
-        btnSettings.addEventListener("click", () => settingsModal.classList.add("active"));
-        btnCloseSettings.addEventListener("click", () => settingsModal.classList.remove("active"));
-        
-        // Klik di luar area konten modal untuk menutup otomatis
-        settingsModal.addEventListener("click", (e) => {
-            if (e.target === settingsModal) settingsModal.classList.remove("remove");
-        });
-
-        // Kontrol Tombol Saklar ON/OFF Musik Latar
-        btnToggleMusic.addEventListener("click", () => {
-            if (state.isMusicPlaying) {
-                pauseAudioSystem();
-            } else {
-                playAudioSystem();
-            }
-        });
-
-        // Kontrol Slider Intensitas Volume
-        volumeSlider.addEventListener("input", (e) => {
-            state.musicVolume = e.target.value;
-            if (bgMusic) {
-                bgMusic.volume = state.musicVolume;
-            }
-        });
-
-        // Saklar ON/OFF Efek Visual Latar Belakang
-        btnToggleEffects.addEventListener("click", () => {
-            state.visualEffectsEnabled = !state.visualEffectsEnabled;
-            btnToggleEffects.textContent = state.visualEffectsEnabled ? "ON" : "OFF";
-            btnToggleEffects.classList.toggle("active", state.visualEffectsEnabled);
-            
-            const container = document.getElementById("bg-effects-container");
-            if (container) {
-                container.style.display = state.visualEffectsEnabled ? "block" : "none";
-                if (state.visualEffectsEnabled) generateBackgroundEnvironment(state.currentTheme);
-            }
-        });
-    }
-
-    function playAudioSystem() {
-        if (!bgMusic) return;
-        bgMusic.play().then(() => {
-            state.isMusicPlaying = true;
-            btnToggleMusic.textContent = "ON";
-            btnToggleMusic.classList.add("active");
-        }).catch(err => console.log("Menunggu interaksi user klik pertama untuk memutar musik: ", err));
-    }
-
-    function pauseAudioSystem() {
-        if (!bgMusic) return;
-        bgMusic.pause();
-        state.isMusicPlaying = false;
-        btnToggleMusic.textContent = "OFF";
-        btnToggleMusic.classList.remove("active");
-    }
-
-    /* ==========================================================================
-       5. UTILITY POPUP ALERTS GENERATOR SYSTEM
-       ========================================================================== */
-    function triggerCustomPopup(title, message, icon = "🚀") {
-        const alertModal = document.getElementById("popup-alert");
-        const iconBox = document.getElementById("popup-icon");
-        const messageBox = document.getElementById("popup-message");
-        const closeBtn = document.getElementById("btn-close-popup");
-
-        iconBox.textContent = icon;
-        messageBox.innerHTML = `<strong>${title}</strong><br><br>${message}`;
-        alertModal.classList.add("active");
-
-        const closeAction = () => {
-            alertModal.classList.remove("active");
-            closeBtn.removeEventListener("click", closeAction);
-        };
-        closeBtn.addEventListener("click", closeAction);
     }
 });
